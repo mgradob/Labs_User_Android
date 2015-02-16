@@ -1,0 +1,167 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:transitionGroup="true"
+    tools:context="com.itesm.labs.labsuser.activities.activities.SignUpActivity">
+
+
+
+    <RelativeLayout
+        android:id="@+id/layoutNombre"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/material_blue"
+        android:gravity="bottom"
+        android:padding="16dp"
+        android:elevation="3dp"
+        >
+
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/signup_nombre"
+            style="@style/LabsTheme.v21.Light.Text.Display1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="72dp"
+            android:layout_marginTop="56dp"
+            android:hint="@string/signupNombre"
+            app:baseColor="@color/background"
+            app:primaryColor="@color/background"
+            app:floatingLabel="highlight"
+            app:errorColor="@color/material_red"
+            />
+
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/signup_apellidop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/signup_nombre"
+            android:layout_marginLeft="72dp"
+            android:hint="@string/signup_apellidop"
+            app:baseColor="@color/background"
+            app:primaryColor="@color/background"
+            app:floatingLabel="highlight"
+            app:errorColor="@color/material_red"
+            />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/signup_apellidom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/signup_apellidop"
+            android:layout_marginLeft="72dp"
+            android:hint="@string/signup_apellidom"
+            app:baseColor="@color/background"
+            app:primaryColor="@color/background"
+            app:floatingLabel="highlight"
+            app:errorColor="@color/material_red"
+            />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layoutInfo"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/layoutNombre"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="18dp"
+        android:id="@+id/signup_layout_carrera"
+        android:layout_width="fill_parent"
+        android:layout_height="72dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center_vertical"
+        >
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/singup_icono_carrera"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/ic_career"
+            />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/signup_carrera"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/singupCarrera"
+            app:baseColor="#000000"
+            app:primaryColor="@color/primary_text"
+            app:floatingLabel="highlight"
+            app:errorColor="@color/material_red"
+            />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/signup_layout_matricula"
+            android:layout_width="fill_parent"
+            android:layout_height="72dp"
+            android:gravity="center_vertical"
+            android:layout_below="@id/signup_layout_carrera"
+            >
+
+            <TextView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:id="@+id/singup_icono_credencial"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:text="#"
+                android:gravity="center"
+                android:textSize="36dp"
+                android:textColor="@color/disabled_text"
+                />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/signup_credencial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/signupMatricula"
+                app:baseColor="#000000"
+                app:primaryColor="@color/primary_text"
+                app:floatingLabel="highlight"
+                app:errorColor="@color/material_red"
+                />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <com.melnykov.fab.FloatingActionButton
+        xmlns:fab="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/activity_request_detail_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/layoutInfo"
+        android:layout_alignRight="@id/layoutInfo"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_done"
+        fab:fab_colorNormal="@color/primary"
+        fab:fab_colorRipple="@color/primary_dark"
+        />
+
+</RelativeLayout>

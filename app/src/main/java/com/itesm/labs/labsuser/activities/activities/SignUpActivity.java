@@ -1,4 +1,4 @@
-package com.itesm.labs.labsuser.activities;
+package com.itesm.labs.labsuser.activities.activities;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -8,19 +8,19 @@ import android.view.MenuItem;
 import com.itesm.labs.labsuser.R;
 
 
-public class LoginActivity extends ActionBarActivity {
+public class SignUpActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_sign_up);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_login, menu);
+        getMenuInflater().inflate(R.menu.menu_sign_up, menu);
         return true;
     }
 
