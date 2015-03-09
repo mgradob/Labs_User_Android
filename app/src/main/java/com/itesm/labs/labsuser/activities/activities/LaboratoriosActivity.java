@@ -3,12 +3,9 @@ package com.itesm.labs.labsuser.activities.activities;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.SimpleAdapter;
 
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.activities.adapters.LabsAdapter;
@@ -34,9 +31,11 @@ public class LaboratoriosActivity extends ActionBarActivity {
         gridLabs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(view.getContext(), CategoriesActivity.class);
+                Intent intent = new Intent(view.getContext(), MainActivity.class);
 
                 intent.putExtra("ENDPOINT", ListaLabs.get(position).getUrl());
+                intent.putExtra("LABNAME", ListaLabs.get(position).getName());
+                intent.putExtra("COLOR", ListaLabs.get(position).getColorResource());
                 startActivity(intent);
                 overridePendingTransition(R.anim.abc_slide_in_top,R.anim.abc_slide_in_top);
 

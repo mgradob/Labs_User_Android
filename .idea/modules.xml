@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/LabsUser.iml" filepath="$PROJECT_DIR$/LabsUser.iml" />
       <module fileurl="file://$PROJECT_DIR$/Labs_User_Android.iml" filepath="$PROJECT_DIR$/Labs_User_Android.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

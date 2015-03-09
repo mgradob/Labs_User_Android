@@ -1,6 +1,7 @@
 package com.itesm.labs.labsuser.activities.adapters;
 
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.activities.rest.models.Laboratory;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by mgradob on 2/15/15.
@@ -20,6 +22,7 @@ public class LabsAdapter extends BaseAdapter {
 
     private ArrayList<Laboratory> laboratoryArrayList;
     private Context context;
+    private int colorArray[];
 
     public LabsAdapter(ArrayList<Laboratory> stringArrayList, Context context) {
         this.laboratoryArrayList = stringArrayList;
@@ -60,6 +63,13 @@ public class LabsAdapter extends BaseAdapter {
 
         viewHolder.icono.setImageDrawable(convertView.getResources().getDrawable(laboratoryArrayList.get(position).getImageResource()));
         viewHolder.texto.setText(laboratoryArrayList.get(position).getName());
+
+        colorArray = convertView.getResources().getIntArray(R.array.material_colors);
+        int color = colorArray[new Random().nextInt(colorArray.length - 1)];
+
+        laboratoryArrayList.get(position).setColorResource(color);
+
+        viewHolder.texto.setBackgroundColor(color);
 
         return convertView;
     }

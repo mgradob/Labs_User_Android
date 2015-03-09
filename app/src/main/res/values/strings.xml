@@ -18,5 +18,9 @@
     <string name="laboratoriosLaboratorios">Laboratorios</string>
     <string name="title_activity_categories">CategoriesActivity</string>
     <string name="CategoriesCategorias">Categorias</string>
+    <string name="title_activity_components">ComponentsActivity</string>
+
+    <string name="ActivityComponentsIconTransitionName">CATEGORY_ICON</string>
+    <string name="ActivityComponentsTitleTransitionName">CATEGORY_TITLE</string>
 
 </resources>

@@ -22,6 +22,9 @@
     <!-- GridView Item Background -->
     <item name="grid_text_background" type="color">#70000000</item>
 
+    <!-- Tabs Scroll Color -->
+    <item name="tabsScrollColor" type="color">@color/background</item>
+
     <!-- Material Design Colors 500, for custom RoundedLetterView -->
     <color name="material_red">#F44336</color>
     <color name="material_pink">#E91E63</color>

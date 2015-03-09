@@ -31,12 +31,20 @@
                 android:value=".activities.activities.LoginActivity" />
         </activity>
         <activity
-            android:name=".activities.activities.CategoriesActivity"
+            android:name=".activities.activities.MainActivity"
             android:label="@string/title_activity_categories"
             android:parentActivityName=".activities.activities.LaboratoriosActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.itesm.labs.labsuser.activities.activities.LaboratoriosActivity" />
+        </activity>
+        <activity
+            android:name=".activities.activities.ComponentsActivity"
+            android:label="@string/title_activity_components"
+            android:parentActivityName=".activities.activities.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.itesm.labs.labsuser.activities.activities.MainActivity" />
         </activity>
     </application>
 

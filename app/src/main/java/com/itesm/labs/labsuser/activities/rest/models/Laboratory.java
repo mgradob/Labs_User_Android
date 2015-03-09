@@ -14,10 +14,12 @@ public class Laboratory implements Serializable {
     @SerializedName("link")
     public String url;
     public Integer imageResource;
+    public Integer colorResource;
 
-    public Laboratory(String name, Integer imageResource) {
+    public Laboratory(String name, Integer imageResource, Integer colorResource) {
         this.name = name;
         this.imageResource = imageResource;
+        this.colorResource = colorResource;
     }
 
     public String getName() {
@@ -44,11 +46,21 @@ public class Laboratory implements Serializable {
         this.imageResource = imageResource;
     }
 
+    public Integer getColorResource() {
+        return colorResource;
+    }
+
+    public void setColorResource(Integer colorResource) {
+        this.colorResource = colorResource;
+    }
+
     @Override
     public String toString() {
         return "Laboratory{" +
                 "name='" + name + '\'' +
                 ", url='" + url + '\'' +
+                ", imageResource=" + imageResource +
+                ", colorResource=" + colorResource +
                 '}';
     }
 }
