@@ -13,7 +13,7 @@
         app:title="@string/laboratoriosLaboratorios"
         app:titleTextAppearance="@style/LabsTheme.v21.Light.Text.Display1"
         android:gravity="bottom"
-        app:contentInsetStart="72dp"
+        app:contentInsetStart="36dp"
         android:background="@color/primary"
         android:elevation="3dp"
     />

@@ -1,7 +1,8 @@
 package com.itesm.labs.labsuser.activities.adapters;
 
 import android.content.Context;
-import android.media.Image;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,7 @@ public class CatAdapter extends BaseAdapter {
         ViewHolder viewHolder;
         LayoutInflater layoutInflater = (LayoutInflater.from(context));
 
-        if (convertView == null){
+        if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.cat_grid_item, parent, false);
 
             viewHolder = new ViewHolder();
@@ -55,11 +56,23 @@ public class CatAdapter extends BaseAdapter {
             viewHolder.text = (TextView) convertView.findViewById(R.id.cat_grid_item_text);
 
             convertView.setTag(viewHolder);
-        }else {
+        } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.icono.setImageDrawable(convertView.getResources().getDrawable(categoryArrayList.get(position).getImageResource()));
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inDither = false;
+        options.inJustDecodeBounds = false;
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        options.inSampleSize = 4;
+
+        Bitmap icon = BitmapFactory.decodeResource(
+                context.getResources(),
+                categoryArrayList.get(position).getImageResource(),
+                options
+            );
+
+        viewHolder.icono.setImageBitmap(icon);
         viewHolder.text.setText(categoryArrayList.get(position).getName());
 
         return convertView;
