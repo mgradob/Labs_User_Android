@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.itesm.labs.labsuser.R;
@@ -91,6 +92,7 @@ public class CartFragment extends Fragment {
         });
 
         cartListView = (ListView) view.findViewById(R.id.fragment_cart_list_view);
+        cartListView.setEmptyView(view.findViewById(R.id.fragment_cart_empty_list));
 
         fab = (FloatingActionButton) view.findViewById(R.id.fragment_cart_fab);
         fab.setOnClickListener(new View.OnClickListener() {

@@ -2,6 +2,7 @@ package com.itesm.labs.labsuser.activities.activities;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -56,7 +57,8 @@ public class MainActivity extends ActionBarActivity
         mToolbar.setTitle(LAB_NAME);
         setSupportActionBar(mToolbar);
 
-        getWindow().setStatusBarColor(getResources().getIntArray(R.array.material_colors_dark)[LAB_COLOR]);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            getWindow().setStatusBarColor(getResources().getIntArray(R.array.material_colors_dark)[LAB_COLOR]);
 
         userCart = new Cart();
 

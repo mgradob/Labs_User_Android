@@ -19,6 +19,14 @@
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
+    <TextView
+        android:id="@+id/fragment_cart_empty_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:text="Lista vacia\n:("
+        android:gravity="center"
+        style="@style/LabsTheme.v21.Text.Display2"/>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fragment_cart_fab"
         android:layout_width="56dp"

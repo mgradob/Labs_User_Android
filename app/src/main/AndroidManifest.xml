@@ -38,14 +38,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.activities.LaboratoriesActivity" />
         </activity>
-        <activity
-            android:name=".activities.activities.ComponentsActivity"
-            android:label="@string/title_activity_components"
-            android:parentActivityName=".activities.activities.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.itesm.labs.labsuser.activities.activities.MainActivity" />
-        </activity>
     </application>
 
 </manifest>
