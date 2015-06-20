@@ -1,0 +1,95 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/categories_component_name"
+            style="@style/LabsTheme.v21.Text.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CATEGORY" />
+
+        <TextView
+            android:id="@+id/categories_component_note"
+            style="@style/LabsTheme.v21.Text.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NOTE" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/LabsTheme.v21.Text.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Disponible:" />
+
+            <TextView
+                android:id="@+id/categories_component_available"
+                style="@style/LabsTheme.v21.Text.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AVAILABLE" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/LabsTheme.v21.Text.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="En carrito:" />
+
+            <TextView
+                android:id="@+id/categories_component_in_cart"
+                style="@style/LabsTheme.v21.Text.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="IN_CART" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="4dp">
+
+        <ImageButton
+            android:id="@+id/categories_add_btn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="#00000000"
+            android:src="@drawable/ic_add_black"
+            android:tint="@color/primary" />
+
+        <ImageButton
+            android:id="@+id/categories_remove_btn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="#00000000"
+            android:src="@drawable/ic_cancel_black"
+            android:tint="@color/material_red" />
+
+    </LinearLayout>
+
+</RelativeLayout>

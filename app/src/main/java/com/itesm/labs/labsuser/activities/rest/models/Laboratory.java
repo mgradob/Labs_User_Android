@@ -9,25 +9,18 @@ import java.io.Serializable;
  */
 public class Laboratory implements Serializable {
 
+    @SerializedName("url")
+    public String url;
     @SerializedName("name")
     public String name;
     @SerializedName("link")
-    public String url;
+    public String link;
+    public int colorResource;
     public Integer imageResource;
-    public Integer colorResource;
 
-    public Laboratory(String name, Integer imageResource, Integer colorResource) {
+    public Laboratory(String name, Integer imageResource) {
         this.name = name;
         this.imageResource = imageResource;
-        this.colorResource = colorResource;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getUrl() {
@@ -38,6 +31,22 @@ public class Laboratory implements Serializable {
         this.url = url;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
     public Integer getImageResource() {
         return imageResource;
     }
@@ -46,21 +55,22 @@ public class Laboratory implements Serializable {
         this.imageResource = imageResource;
     }
 
-    public Integer getColorResource() {
+    public int getColorResource() {
         return colorResource;
     }
 
-    public void setColorResource(Integer colorResource) {
+    public void setColorResource(int colorResource) {
         this.colorResource = colorResource;
     }
 
     @Override
     public String toString() {
         return "Laboratory{" +
-                "name='" + name + '\'' +
-                ", url='" + url + '\'' +
-                ", imageResource=" + imageResource +
+                "url='" + url + '\'' +
+                ", name='" + name + '\'' +
+                ", link='" + link + '\'' +
                 ", colorResource=" + colorResource +
+                ", imageResource=" + imageResource +
                 '}';
     }
 }

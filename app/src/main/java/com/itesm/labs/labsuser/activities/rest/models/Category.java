@@ -2,21 +2,25 @@ package com.itesm.labs.labsuser.activities.rest.models;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by mgradob on 2/15/15.
- */
-public class Category {
+import java.io.Serializable;
 
+/**
+ * Created by miguel on 7/10/14.
+ */
+public class Category implements Serializable {
+
+    @SerializedName("id_category")
+    private int id;
     @SerializedName("name")
     private String name;
-    @SerializedName("id_category")
-    private Integer id;
     private Integer imageResource;
 
-    public Category(String name, Integer id, Integer imageResource) {
-        this.name = name;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
         this.id = id;
-        this.imageResource = imageResource;
     }
 
     public String getName() {
@@ -25,14 +29,6 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public Integer getImageResource() {
@@ -46,8 +42,8 @@ public class Category {
     @Override
     public String toString() {
         return "Category{" +
-                "name='" + name + '\'' +
-                ", id=" + id +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", imageResource=" + imageResource +
                 '}';
     }

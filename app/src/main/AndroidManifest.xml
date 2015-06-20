@@ -23,7 +23,7 @@
             android:label="@string/title_activity_sugn_up" >
         </activity>
         <activity
-            android:name=".activities.activities.LaboratoriosActivity"
+            android:name=".activities.activities.LaboratoriesActivity"
             android:label="@string/title_activity_laboratorios"
             android:parentActivityName=".activities.activities.LoginActivity" >
             <meta-data
@@ -33,10 +33,10 @@
         <activity
             android:name=".activities.activities.MainActivity"
             android:label="@string/title_activity_categories"
-            android:parentActivityName=".activities.activities.LaboratoriosActivity" >
+            android:parentActivityName=".activities.activities.LaboratoriesActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.itesm.labs.labsuser.activities.activities.LaboratoriosActivity" />
+                android:value=".activities.activities.LaboratoriesActivity" />
         </activity>
         <activity
             android:name=".activities.activities.ComponentsActivity"

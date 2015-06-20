@@ -5,8 +5,8 @@ import android.os.AsyncTask;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.itesm.labs.labsuser.R;
-import com.itesm.labs.labsuser.activities.rest.interfaces.LabsInterface;
 import com.itesm.labs.labsuser.activities.rest.models.Laboratory;
+import com.itesm.labs.labsuser.activities.rest.service.LaboratoryService;
 
 import java.util.ArrayList;
 
@@ -28,9 +28,9 @@ public class HiloLabs extends AsyncTask<String, Void, ArrayList<Laboratory>> {
                 .setConverter(new GsonConverter(gson))
                 .build();
 
-        LabsInterface labsInterface = restAdapter.create(LabsInterface.class);
+        LaboratoryService labsInterface = restAdapter.create(LaboratoryService.class);
 
-        laboratoryArrayList = labsInterface.getLabs();
+        laboratoryArrayList = labsInterface.getLaboratories();
 
         for(Laboratory laboratory : laboratoryArrayList){
             laboratory.setImageResource(R.drawable.ic_logo);

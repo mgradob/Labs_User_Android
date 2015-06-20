@@ -65,11 +65,11 @@ public class LabsAdapter extends BaseAdapter {
         viewHolder.texto.setText(laboratoryArrayList.get(position).getName());
 
         colorArray = convertView.getResources().getIntArray(R.array.material_colors);
-        int color = colorArray[new Random().nextInt(colorArray.length - 1)];
+        int color = new Random().nextInt(colorArray.length - 1);
 
         laboratoryArrayList.get(position).setColorResource(color);
 
-        viewHolder.texto.setBackgroundColor(color);
+        viewHolder.texto.setBackgroundColor(colorArray[color]);
 
         return convertView;
     }

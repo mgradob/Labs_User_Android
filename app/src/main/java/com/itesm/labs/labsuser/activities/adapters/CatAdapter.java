@@ -63,7 +63,7 @@ public class CatAdapter extends BaseAdapter {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inDither = false;
         options.inJustDecodeBounds = false;
-        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        options.inPreferredConfig = Bitmap.Config.ARGB_4444;
         options.inSampleSize = 4;
 
         Bitmap icon = BitmapFactory.decodeResource(
