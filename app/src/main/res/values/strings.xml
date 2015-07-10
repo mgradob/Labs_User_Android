@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="font_family_display_4_material">sans-serif-light</string>
+    <string name="font_family_display_3_material">sans-serif</string>
+    <string name="font_family_display_2_material">sans-serif</string>
+    <string name="font_family_display_1_material">sans-serif</string>
+    <string name="font_family_headline_material">sans-serif</string>
+    <string name="font_family_title_material">sans-serif-medium</string>
+    <string name="font_family_subhead_material">sans-serif</string>
+    <string name="font_family_menu_material">sans-serif</string>
+    <string name="font_family_body_2_material">sans-serif-medium</string>
+    <string name="font_family_body_1_material">sans-serif</string>
+    <string name="font_family_caption_material">sans-serif</string>
+    <string name="font_family_button_material">sans-serif-medium</string>
+
     <string name="app_name">Labs User</string>
     <string name="action_settings">Settings</string>
     <string name="login_mat">Matrícula</string>
@@ -8,7 +21,6 @@
     <string name="login_button">LOGIN</string>
     <string name="login_signup">Sign Up</string>
     <string name="title_activity_sugn_up">SugnUpActivity</string>
-    <string name="hello_world">Hello world!</string>
     <string name="signupNombre">Nombre(s)</string>
     <string name="signupMatricula">Matrícula</string>
     <string name="singupCarrera">Carrera</string>
@@ -18,12 +30,8 @@
     <string name="laboratoriosLaboratorios">Laboratorios</string>
     <string name="title_activity_categories">CategoriesActivity</string>
     <string name="CategoriesCategorias">Categorias</string>
-    <string name="title_activity_components">ComponentsActivity</string>
 
-    <string name="ActivityComponentsIconTransitionName">CATEGORY_ICON</string>
-    <string name="ActivityComponentsTitleTransitionName">CATEGORY_TITLE</string>
-
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="AppTitleLogin">Laboratorios</string>
+    <string name="AppCampusName">Campus Chihuahua</string>
 
 </resources>

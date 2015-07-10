@@ -58,4 +58,10 @@ public class CategoriesFragment extends Fragment {
                 .replace(R.id.fragment_categories_container, categoriesGridFragment)
                 .commit();
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("ENDPOINT", ENDPOINT);
+    }
 }

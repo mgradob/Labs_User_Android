@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@color/primary"
         android:layout_below="@id/labs_grid_item_image"
-        style="@style/LabsTheme.v21.Light.Text.Body1"
+        style="@style/LabsTheme.Compat.Light.Text.Body1"
         android:text="YOLO"
         android:padding="16dp"/>
 

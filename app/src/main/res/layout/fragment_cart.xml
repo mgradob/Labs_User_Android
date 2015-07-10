@@ -14,8 +14,7 @@
             android:id="@+id/fragment_cart_list_view"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:animateLayoutChanges="true"
-            android:nestedScrollingEnabled="true" />
+            android:animateLayoutChanges="true" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
@@ -25,7 +24,7 @@
         android:layout_height="fill_parent"
         android:text="Lista vacia\n:("
         android:gravity="center"
-        style="@style/LabsTheme.v21.Text.Display2"/>
+        style="@style/LabsTheme.Compat.Text.Display2"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fragment_cart_fab"

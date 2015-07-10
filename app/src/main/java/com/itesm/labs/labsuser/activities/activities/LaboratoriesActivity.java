@@ -2,8 +2,9 @@ package com.itesm.labs.labsuser.activities.activities;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,7 +14,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.activities.adapters.LabsAdapter;
-import com.itesm.labs.labsuser.activities.async_tasks.HiloLabs;
 import com.itesm.labs.labsuser.activities.rest.models.Laboratory;
 import com.itesm.labs.labsuser.activities.rest.service.LaboratoryService;
 
@@ -25,9 +25,11 @@ import retrofit.converter.GsonConverter;
 public class LaboratoriesActivity extends ActionBarActivity {
 
     private GridView gridLabs;
+    private SwipeRefreshLayout refreshLayout;
+
     private String userId;
     private ArrayList<String> allowedLabs;
-    private ArrayList <Laboratory> ListaLabs;
+    private ArrayList<Laboratory> ListaLabs;
 
 
     @Override
@@ -36,6 +38,15 @@ public class LaboratoriesActivity extends ActionBarActivity {
         setContentView(R.layout.activity_laboratorios);
 
         gridLabs = (GridView) findViewById(R.id.labs_grid);
+
+        refreshLayout = (SwipeRefreshLayout) findViewById(R.id.labs_grid_swipe_refresh);
+        refreshLayout.setColorSchemeResources(R.color.material_blue, R.color.material_yellow, R.color.material_red);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshList();
+            }
+        });
 
         Intent callingIntent = getIntent();
         userId = callingIntent.getStringExtra("USERID");
@@ -51,12 +62,15 @@ public class LaboratoriesActivity extends ActionBarActivity {
                 intent.putExtra("COLOR", ListaLabs.get(position).getColorResource());
                 intent.putExtra("USERID", userId);
                 startActivity(intent);
-                overridePendingTransition(R.anim.abc_slide_in_top,R.anim.abc_slide_in_top);
-
+                overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_in_top);
             }
         });
 
-        new AsyncTask<ArrayList<String>, Void, ArrayList<Laboratory>>(){
+        refreshList();
+    }
+
+    private void refreshList() {
+        new AsyncTask<ArrayList<String>, Void, ArrayList<Laboratory>>() {
             @Override
             protected ArrayList<Laboratory> doInBackground(ArrayList<String>... params) {
                 try {
@@ -73,15 +87,14 @@ public class LaboratoriesActivity extends ActionBarActivity {
                         LaboratoryService labsInterface = restAdapter.create(LaboratoryService.class);
 
                         labsList.add(labsInterface.getLaboratoriesFromUrl());
-
                     }
 
-                    for(Laboratory laboratory : labsList){
+                    for (Laboratory laboratory : labsList) {
                         laboratory.setImageResource(R.drawable.ic_logo);
                     }
 
                     return labsList;
-                } catch (Exception ex){
+                } catch (Exception ex) {
                     Log.e("LABS", "Error finding labs");
                     return null;
                 }
@@ -91,7 +104,7 @@ public class LaboratoriesActivity extends ActionBarActivity {
             protected void onPostExecute(ArrayList<Laboratory> laboratories) {
                 super.onPostExecute(laboratories);
 
-                if(laboratories != null){
+                if (laboratories != null) {
                     ListaLabs = laboratories;
                     gridLabs.setAdapter(new LabsAdapter(ListaLabs, getApplicationContext()));
                 }

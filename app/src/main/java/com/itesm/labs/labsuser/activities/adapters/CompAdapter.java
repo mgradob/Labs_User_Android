@@ -80,8 +80,10 @@ public class CompAdapter extends BaseAdapter {
 
                 for (CartItem item : userCart.getCartList()) {
                     if (item.getComponentId() == tempItem.getComponentId()) {
-                        item.setQuantity(item.getQuantity() + 1);
-                        holder.component_in_cart.setText(" " + item.getQuantity());
+                        if(item.getQuantity() < DATA.get(position).getAvailable()) {
+                            item.setQuantity(item.getQuantity() + 1);
+                            holder.component_in_cart.setText(" " + item.getQuantity());
+                        }
 
                         return;
                     }

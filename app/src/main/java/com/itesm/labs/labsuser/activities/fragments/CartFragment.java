@@ -4,6 +4,7 @@ package com.itesm.labs.labsuser.activities.fragments;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -13,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.itesm.labs.labsuser.R;
@@ -33,6 +33,7 @@ public class CartFragment extends Fragment {
     private ListView cartListView;
     private FloatingActionButton fab;
     private SwipeRefreshLayout refreshLayout;
+    private CoordinatorLayout mCoordinatorLayout;
 
     private String ENDPOINT;
     private String USER_ID;
@@ -118,11 +119,10 @@ public class CartFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
 
-        if(isVisibleToUser){
+        if (isVisibleToUser) {
             cartListView.setAdapter(new CartAdapter(getActivity().getApplication()
                     .getApplicationContext(), userCart));
-        }
-        else
+        } else
             Log.d("CartFragment", "hidden");
     }
 
@@ -135,15 +135,26 @@ public class CartFragment extends Fragment {
                 protected Void doInBackground(Void... params) {
                     CartQuery query = new CartQuery(ENDPOINT);
                     ArrayList<CartItem> tempItems = query.getCartOf(USER_ID);
-                    for(CartItem item : tempItems){
+                    for (CartItem item : tempItems) {
                         query.deleteCart(item.getCartId());
                     }
 
-                    for(CartItem item : userCart.getCartList()){
-                        item.setStudentId(USER_ID);
-                        item.setReady(false);
-                        item.setCheckout(false);
-                        query.postNewCartItem(item);
+                    for (CartItem item : userCart.getCartList()) {
+                        Component tempComponent = new ComponentQuery(ENDPOINT).getComponent(item.getComponentId());
+
+                        if (item.getQuantity() > tempComponent.getAvailable()) {
+                            Toast.makeText(getActivity().getApplicationContext(),
+                                    "No hay suficientes componentes: " +
+                                    tempComponent.getName() + "\nPedidos: " +
+                                    item.getQuantity() + ", disponibles: " +
+                                    tempComponent.getAvailable(),
+                                    Toast.LENGTH_LONG).show();
+                        } else {
+                            item.setStudentId(USER_ID);
+                            item.setReady(false);
+                            item.setCheckout(false);
+                            query.postNewCartItem(item);
+                        }
                     }
 
                     return null;
@@ -201,6 +212,12 @@ public class CartFragment extends Fragment {
                 refreshLayout.setRefreshing(false);
             }
         }.execute(ENDPOINT);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("ENDPOINT", ENDPOINT);
     }
 
     public interface CartFragInteractionListener {

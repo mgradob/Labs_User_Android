@@ -123,6 +123,12 @@ public class CategoriesDetailFragment extends Fragment {
         }.execute(ENDPOINT, "" + CATEGORY_ID);
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("ENDPOINT", ENDPOINT);
+    }
+
     private void refreshList() {
         getCategoryComponents();
     }

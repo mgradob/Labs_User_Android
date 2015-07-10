@@ -131,4 +131,10 @@ public class RecordFragment extends Fragment {
             }
         }.execute();
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("ENDPOINT", ENDPOINT);
+    }
 }

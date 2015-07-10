@@ -1,17 +1,18 @@
 package com.itesm.labs.labsuser.activities.fragments;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.GridView;
 
 import com.itesm.labs.labsuser.R;
-import com.itesm.labs.labsuser.activities.adapters.CatAdapter;
+import com.itesm.labs.labsuser.activities.adapters.CategoriesRecyclerAdapter;
 import com.itesm.labs.labsuser.activities.async_tasks.HiloCat;
 import com.itesm.labs.labsuser.activities.rest.models.Category;
 
@@ -20,7 +21,8 @@ import java.util.ArrayList;
 public class CategoriesGridFragment extends Fragment {
 
     private CatGridFragInteractionListener catGridFragInteractionListener;
-    private GridView mCategoriesGrid;
+    private RecyclerView mRecyclerView;
+    private CategoriesRecyclerAdapter mAdapter;
     private SwipeRefreshLayout refreshLayout;
 
     private String ENDPOINT;
@@ -55,7 +57,7 @@ public class CategoriesGridFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.fragment_categories_grid_swipe_refresh);
-        refreshLayout.setColorSchemeResources(R.color.material_blue, R.color.material_yellow, R.color.material_red);
+        refreshLayout.setColorSchemeResources(R.color.primary, R.color.primary_dark, R.color.accent);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -63,15 +65,24 @@ public class CategoriesGridFragment extends Fragment {
             }
         });
 
-        mCategoriesGrid = (GridView) view.findViewById(R.id.fragment_categories_grid_gridview);
-        mCategoriesGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.fragment_categories_grid_recyclerview);
+        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+            mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        else
+            mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 4));
+
+        mRecyclerView.setHasFixedSize(true);
+
+        mAdapter = new CategoriesRecyclerAdapter();
+        mAdapter.setmContext(getActivity().getApplicationContext());
+        mAdapter.setMyOnClickListener(new CategoriesRecyclerAdapter.MyOnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void mOnClick(View v, int position) {
                 catGridFragInteractionListener.displayCategory(listaCat.get(position).getId());
             }
         });
 
-        HiloCat hilo = new HiloCat() {
+        new HiloCat() {
             @Override
             protected void onPostExecute(ArrayList<Category> categories) {
                 super.onPostExecute(categories);
@@ -79,11 +90,12 @@ public class CategoriesGridFragment extends Fragment {
                 if (categories != null) {
                     listaCat = categories;
 
-                    mCategoriesGrid.setAdapter(new CatAdapter(listaCat, getActivity().getApplicationContext()));
+                    mAdapter.setmCategories(listaCat);
+
+                    mRecyclerView.setAdapter(mAdapter);
                 }
             }
-        };
-        hilo.execute(ENDPOINT);
+        }.execute(ENDPOINT);
     }
 
     @Override
@@ -98,9 +110,7 @@ public class CategoriesGridFragment extends Fragment {
     }
 
     private void refreshList() {
-        refreshLayout.setRefreshing(true);
-
-        HiloCat hilo = new HiloCat() {
+        new HiloCat() {
             @Override
             protected void onPostExecute(ArrayList<Category> categories) {
                 super.onPostExecute(categories);
@@ -108,12 +118,18 @@ public class CategoriesGridFragment extends Fragment {
                 if (categories != null) {
                     listaCat = categories;
 
-                    mCategoriesGrid.setAdapter(new CatAdapter(listaCat, getActivity().getApplicationContext()));
+                    mAdapter.setmCategories(listaCat);
+
                     refreshLayout.setRefreshing(false);
                 }
             }
-        };
-        hilo.execute(ENDPOINT);
+        }.execute(ENDPOINT);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("ENDPOINT", ENDPOINT);
     }
 
     /**

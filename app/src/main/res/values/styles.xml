@@ -4,4 +4,165 @@
     <!-- Login Activity -->
     <style name="LabsTheme.Compat.Login" parent="LabsTheme.Compat" />
 
+    <!-- Fonts styles Dark -->
+    <style name="LabsTheme.Compat.Text.Display4" parent="LabsTheme.Compat">
+        <item name="android:textColor">@color/secondary_text</item>
+        <item name="android:textSize">@dimen/text_size_display_4_material</item>
+        <item name="android:fontFamily">@string/font_family_display_4_material</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="LabsTheme.Compat.Text.Display3" parent="LabsTheme.Compat">
+        <item name="android:textColor">@color/secondary_text</item>
+        <item name="android:textSize">@dimen/text_size_display_3_material</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">@string/font_family_display_3_material</item>
+    </style>
+
+    <style name="LabsTheme.Compat.Text.Display2" parent="LabsTheme.Compat">
+        <item name="android:textColor">@color/secondary_text</item>
+        <item name="android:textSize">@dimen/text_size_display_2_material</item>
+        <item name="android:fontFamily">@string/font_family_display_2_material</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="LabsTheme.Compat.Text.Display1" parent="LabsTheme.Compat">
+        <item name="android:textColor">@color/secondary_text</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text_size_display_1_material</item>
+        <item name="android:fontFamily">@string/font_family_display_1_material</item>
+    </style>
+
+    <style name="LabsTheme.Compat.Text.Headline" parent="LabsTheme.Compat">
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text_size_headline_material</item>
+        <item name="android:fontFamily">@string/font_family_headline_material</item>
+    </style>
+
+    <style name="LabsTheme.Compat.Text.Title" parent="LabsTheme.Compat">
+        <item name="android:textSize">@dimen/text_size_title_material</item>
+        <item name="android:fontFamily">@string/font_family_title_material</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="LabsTheme.Compat.Text.Subhead" parent="LabsTheme.Compat">
+        <item name="android:textSize">@dimen/text_size_subhead_material</item>
+        <item name="android:fontFamily">@string/font_family_subhead_material</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="LabsTheme.Compat.Text.Body1" parent="LabsTheme.Compat">
+        <item name="android:textSize">@dimen/text_size_body_1_material</item>
+        <item name="android:fontFamily">@string/font_family_body_1_material</item>
+        <item name="android:textColor">@color/secondary_text</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="LabsTheme.Compat.Text.Body2" parent="LabsTheme.Compat">
+        <item name="android:textSize">@dimen/text_size_body_2_material</item>
+        <item name="android:fontFamily">@string/font_family_body_2_material</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="LabsTheme.Compat.Text.Caption" parent="LabsTheme.Compat">
+        <item name="android:textSize">@dimen/text_size_caption_material</item>
+        <item name="android:fontFamily">@string/font_family_caption_material</item>
+        <item name="android:textColor">@color/secondary_text</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="LabsTheme.Compat.Text.Button" parent="LabsTheme.Compat">
+        <item name="android:textSize">@dimen/text_size_button_material</item>
+        <item name="android:fontFamily">@string/font_family_button_material</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <!-- Light Theme -->
+    <style name="LabsTheme.Compat.Light" parent="LabsTheme.Compat" />
+
+    <!-- Fonts styles Dark -->
+    <style name="LabsTheme.Compat.Light.Text.Display4" parent="LabsTheme.Compat">
+        <item name="android:textColor">@color/secondary_text_light</item>
+        <item name="android:textSize">@dimen/text_size_display_4_material</item>
+        <item name="android:fontFamily">@string/font_family_display_4_material</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="LabsTheme.Compat.Light.Text.Display3" parent="LabsTheme.Compat">
+        <item name="android:textColor">@color/secondary_text_light</item>
+        <item name="android:textSize">@dimen/text_size_display_3_material</item>
+        <item name="android:fontFamily">@string/font_family_display_3_material</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="LabsTheme.Compat.Light.Text.Display2" parent="LabsTheme.Compat">
+        <item name="android:textColor">@color/secondary_text_light</item>
+        <item name="android:textSize">@dimen/text_size_display_2_material</item>
+        <item name="android:fontFamily">@string/font_family_display_2_material</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="LabsTheme.Compat.Light.Text.Display1" parent="LabsTheme.Compat">
+        <item name="android:textColor">@color/secondary_text_light</item>
+        <item name="android:textSize">@dimen/text_size_display_1_material</item>
+        <item name="android:fontFamily">@string/font_family_display_1_material</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="LabsTheme.Compat.Light.Text.Headline" parent="LabsTheme.Compat">
+        <item name="android:textColor">@color/primary_text_light</item>
+        <item name="android:textSize">@dimen/text_size_headline_material</item>
+        <item name="android:fontFamily">@string/font_family_headline_material</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="LabsTheme.Compat.Light.Text.Title" parent="LabsTheme.Compat">
+        <item name="android:textSize">@dimen/text_size_title_material</item>
+        <item name="android:fontFamily">@string/font_family_title_material</item>
+        <item name="android:textColor">@color/primary_text_light</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="LabsTheme.Compat.Light.Text.Subhead" parent="LabsTheme.Compat">
+        <item name="android:textSize">@dimen/text_size_subhead_material</item>
+        <item name="android:fontFamily">@string/font_family_subhead_material</item>
+        <item name="android:textColor">@color/primary_text_light</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="LabsTheme.Compat.Light.Text.Body1" parent="LabsTheme.Compat">
+        <item name="android:textSize">@dimen/text_size_body_1_material</item>
+        <item name="android:fontFamily">@string/font_family_body_1_material</item>
+        <item name="android:textColor">@color/secondary_text_light</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="LabsTheme.Compat.Light.Text.Body2" parent="LabsTheme.Compat">
+        <item name="android:textSize">@dimen/text_size_body_2_material</item>
+        <item name="android:fontFamily">@string/font_family_body_2_material</item>
+        <item name="android:textColor">@color/primary_text_light</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="LabsTheme.Compat.Light.Text.Caption" parent="LabsTheme.Compat">
+        <item name="android:textSize">@dimen/text_size_caption_material</item>
+        <item name="android:fontFamily">@string/font_family_caption_material</item>
+        <item name="android:textColor">@color/secondary_text_light</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="LabsTheme.Compat.Light.Text.Button" parent="LabsTheme.Compat">
+        <item name="android:textSize">@dimen/text_size_button_material</item>
+        <item name="android:fontFamily">@string/font_family_button_material</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/primary_text_light</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
 </resources>

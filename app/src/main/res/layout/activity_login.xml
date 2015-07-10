@@ -8,7 +8,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@color/material_teal"
-        android:elevation="3dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingBottom="8dp"
@@ -70,6 +69,7 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/login_mat"
+                android:singleLine="true"
                 android:textColorHint="@color/primary" />
         </android.support.design.widget.TextInputLayout>
 
@@ -86,6 +86,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/login_pass"
                 android:inputType="textPassword"
+                android:singleLine="true"
                 android:textColorHint="@color/primary" />
         </android.support.design.widget.TextInputLayout>
 
@@ -99,21 +100,17 @@
 
             <Button
                 android:id="@+id/login_button"
-                style="@android:style/Widget.Material.Button.Borderless.Colored"
+                style="?attr/borderlessButtonStyle"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/login_user_pass"
-                android:layout_centerHorizontal="true"
                 android:text="@string/login_button"
                 android:textColor="@color/primary" />
 
             <Button
                 android:id="@+id/signup_button"
-                style="@android:style/Widget.Material.Button.Borderless.Colored"
+                style="?attr/borderlessButtonStyle"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/login_button"
-                android:layout_centerHorizontal="true"
                 android:text="@string/login_signup"
                 android:textColor="@color/primary" />
 
@@ -131,18 +128,18 @@
         android:padding="16dp">
 
         <TextView
-            style="@style/LabsTheme.v21.Text.Display2"
+            style="@style/LabsTheme.Compat.Text.Display2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Laboratorios" />
+            android:text="@string/AppTitleLogin" />
 
         <TextView
-            style="@style/LabsTheme.v21.Text.Title"
+            style="@style/LabsTheme.Compat.Text.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Campus Chihuahua"
+            android:text="@string/AppCampusName"
             android:textColor="@color/primary_dark_material_light" />
     </LinearLayout>
 

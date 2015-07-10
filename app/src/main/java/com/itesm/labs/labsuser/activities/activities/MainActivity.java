@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.itesm.labs.labsuser.R;
@@ -26,7 +26,7 @@ import com.itesm.labs.labsuser.activities.tabs.SectionPagerAdapter;
 
 import java.util.ArrayList;
 
-public class MainActivity extends ActionBarActivity
+public class MainActivity extends AppCompatActivity
         implements CategoriesGridFragment.CatGridFragInteractionListener,
         CartFragment.CartFragInteractionListener {
 
@@ -57,7 +57,7 @@ public class MainActivity extends ActionBarActivity
         mToolbar.setTitle(LAB_NAME);
         setSupportActionBar(mToolbar);
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             getWindow().setStatusBarColor(getResources().getIntArray(R.array.material_colors_dark)[LAB_COLOR]);
 
         userCart = new Cart();
@@ -98,6 +98,17 @@ public class MainActivity extends ActionBarActivity
         labsUserSqliteOpenHelper = new LabsUserSqliteOpenHelper(getApplicationContext());
         labsUserSqliteOpenHelper.getReadableDatabase();
 
+        if (findViewById(R.id.activity_main) != null) {
+            if (savedInstanceState != null) return;
+
+            categoriesFragment = new CategoriesFragment();
+            categoriesFragment.setENDPOINT(ENDPOINT);
+            getSupportFragmentManager().beginTransaction()
+                    .setCustomAnimations(R.anim.popup_enter, R.anim.popup_exit)
+                    .replace(R.id.fragment_categories_container, categoriesFragment)
+                    .commit();
+        }
+
         initCart();
     }
 
@@ -137,9 +148,12 @@ public class MainActivity extends ActionBarActivity
 
                     userCart.setCartList(cartItems);
 
-                    categoriesFragment.setUserCart(userCart);
-                    cartFragment.setUserCart(userCart);
-                    cartFragment.refreshList();
+                    if (categoriesFragment != null)
+                        categoriesFragment.setUserCart(userCart);
+                    if (cartFragment != null) {
+                        cartFragment.setUserCart(userCart);
+                        cartFragment.refreshList();
+                    }
 
                     dialog.dismiss();
                 }
@@ -163,6 +177,11 @@ public class MainActivity extends ActionBarActivity
                 .setCustomAnimations(R.anim.popup_enter, R.anim.popup_exit)
                 .replace(R.id.fragment_categories_container, categoriesDetailFragment)
                 .commit();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     @Override
