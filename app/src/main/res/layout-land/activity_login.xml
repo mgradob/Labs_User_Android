@@ -51,14 +51,10 @@
 
     </LinearLayout>
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="10dp"/>
-
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="4dp"
+        android:layout_height="fill_parent"
+        android:gravity="bottom"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -76,21 +72,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/AppTitleLogin" />
+                android:text="@string/app_title_login" />
 
             <TextView
                 style="@style/LabsTheme.Compat.Text.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/AppCampusName"
+                android:text="@string/app_campus_name"
                 android:textColor="@color/primary_dark_material_light" />
 
         </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/login_form"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"

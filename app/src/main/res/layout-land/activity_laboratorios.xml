@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.itesm.labs.labsuser.activities.activities.LaboratoriesActivity">
+    tools:context="com.itesm.labs.labsuser.app.activities.LaboratoriesActivity">
 
     <android.support.v7.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="fill_parent"
@@ -12,7 +12,7 @@
         android:elevation="3dp"
         android:gravity="bottom"
         app:contentInsetStart="36dp"
-        app:title="@string/laboratoriosLaboratorios"
+        app:title="@string/labs_title"
         app:titleTextAppearance="@style/LabsTheme.Compat.Light.Text.Display1" />
 
     <android.support.v4.widget.SwipeRefreshLayout
@@ -20,16 +20,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <GridView
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/labs_grid"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:animateLayoutChanges="true"
-            android:gravity="center_horizontal"
-            android:horizontalSpacing="1dp"
-            android:numColumns="3"
-            android:stretchMode="columnWidth"
-            android:verticalSpacing="1dp" />
+            android:gravity="center_horizontal" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
 

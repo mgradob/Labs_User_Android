@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.itesm.labs.labsuser.activities.activities.SignUpActivity">
+    tools:context="com.itesm.labs.labsuser.app.activities.SignUpActivity">
 
     <RelativeLayout
         android:id="@+id/layoutNombre"
@@ -29,7 +29,7 @@
                 android:layout_marginBottom="16dp"
                 android:layout_marginLeft="72dp"
                 android:layout_marginTop="56dp"
-                android:hint="@string/signupNombre"
+                android:hint="@string/signup_nombre"
                 android:textColor="@color/primary_text_light"
                 android:textColorHint="@color/primary_text_light"
                 android:textSize="48sp" />
@@ -111,7 +111,7 @@
                     android:id="@+id/signup_carrera"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/singupCarrera"
+                    android:hint="@string/singup_carrera"
                     android:textColorHint="@color/primary" />
             </android.support.design.widget.TextInputLayout>
 
@@ -145,7 +145,7 @@
                     android:id="@+id/signup_credencial"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/signupMatricula"
+                    android:hint="@string/signup_matricula"
                     android:textColorHint="@color/primary" />
             </android.support.design.widget.TextInputLayout>
 

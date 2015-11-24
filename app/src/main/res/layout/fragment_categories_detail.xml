@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.itesm.labs.labsuser.activities.fragments.CategoriesDetailFragment">
+    tools:context="com.itesm.labs.labsuser.app.fragments.CategoriesDetailFragment">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/fragment_categories_detail_swipe_refresh"

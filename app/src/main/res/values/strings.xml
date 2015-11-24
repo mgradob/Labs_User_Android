@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Global strings -->
     <string name="font_family_display_4_material">sans-serif-light</string>
     <string name="font_family_display_3_material">sans-serif</string>
     <string name="font_family_display_2_material">sans-serif</string>
@@ -16,22 +17,68 @@
 
     <string name="app_name">Labs User</string>
     <string name="action_settings">Settings</string>
+
+    <string name="app_title_login">Laboratories</string>
+    <string name="app_campus_name">Campus Chihuahua</string>
+
+    <string name="backstack_categories_fragment">categoriesFragment</string>
+
+    <!-- Login Activity -->
     <string name="login_mat">Matrícula</string>
     <string name="login_pass">Password</string>
     <string name="login_button">LOGIN</string>
     <string name="login_signup">Sign Up</string>
-    <string name="title_activity_sugn_up">SugnUpActivity</string>
-    <string name="signupNombre">Nombre(s)</string>
-    <string name="signupMatricula">Matrícula</string>
-    <string name="singupCarrera">Carrera</string>
+    <string name="login_dialog_title">Please wait</string>
+    <string name="login_dialog_content">We\'re signing you in…</string>
+    <string name="login_snackbar_error_content">Invalid student ID or password.</string>
+
+    <!-- Signup Activity -->
+    <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="signup_nombre">Nombre(s)</string>
+    <string name="signup_matricula">Matrícula</string>
+    <string name="singup_carrera">Carrera</string>
     <string name="signup_apellidop">Apellido Paterno</string>
     <string name="signup_apellidom">Apellido Materno</string>
-    <string name="title_activity_laboratorios">LaboratoriosActivity</string>
-    <string name="laboratoriosLaboratorios">Laboratorios</string>
-    <string name="title_activity_categories">CategoriesActivity</string>
-    <string name="CategoriesCategorias">Categorias</string>
 
-    <string name="AppTitleLogin">Laboratorios</string>
-    <string name="AppCampusName">Campus Chihuahua</string>
+    <!-- Labs Activity -->
+    <string name="title_activity_laboratorios">LaboratoriosActivity</string>
+    <string name="labs_title">Laboratories</string>
+    <string name="labs_dialog_title">Please wait</string>
+    <string name="labs_dialog_content">We\'re getting your labs…</string>
+    <string name="labs_snackbar_error_content">Unable to get labs, check your internet connection.</string>
+
+    <!-- Main Activity -->
+    <string name="main_dialog_title_init">Please wait</string>
+    <string name="main_dialog_content_init">We\'re obtaining the lab info…</string>
+
+    <!-- Pager Adapter -->
+    <string name="page_title_categories">Categories</string>
+    <string name="page_title_cart">Cart</string>
+    <string name="page_title_history">History</string>
+
+    <!-- Categories Fragment -->
+    <string name="title_activity_categories">CategoriesActivity</string>
+    <string name="categories_title">Categories</string>
+    <!-- Grid-->
+    <string name="categories_grid_snackbar_error_content">Error obtaining categories.</string>
+    <!-- Details -->
+    <string name="categories_detail_snackbar_error_content">Error obtaining components.</string>
+    <string name="page_title_categories_detail">Details</string>
+
+    <!-- Cart Fragment-->
+    <string name="cart_empty_list">List empty\n:(</string>
+    <string name="cart_snackbar_error_content">Error obtaining cart.</string>
+    <string name="cart_snackbar_post_success_content">Cart added.</string>
+    <string name="cart_snackbar_post_error_content">Error adding cart, check your internet connection.</string>
+
+    <!-- Record Fragment -->
+    <string name="record_snackbar_error_content">Error obtaining cart.</string>
+    <string name="record_snackbar_post_success_content">Cart added.</string>
+    <string name="record_snackbar_post_error_content">Error adding cart, check your internet connection.</string>
+
+    <!-- Notifications -->
+    <string name="notification_cart_ready_title">Request ready!</string>
+    <string name="notification_cart_ready_body">Your components are ready for pickup, head to the lab with your student id for checkout.</string>
+    <string name="notification_intent_action">FROM_NOTIFICATION</string>
 
 </resources>

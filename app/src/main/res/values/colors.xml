@@ -101,4 +101,10 @@
         <item>@color/material_blue_grey_dark</item>
     </array>
 
+    <!-- Text Color Tabs -->
+    <item name="tabs_primary_text_light" type="color">#FFFFFFFF</item>
+    <item name="tabs_secondary_text_light" type="color">#FFFDFDFD</item>
+    <item name="tabs_disabled_text_light" type="color">#FFFBFBFB</item>
+    <item name="tabs_dividers_light" type="color">#FFF9F9F9</item>
+
 </resources>
