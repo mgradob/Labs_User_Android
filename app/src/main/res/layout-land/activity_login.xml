@@ -1,9 +1,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".LoginActivity">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -53,46 +54,14 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="bottom"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:id="@+id/login_title"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_above="@id/login_form"
-            android:layout_alignParentBottom="true"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <TextView
-                style="@style/LabsTheme.Compat.Text.Display2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/app_title_login" />
-
-            <TextView
-                style="@style/LabsTheme.Compat.Text.Title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/app_campus_name"
-                android:textColor="@color/primary_dark_material_light" />
-
-        </LinearLayout>
+        android:layout_height="fill_parent">
 
         <RelativeLayout
             android:id="@+id/login_form"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:elevation="3dp"
             android:background="#D1D1D1"
-            android:padding="16dp">
+            android:padding="8dp">
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/login_user_id_til"
@@ -127,7 +96,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/login_user_pass_til"
                 android:layout_marginTop="8dp"
@@ -149,11 +118,31 @@
                     android:layout_height="wrap_content"
                     android:text="@string/login_signup"
                     android:textColor="@color/primary" />
-
             </LinearLayout>
-
         </RelativeLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/login_title"
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
 
+            <TextView
+                style="@style/LabsTheme.Compat.Text.Display2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/app_title_login" />
+
+            <TextView
+                style="@style/LabsTheme.Compat.Text.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/app_campus_name"
+                android:textColor="@color/primary_dark_material_light" />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
