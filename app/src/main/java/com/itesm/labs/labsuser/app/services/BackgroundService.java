@@ -1,7 +1,7 @@
 package com.itesm.labs.labsuser.app.services;
 
-import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
@@ -13,9 +13,9 @@ import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
 import com.itesm.labs.labsuser.R;
-import com.itesm.labs.labsuser.app.activities.MainActivity;
 import com.itesm.labs.labsuser.app.application.AppConstants;
 import com.itesm.labs.labsuser.app.application.AppGlobals;
+import com.itesm.labs.labsuser.app.application.LabsApp;
 import com.itesm.labs.labsuser.app.rest.clients.CartClient;
 import com.itesm.labs.labsuser.app.rest.models.CartItem;
 
@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 
@@ -41,10 +42,19 @@ public class BackgroundService extends Service {
     AppGlobals mAppGlobals;
     @Inject
     SharedPreferences mSharedPreferences;
+    @Inject
+    Context mContext;
 
     private String TAG = BackgroundService.class.getSimpleName();
     private Handler mHandler;
     private Runnable mRunnable;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        LabsApp.get().inject(this);
+    }
 
     @Nullable
     @Override
@@ -90,9 +100,9 @@ public class BackgroundService extends Service {
 
     private void showNotification() {
         Log.d(TAG, "Showing notification");
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.putExtra(getResources().getString(R.string.notification_intent_action), true);
-        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
+//        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//        intent.putExtra(getResources().getString(R.string.notification_intent_action), true);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
 
@@ -100,16 +110,18 @@ public class BackgroundService extends Service {
         builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_herramientas));
         builder.setContentTitle(getResources().getString(R.string.notification_cart_ready_title));
         builder.setContentText(getResources().getString(R.string.notification_cart_ready_body));
-        builder.setContentIntent(pendingIntent);
+        builder.setAutoCancel(true);
+//        builder.setContentIntent(pendingIntent);
 
-        NotificationManagerCompat notificationManager = (NotificationManagerCompat) getSystemService(NOTIFICATION_SERVICE);
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(mContext);
         notificationManager.notify(NOTIFICATION_ID, builder.build());
     }
 
     private void getUserCart() {
         mCartClient.getCartItemsOf(mSharedPreferences.getString(AppConstants.PREFERENCES_KEY_USER_TOKEN, ""),
                 mAppGlobals.getLabLink(), mAppGlobals.getUser().getUserId())
-                .subscribeOn(Schedulers.immediate())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<ArrayList<CartItem>>() {
                     @Override
                     public void onStart() {

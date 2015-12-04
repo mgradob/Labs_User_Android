@@ -14,6 +14,7 @@ import com.itesm.labs.labsuser.app.bases.LabsBaseActivity;
 import com.itesm.labs.labsuser.app.fragments.CartFragment;
 import com.itesm.labs.labsuser.app.fragments.MaterialsFragment;
 import com.itesm.labs.labsuser.app.fragments.RecordFragment;
+import com.itesm.labs.labsuser.app.services.BackgroundService;
 import com.itesm.labs.labsuser.app.tabs.SectionPagerAdapter;
 import com.itesm.labs.labsuser.app.utils.SnackbarUtil;
 
@@ -51,6 +52,8 @@ public class MainActivity extends LabsBaseActivity implements SnackbarUtil {
         Intent callingIntent = getIntent();
         if (callingIntent.getBooleanExtra(getResources().getString(R.string.notification_intent_action), false))
             mPager.setCurrentItem(1);
+
+        startService(new Intent(mContext, BackgroundService.class));
     }
 
     private void setupToolbar() {

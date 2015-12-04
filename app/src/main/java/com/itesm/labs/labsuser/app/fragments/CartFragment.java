@@ -205,7 +205,9 @@ public class CartFragment extends LabsBaseFragment {
 
                     @Override
                     public void onNext(Void aVoid) {
-
+                        for (CartItem item : mAppGlobals.getUserCart().getCartList()) {
+                            item.setReady(false);
+                        }
                     }
                 });
     }
@@ -232,6 +234,7 @@ public class CartFragment extends LabsBaseFragment {
                                 Snackbar.LENGTH_LONG)
                                 .show();
 
+                        refreshList();
                     }
 
                     @Override
@@ -254,7 +257,7 @@ public class CartFragment extends LabsBaseFragment {
     @Override
     public void setMenuVisibility(boolean menuVisible) {
         super.setMenuVisibility(menuVisible);
-        if(menuVisible){
+        if (menuVisible) {
             mAdapter.refresh(mAppGlobals.getUserCart().getCartList());
         }
     }

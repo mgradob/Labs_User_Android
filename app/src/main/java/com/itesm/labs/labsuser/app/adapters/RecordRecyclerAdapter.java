@@ -10,10 +10,6 @@ import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
 import com.itesm.labs.labsuser.app.rest.models.History;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import butterknife.Bind;
 
 /**
@@ -66,7 +62,7 @@ public class RecordRecyclerAdapter extends BaseRecyclerAdapter<History, RecordRe
             recordItemComponentNameNote.setText(holderItem.getComponentNameNote());
             recordItemComponentQuantity.setText("" + holderItem.getQuantity());
             recordItemDateOut.setText("Fecha pedido:\n" + holderItem.getDateOut());
-            recordItemDateIn.setText((holderItem.getDateIn() != null) ? "Fecha entregado:\n" +  holderItem.getDateIn(): "Fecha entregado:\n - ");
+            recordItemDateIn.setText((holderItem.getDateIn() != null) ? "Fecha entregado:\n" + holderItem.getDateIn() : "Fecha entregado:\n - ");
         }
     }
 }

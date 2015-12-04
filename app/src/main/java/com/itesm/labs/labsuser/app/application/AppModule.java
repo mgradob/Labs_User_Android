@@ -30,7 +30,6 @@ import com.itesm.labs.labsuser.app.rest.services.LaboratoryService;
 import com.itesm.labs.labsuser.app.rest.services.RecordService;
 import com.itesm.labs.labsuser.app.rest.services.UserService;
 import com.itesm.labs.labsuser.app.services.BackgroundService;
-import com.itesm.labs.labsuser.app.utils.SnackbarUtil;
 
 import javax.inject.Singleton;
 

@@ -30,17 +30,17 @@ public interface CartService {
 
     @POST("/{lab}/detailcart/")
     Response postNewCartItem(@Header("Authorization") String token,
-                         @Path("lab") String lab,
-                         @Body CartItem item);
+                             @Path("lab") String lab,
+                             @Body CartItem item);
 
     @PUT("/{lab}/detailcart/{id_cart}/")
     Response editCartItem(@Header("Authorization") String token,
-                      @Path("lab") String lab,
-                      @Path("id_cart") int cartId,
-                      @Body CartItem cartItemBody);
+                          @Path("lab") String lab,
+                          @Path("id_cart") int cartId,
+                          @Body CartItem cartItemBody);
 
     @DELETE("/{lab}/detailcart/{id_cart}/")
     Response deleteCartItem(@Header("Authorization") String token,
-                        @Path("lab") String lab,
-                        @Path("id_cart") int cartId);
+                            @Path("lab") String lab,
+                            @Path("id_cart") int cartId);
 }

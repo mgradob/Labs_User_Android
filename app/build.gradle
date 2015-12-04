@@ -2,8 +2,8 @@ apply plugin: 'com.android.application'
 
 def BASE_API_URL = "BASE_API_URL"
 
-def MAJOR_VERSION = 2
-def MINOR_VERSION = 0
+def MAJOR_VERSION = 1
+def MINOR_VERSION = 1
 def BUILD_VERSION = 0
 
 android {
@@ -16,7 +16,7 @@ android {
         targetSdkVersion 23
         versionCode MAJOR_VERSION * 10000 + MINOR_VERSION * 100 + BUILD_VERSION * 1
         versionName "${MAJOR_VERSION}.${MINOR_VERSION}.${BUILD_VERSION}"
-        buildConfigField "String", "${BASE_API_URL}", "\"http://labs.chi.itesm.mx:8081/\""
+        buildConfigField "String", "${BASE_API_URL}", "\"http://labs.chi.itesm.mx:8080/\""
     }
     buildTypes {
         release {

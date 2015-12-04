@@ -59,7 +59,7 @@ public class CartClient {
         return Observable.create(new Observable.OnSubscribe<Void>() {
             @Override
             public void call(Subscriber<? super Void> subscriber) {
-                for (CartItem cartItem : cart){
+                for (CartItem cartItem : cart) {
                     CartItem newItem = new CartItem(
                             cartItem.getCartId(),
                             mAppGlobals.getUser().getUserId(),
