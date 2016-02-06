@@ -2,7 +2,6 @@ package com.mgb.labsapi.clients;
 
 import com.mgb.labsapi.Constants;
 import com.mgb.labsapi.models.Auth;
-import com.mgb.labsapi.models.LoginUser;
 import com.mgb.labsapi.models.User;
 
 import java.util.ArrayList;

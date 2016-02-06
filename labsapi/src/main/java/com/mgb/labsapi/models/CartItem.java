@@ -22,18 +22,42 @@ public class CartItem {
     @SerializedName("date_checkout")
     private String dateCheckout;
 
-    public CartItem() {
-
+    public CartItem(Builder builder) {
+        this.cartId = builder.cartId;
+        this.studentId = builder.studentId;
+        this.componentId = builder.componentId;
+        this.quantity = builder.quantity;
+        this.checkout = builder.checkout;
+        this.ready = builder.ready;
+        this.dateCheckout = builder.dateCheckout;
     }
 
-    public CartItem(int cartId, String studentId, int componentId, int quantity, boolean checkout, boolean ready, String dateCheckout) {
-        this.cartId = cartId;
-        this.studentId = studentId;
-        this.componentId = componentId;
-        this.quantity = quantity;
-        this.checkout = checkout;
-        this.ready = ready;
-        this.dateCheckout = dateCheckout;
+    public int getCartId() {
+        return cartId;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public int getComponentId() {
+        return componentId;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public boolean isCheckout() {
+        return checkout;
+    }
+
+    public boolean isReady() {
+        return ready;
+    }
+
+    public String getDateCheckout() {
+        return dateCheckout;
     }
 
     @Override
@@ -49,60 +73,52 @@ public class CartItem {
                 '}';
     }
 
-    public int getCartId() {
-        return cartId;
-    }
+    public static class Builder {
+        private int cartId;
+        private String studentId;
+        private int componentId;
+        private int quantity;
+        private boolean checkout;
+        private boolean ready;
+        private String dateCheckout;
 
-    public void setCartId(int cartId) {
-        this.cartId = cartId;
-    }
+        public Builder setCartId(int cartId) {
+            this.cartId = cartId;
+            return this;
+        }
 
-    public String getStudentId() {
-        return studentId;
-    }
+        public Builder setStudentId(String studentId) {
+            this.studentId = studentId;
+            return this;
+        }
 
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
-    }
+        public Builder setComponentId(int componentId) {
+            this.componentId = componentId;
+            return this;
+        }
 
-    public int getComponentId() {
-        return componentId;
-    }
+        public Builder setQuantity(int quantity) {
+            this.quantity = quantity;
+            return this;
+        }
 
-    public void setComponentId(int componentId) {
-        this.componentId = componentId;
-    }
+        public Builder setCheckout(boolean checkout) {
+            this.checkout = checkout;
+            return this;
+        }
 
-    public int getQuantity() {
-        return quantity;
-    }
+        public Builder setReady(boolean ready) {
+            this.ready = ready;
+            return this;
+        }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+        public Builder setDateCheckout(String dateCheckout) {
+            this.dateCheckout = dateCheckout;
+            return this;
+        }
 
-    public boolean isCheckout() {
-        return checkout;
+        public CartItem build() {
+            return new CartItem(this);
+        }
     }
-
-    public void setCheckout(boolean checkout) {
-        this.checkout = checkout;
-    }
-
-    public boolean isReady() {
-        return ready;
-    }
-
-    public void setReady(boolean ready) {
-        this.ready = ready;
-    }
-
-    public String getDateCheckout() {
-        return dateCheckout;
-    }
-
-    public void setDateCheckout(String dateCheckout) {
-        this.dateCheckout = dateCheckout;
-    }
-
 }

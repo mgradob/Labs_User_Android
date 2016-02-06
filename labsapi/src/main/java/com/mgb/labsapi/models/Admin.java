@@ -22,65 +22,37 @@ public class Admin {
     @SerializedName("labs")
     private ArrayList<String> allowedLabs;
 
-    public Admin(String adminId, String adminName, String adminLastName1, String adminLastName2, String adminMail, ArrayList<String> allowedLabs) {
-        this.adminId = adminId;
-        this.adminName = adminName;
-        this.adminLastName1 = adminLastName1;
-        this.adminLastName2 = adminLastName2;
-        this.adminMail = adminMail;
-        this.allowedLabs = allowedLabs;
-    }
-
-    public String getAdminName() {
-        return adminName;
-    }
-
-    public void setAdminName(String adminName) {
-        this.adminName = adminName;
-    }
-
-    public String getFullName() {
-        return this.adminName + " " + this.adminLastName1 + " " + this.adminLastName2;
-    }
-
-    public String getAdminLastName1() {
-        return adminLastName1;
-    }
-
-    public void setAdminLastName1(String adminLastName1) {
-        this.adminLastName1 = adminLastName1;
-    }
-
-    public String getAdminLastName2() {
-        return adminLastName2;
-    }
-
-    public void setAdminLastName2(String adminLastName2) {
-        this.adminLastName2 = adminLastName2;
+    public Admin(Builder builder) {
+        this.adminId = builder.adminId;
+        this.adminName = builder.adminName;
+        this.adminLastName1 = builder.adminLastName1;
+        this.adminLastName2 = builder.adminLastName2;
+        this.adminMail = builder.adminMail;
+        this.allowedLabs = builder.allowedLabs;
     }
 
     public String getAdminId() {
         return adminId;
     }
 
-    public void setAdminId(String adminId) {
-        this.adminId = adminId;
+    public String getAdminName() {
+        return adminName;
+    }
+
+    public String getAdminLastName1() {
+        return adminLastName1;
+    }
+
+    public String getAdminLastName2() {
+        return adminLastName2;
     }
 
     public String getAdminMail() {
         return adminMail;
     }
 
-    public void setAdminMail(String adminMail) {
-        this.adminMail = adminMail;
-    }
-
     public ArrayList<String> getAllowedLabs() {
         return allowedLabs;
-    }
-
-    public void setAllowedLabs(ArrayList<String> allowedLabs) {
-        this.allowedLabs = allowedLabs;
     }
 
     @Override
@@ -93,5 +65,48 @@ public class Admin {
                 ", adminMail='" + adminMail + '\'' +
                 ", allowedLabs=" + allowedLabs +
                 '}';
+    }
+
+    public static class Builder {
+        private String adminId;
+        private String adminName;
+        private String adminLastName1;
+        private String adminLastName2;
+        private String adminMail;
+        private ArrayList<String> allowedLabs;
+
+        public Builder setAdminId(String adminId) {
+            this.adminId = adminId;
+            return this;
+        }
+
+        public Builder setAdminName(String adminName) {
+            this.adminName = adminName;
+            return this;
+        }
+
+        public Builder setAdminLastName1(String adminLastName1) {
+            this.adminLastName1 = adminLastName1;
+            return this;
+        }
+
+        public Builder setAdminLastName2(String adminLastName2) {
+            this.adminLastName2 = adminLastName2;
+            return this;
+        }
+
+        public Builder setAdminMail(String adminMail) {
+            this.adminMail = adminMail;
+            return this;
+        }
+
+        public Builder setAllowedLabs(ArrayList<String> allowedLabs) {
+            this.allowedLabs = allowedLabs;
+            return this;
+        }
+
+        public Admin build() {
+            return new Admin(this);
+        }
     }
 }

@@ -18,44 +18,33 @@ public class History {
     @SerializedName("date_in")
     private String dateIn;
 
-    public String getStudentId() {
-        return studentId;
+    public History(Builder builder) {
+        this.studentId = builder.studentId;
+        this.componentId = builder.componentId;
+        this.quantity = builder.quantity;
+        this.dateOut = builder.dateOut;
+        this.dateIn = builder.dateIn;
+
     }
 
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
+    public String getStudentId() {
+        return studentId;
     }
 
     public int getComponentId() {
         return componentId;
     }
 
-    public void setComponentId(int componentId) {
-        this.componentId = componentId;
-    }
-
     public int getQuantity() {
         return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public String getDateOut() {
         return dateOut;
     }
 
-    public void setDateOut(String dateOut) {
-        this.dateOut = dateOut;
-    }
-
     public String getDateIn() {
         return dateIn;
-    }
-
-    public void setDateIn(String dateIn) {
-        this.dateIn = dateIn;
     }
 
     @Override
@@ -67,5 +56,42 @@ public class History {
                 ", dateOut='" + dateOut + '\'' +
                 ", dateIn='" + dateIn + '\'' +
                 '}';
+    }
+
+    public static class Builder {
+        private String studentId;
+        private int componentId;
+        private int quantity;
+        private String dateOut;
+        private String dateIn;
+
+        public Builder setStudentId(String studentId) {
+            this.studentId = studentId;
+            return this;
+        }
+
+        public Builder setComponentId(int componentId) {
+            this.componentId = componentId;
+            return this;
+        }
+
+        public Builder setQuantity(int quantity) {
+            this.quantity = quantity;
+            return this;
+        }
+
+        public Builder setDateOut(String dateOut) {
+            this.dateOut = dateOut;
+            return this;
+        }
+
+        public Builder setDateIn(String dateIn) {
+            this.dateIn = dateIn;
+            return this;
+        }
+
+        public History build() {
+            return new History(this);
+        }
     }
 }

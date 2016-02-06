@@ -26,96 +26,48 @@ public class User {
     @SerializedName("labs")
     private ArrayList<String> allowedLabs;
 
-    private Integer userColor;
+    public User(Builder builder) {
+        this.userName = builder.userName;
+        this.userLastName1 = builder.userLastName1;
+        this.userLastName2 = builder.userLastName2;
+        this.userId = builder.userId;
+        this.userCareer = builder.userCareer;
+        this.userUid = builder.userUid;
+        this.userMail = builder.userMail;
+        this.allowedLabs = builder.allowedLabs;
 
-    public User() {
-    }
-
-    public User(String userName, String userLastName1, String userLastName2, String userId, String userCareer, long userUid, String userMail, ArrayList<String> allowedLabs) {
-        this.userName = userName;
-        this.userLastName1 = userLastName1;
-        this.userLastName2 = userLastName2;
-        this.userId = userId;
-        this.userCareer = userCareer;
-        this.userUid = userUid;
-        this.userMail = userMail;
-        this.allowedLabs = allowedLabs;
     }
 
     public String getUserName() {
         return userName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getFullName() {
-        return this.userName + " " + this.userLastName1 + " " + this.userLastName2;
-    }
-
     public String getUserLastName1() {
         return userLastName1;
-    }
-
-    public void setUserLastName1(String userLastName1) {
-        this.userLastName1 = userLastName1;
     }
 
     public String getUserLastName2() {
         return userLastName2;
     }
 
-    public void setUserLastName2(String userLastName2) {
-        this.userLastName2 = userLastName2;
-    }
-
     public String getUserId() {
         return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public String getUserCareer() {
         return userCareer;
     }
 
-    public void setUserCareer(String userCareer) {
-        this.userCareer = userCareer;
-    }
-
     public long getUserUid() {
         return userUid;
-    }
-
-    public void setUserUid(long userUid) {
-        this.userUid = userUid;
     }
 
     public String getUserMail() {
         return userMail;
     }
 
-    public void setUserMail(String userMail) {
-        this.userMail = userMail;
-    }
-
     public ArrayList<String> getAllowedLabs() {
         return allowedLabs;
-    }
-
-    public void setAllowedLabs(ArrayList<String> allowedLabs) {
-        this.allowedLabs = allowedLabs;
-    }
-
-    public Integer getUserColor() {
-        return userColor;
-    }
-
-    public void setUserColor(Integer userColor) {
-        this.userColor = userColor;
     }
 
     @Override
@@ -129,7 +81,61 @@ public class User {
                 ", userUid=" + userUid +
                 ", userMail='" + userMail + '\'' +
                 ", allowedLabs=" + allowedLabs +
-                ", userColor=" + userColor +
                 '}';
+    }
+
+    public static class Builder {
+        private String userName;
+        private String userLastName1;
+        private String userLastName2;
+        private String userId;
+        private String userCareer;
+        private long userUid;
+        private String userMail;
+        private ArrayList<String> allowedLabs;
+
+        public Builder setUserName(String userName) {
+            this.userName = userName;
+            return this;
+        }
+
+        public Builder setUserLastName1(String userLastName1) {
+            this.userLastName1 = userLastName1;
+            return this;
+        }
+
+        public Builder setUserLastName2(String userLastName2) {
+            this.userLastName2 = userLastName2;
+            return this;
+        }
+
+        public Builder setUserId(String userId) {
+            this.userId = userId;
+            return this;
+        }
+
+        public Builder setUserCareer(String userCareer) {
+            this.userCareer = userCareer;
+            return this;
+        }
+
+        public Builder setUserUid(long userUid) {
+            this.userUid = userUid;
+            return this;
+        }
+
+        public Builder setUserMail(String userMail) {
+            this.userMail = userMail;
+            return this;
+        }
+
+        public Builder setAllowedLabs(ArrayList<String> allowedLabs) {
+            this.allowedLabs = allowedLabs;
+            return this;
+        }
+
+        public User build() {
+            return new User(this);
+        }
     }
 }

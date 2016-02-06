@@ -9,51 +9,48 @@ import java.io.Serializable;
  */
 public class Laboratory implements Serializable {
 
-    @SerializedName("url")
-    private String url;
     @SerializedName("name")
     private String name;
     @SerializedName("link")
     private String link;
 
-    public Laboratory() {
-
-    }
-
-    public Laboratory(String name) {
-        this.name = name;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
+    public Laboratory(Builder builder) {
+        this.name = builder.name;
+        this.link = builder.link;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getLink() {
         return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
     }
 
     @Override
     public String toString() {
         return "Laboratory{" +
-                "url='" + url + '\'' +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", link='" + link + '\'' +
                 '}';
+    }
+
+    public static class Builder {
+        private String name;
+        private String link;
+
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder setLink(String link) {
+            this.link = link;
+            return this;
+        }
+
+        public Laboratory build() {
+            return new Laboratory(this);
+        }
     }
 }
