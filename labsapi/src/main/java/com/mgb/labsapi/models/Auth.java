@@ -8,9 +8,13 @@ import com.google.gson.annotations.SerializedName;
 public class Auth {
 
     @SerializedName("auth_token")
-    private String auth_token;
+    private String authToken;
 
-    public String getAuth_token() {
-        return auth_token;
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
     }
 }
