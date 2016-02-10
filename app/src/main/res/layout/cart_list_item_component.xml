@@ -8,13 +8,13 @@
         android:id="@+id/cart_component_ready"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:src="@drawable/ic_request_pending"
-        android:layout_marginRight="4dp"/>
+        android:layout_marginRight="4dp"
+        android:src="@drawable/ic_request_pending" />
 
     <LinearLayout
-        android:layout_toRightOf="@id/cart_component_ready"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/cart_component_ready"
         android:orientation="vertical">
 
         <TextView
@@ -57,10 +57,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
         android:layout_centerVertical="true"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_centerInParent="true">
+        android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/cart_add_btn"

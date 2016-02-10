@@ -3,7 +3,7 @@
     android:id="@+id/fragment_record"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.itesm.labs.labsuser.app.fragments.RecordFragment">
+    tools:context=".app.commons.views.fragments.RecordFragment">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/record_list_view_swipe_refresh"

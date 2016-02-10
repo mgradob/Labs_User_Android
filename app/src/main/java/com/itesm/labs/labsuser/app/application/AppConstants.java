@@ -8,7 +8,7 @@ public class AppConstants {
     /**
      * Intent keys.
      */
-    public static final String INTENT_ENDPOINT = "ENDPOINT";
+    public static final String INTENT_LINK = "LINK";
     public static final String INTENT_LAB_NAME = "LABNAME";
     public static final String INTENT_COLOR = "COLOR";
     public static final String INTENT_USER_ID = "USERID";

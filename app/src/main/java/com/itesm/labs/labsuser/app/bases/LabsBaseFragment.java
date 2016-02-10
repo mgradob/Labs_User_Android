@@ -5,11 +5,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import com.itesm.labs.labsuser.app.application.AppGlobals;
 import com.itesm.labs.labsuser.app.application.LabsApp;
-import com.itesm.labs.labsuser.app.utils.SnackbarUtil;
+import com.itesm.labs.labsuser.app.application.LabsPreferences;
+import com.itesm.labs.labsuser.app.commons.utils.SnackbarUtil;
 
 import javax.inject.Inject;
+
+import rx.Subscription;
 
 /**
  * Created by mgradob on 10/31/15.
@@ -17,15 +19,13 @@ import javax.inject.Inject;
 public abstract class LabsBaseFragment extends Fragment {
 
     @Inject
-    public SharedPreferences mSharedPreferences;
-
-    @Inject
-    public AppGlobals mAppGlobals;
+    public LabsPreferences mLabsPreferences;
 
     @Inject
     public Context mContext;
 
-    public SnackbarUtil mSnackbarUtil;
+    @Inject
+    public Subscription mSubscription;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

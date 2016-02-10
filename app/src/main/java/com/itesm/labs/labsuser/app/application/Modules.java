@@ -1,7 +1,7 @@
 package com.itesm.labs.labsuser.app.application;
 
 import com.itesm.labs.labsuser.BuildConfig;
-import com.itesm.labs.labsuser.app.rest.ApiModule;
+import com.mgb.labsapi.ApiModule;
 
 /**
  * Created by mgradob on 10/25/15.

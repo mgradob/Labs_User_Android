@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.itesm.labs.labsuser.app.activities.SignUpActivity">
+    tools:context=".app.commons.views.activities.SignUpActivity">
 
     <RelativeLayout
         android:id="@+id/layoutNombre"

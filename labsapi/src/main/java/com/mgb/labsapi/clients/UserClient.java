@@ -2,6 +2,7 @@ package com.mgb.labsapi.clients;
 
 import com.mgb.labsapi.Constants;
 import com.mgb.labsapi.models.Auth;
+import com.mgb.labsapi.models.LoginBody;
 import com.mgb.labsapi.models.User;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ import rx.Observable;
 public interface UserClient {
 
     @POST("/auth/login/")
-    Observable<Auth> loginUser(@Body LoginUser loginUser);
+    Observable<Auth> loginUser(@Body LoginBody loginUser);
 
     @GET("/students/{user_id}")
     Observable<User> getUser(@Header(Constants.AUTHORIZATION) String token,

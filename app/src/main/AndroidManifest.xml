@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:theme="@style/LabsTheme">
         <activity
-            android:name=".app.activities.LoginActivity"
+            android:name=".app.commons.views.activities.LoginActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,26 +20,29 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".app.activities.SignUpActivity"
-            android:label="@string/title_activity_sign_up"></activity>
+            android:name=".app.commons.views.activities.SignUpActivity"
+            android:label="@string/title_activity_sign_up"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".app.activities.LaboratoriesActivity"
+            android:name=".app.commons.views.activities.LaboratoriesActivity"
             android:label="@string/title_activity_laboratorios"
-            android:parentActivityName=".app.activities.LoginActivity">
+            android:parentActivityName=".app.commons.views.activities.LoginActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".app.activities.LoginActivity" />
+                android:value=".app.commons.views.activities.LoginActivity" />
         </activity>
         <activity
-            android:name=".app.activities.MainActivity"
-            android:label="@string/title_activity_categories"
-            android:parentActivityName=".app.activities.LaboratoriesActivity">
+            android:name=".app.commons.views.activities.MainActivity"
+            android:label="@string/title_activity_main"
+            android:parentActivityName=".app.commons.views.activities.LaboratoriesActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".app.activities.LaboratoriesActivity" />
+                android:value=".app.commons.views.activities.LaboratoriesActivity" />
         </activity>
 
-        <service android:name=".app.services.BackgroundService" />
+        <service android:name=".app.commons.services.BackgroundService" />
     </application>
 
 </manifest>

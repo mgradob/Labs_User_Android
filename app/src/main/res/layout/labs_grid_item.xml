@@ -6,16 +6,17 @@
     <ImageView
         android:id="@+id/labs_grid_item_image"
         android:layout_width="200dp"
-        android:layout_height="200dp"/>
+        android:layout_height="200dp"
+        android:src="@drawable/ic_electronics" />
 
     <TextView
         android:id="@+id/labs_grid_item_text"
+        style="@style/LabsTheme.Compat.Light.Text.Body1"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:background="@color/primary"
         android:layout_below="@id/labs_grid_item_image"
-        style="@style/LabsTheme.Compat.Light.Text.Body1"
-        android:text="YOLO"
-        android:padding="16dp"/>
+        android:background="@color/primary"
+        android:padding="16dp"
+        android:text="YOLO" />
 
 </RelativeLayout>

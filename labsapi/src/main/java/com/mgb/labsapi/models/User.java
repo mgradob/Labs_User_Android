@@ -50,6 +50,10 @@ public class User {
         return userLastName2;
     }
 
+    public String getUserFullName() {
+        return String.format("%s %s %s", userName, userLastName1, userLastName2);
+    }
+
     public String getUserId() {
         return userId;
     }

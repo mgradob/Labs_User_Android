@@ -4,7 +4,7 @@
     android:id="@+id/cart_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.itesm.labs.labsuser.app.fragments.CartFragment">
+    tools:context=".app.commons.views.fragments.CartFragment">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/fragment_cart_list_view_swipe_refresh"

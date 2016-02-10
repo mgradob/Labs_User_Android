@@ -3,33 +3,26 @@ package com.itesm.labs.labsuser.app.application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.itesm.labs.labsuser.app.activities.LaboratoriesActivity;
-import com.itesm.labs.labsuser.app.activities.LoginActivity;
-import com.itesm.labs.labsuser.app.activities.MainActivity;
-import com.itesm.labs.labsuser.app.adapters.CartRecyclerAdapter;
-import com.itesm.labs.labsuser.app.adapters.CategoryRecyclerAdapter;
-import com.itesm.labs.labsuser.app.adapters.ComponentRecyclerAdapter;
-import com.itesm.labs.labsuser.app.adapters.LabsRecyclerAdapter;
-import com.itesm.labs.labsuser.app.adapters.RecordRecyclerAdapter;
+import com.itesm.labs.labsuser.app.admin.views.fragments.InventoryFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.ReportsFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.RequestDetailFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.RequestsFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.UsersFragment;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.LabsBaseActivity;
 import com.itesm.labs.labsuser.app.bases.LabsBaseFragment;
-import com.itesm.labs.labsuser.app.fragments.CartFragment;
-import com.itesm.labs.labsuser.app.fragments.MaterialsFragment;
-import com.itesm.labs.labsuser.app.fragments.RecordFragment;
-import com.itesm.labs.labsuser.app.rest.clients.CartClient;
-import com.itesm.labs.labsuser.app.rest.clients.CategoryClient;
-import com.itesm.labs.labsuser.app.rest.clients.ComponentClient;
-import com.itesm.labs.labsuser.app.rest.clients.LaboratoryClient;
-import com.itesm.labs.labsuser.app.rest.clients.RecordClient;
-import com.itesm.labs.labsuser.app.rest.clients.UserClient;
-import com.itesm.labs.labsuser.app.rest.services.CartService;
-import com.itesm.labs.labsuser.app.rest.services.CategoryService;
-import com.itesm.labs.labsuser.app.rest.services.ComponentService;
-import com.itesm.labs.labsuser.app.rest.services.LaboratoryService;
-import com.itesm.labs.labsuser.app.rest.services.RecordService;
-import com.itesm.labs.labsuser.app.rest.services.UserService;
-import com.itesm.labs.labsuser.app.services.BackgroundService;
+import com.itesm.labs.labsuser.app.commons.adapters.CartRecyclerAdapter;
+import com.itesm.labs.labsuser.app.commons.adapters.CategoryRecyclerAdapter;
+import com.itesm.labs.labsuser.app.commons.adapters.ComponentRecyclerAdapter;
+import com.itesm.labs.labsuser.app.commons.adapters.LabsRecyclerAdapter;
+import com.itesm.labs.labsuser.app.commons.adapters.RecordRecyclerAdapter;
+import com.itesm.labs.labsuser.app.commons.services.BackgroundService;
+import com.itesm.labs.labsuser.app.commons.views.activities.LaboratoriesActivity;
+import com.itesm.labs.labsuser.app.commons.views.activities.LoginActivity;
+import com.itesm.labs.labsuser.app.commons.views.activities.MainActivity;
+import com.itesm.labs.labsuser.app.commons.views.fragments.CartFragment;
+import com.itesm.labs.labsuser.app.commons.views.fragments.MaterialsFragment;
+import com.itesm.labs.labsuser.app.commons.views.fragments.RecordFragment;
 
 import javax.inject.Singleton;
 
@@ -86,46 +79,40 @@ public class AppModule {
 
     @Provides
     @Singleton
-    AppGlobals providesAppGlobals() {
-        return new AppGlobals();
+    LabsPreferences providesLabsPreferences(SharedPreferences sharedPreferences) {
+        return new LabsPreferences(sharedPreferences);
     }
     //endregion
 
-    //region Rest Clients
+    //region Fragments
     @Provides
     @Singleton
-    UserClient providesUserClient(UserService userService) {
-        return new UserClient(userService);
+    RequestsFragment providesRequestsFragment() {
+        return new RequestsFragment();
     }
 
     @Provides
     @Singleton
-    LaboratoryClient providesLaboratoryClient(LaboratoryService laboratoryService) {
-        return new LaboratoryClient(laboratoryService);
+    RequestDetailFragment providesRequestDetailFragment() {
+        return new RequestDetailFragment();
     }
 
     @Provides
     @Singleton
-    CategoryClient providesCategoryClient(CategoryService categoryService) {
-        return new CategoryClient(categoryService);
+    InventoryFragment providesInventoryFragment() {
+        return new InventoryFragment();
     }
 
     @Provides
     @Singleton
-    ComponentClient providesComponentClient(ComponentService componentService) {
-        return new ComponentClient(componentService);
+    UsersFragment providesUsersFragment() {
+        return new UsersFragment();
     }
 
     @Provides
     @Singleton
-    CartClient providesCartClient(CartService cartService, ComponentService componentService) {
-        return new CartClient(cartService, componentService);
-    }
-
-    @Provides
-    @Singleton
-    RecordClient providesRecordClient(RecordService recordService, CategoryService categoryService, ComponentService componentService) {
-        return new RecordClient(componentService, categoryService, recordService);
+    ReportsFragment providesReportsFragment() {
+        return new ReportsFragment();
     }
     //endregion
 }

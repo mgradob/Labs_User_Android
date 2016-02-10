@@ -12,24 +12,24 @@
 
         <TextView
             android:id="@+id/record_item_category_name"
+            style="@style/LabsTheme.Compat.Text.Subhead"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="CATEGORY_NAME"
-            style="@style/LabsTheme.Compat.Text.Subhead"/>
+            android:text="CATEGORY_NAME" />
 
         <TextView
             android:id="@+id/record_item_component_name_note"
+            style="@style/LabsTheme.Compat.Text.Body1"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="COMPONENT_NAME_NOTE"
-            style="@style/LabsTheme.Compat.Text.Body1"/>
+            android:text="COMPONENT_NAME_NOTE" />
 
         <TextView
             android:id="@+id/record_item_component_quantity"
+            style="@style/LabsTheme.Compat.Text.Body1"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="COMPONENT_QUANTITY"
-            style="@style/LabsTheme.Compat.Text.Body1"/>
+            android:text="COMPONENT_QUANTITY" />
 
     </LinearLayout>
 
@@ -42,19 +42,19 @@
 
         <TextView
             android:id="@+id/record_item_date_out"
+            style="@style/LabsTheme.Compat.Text.Subhead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DATE_OUT"
             android:gravity="right"
-            style="@style/LabsTheme.Compat.Text.Subhead"/>
+            android:text="DATE_OUT" />
 
         <TextView
             android:id="@+id/record_item_date_in"
+            style="@style/LabsTheme.Compat.Text.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DATE_IN"
             android:gravity="right"
-            style="@style/LabsTheme.Compat.Text.Body1"/>
+            android:text="DATE_IN" />
 
     </LinearLayout>
 

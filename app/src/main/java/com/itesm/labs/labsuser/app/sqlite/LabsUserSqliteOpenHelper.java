@@ -6,10 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.itesm.labs.labsuser.app.rest.models.CartItem;
-import com.itesm.labs.labsuser.app.rest.models.Component;
-import com.itesm.labs.labsuser.app.rest.models.User;
-import com.itesm.labs.labsuser.app.rest.models.UserCart;
+import com.mgb.labsapi.models.CartItem;
+import com.mgb.labsapi.models.Component;
+import com.mgb.labsapi.models.User;
 
 import java.util.ArrayList;
 
