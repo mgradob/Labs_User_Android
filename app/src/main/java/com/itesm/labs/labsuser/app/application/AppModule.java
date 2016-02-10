@@ -20,9 +20,6 @@ import com.itesm.labs.labsuser.app.commons.services.BackgroundService;
 import com.itesm.labs.labsuser.app.commons.views.activities.LaboratoriesActivity;
 import com.itesm.labs.labsuser.app.commons.views.activities.LoginActivity;
 import com.itesm.labs.labsuser.app.commons.views.activities.MainActivity;
-import com.itesm.labs.labsuser.app.commons.views.fragments.CartFragment;
-import com.itesm.labs.labsuser.app.commons.views.fragments.MaterialsFragment;
-import com.itesm.labs.labsuser.app.commons.views.fragments.RecordFragment;
 
 import javax.inject.Singleton;
 

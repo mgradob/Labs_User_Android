@@ -18,16 +18,12 @@ import com.mgb.labsapi.clients.CartClient;
 import com.mgb.labsapi.clients.UserClient;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
-import rx.Observable;
 
 
 /**
