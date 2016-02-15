@@ -9,6 +9,9 @@ import android.support.v7.widget.Toolbar;
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminSectionPagerAdapter;
 import com.itesm.labs.labsuser.app.bases.LabsBaseActivity;
+import com.itesm.labs.labsuser.app.commons.events.BackPressedEvent;
+import com.itesm.labs.labsuser.app.commons.events.FinishActivityEvent;
+import com.squareup.otto.Subscribe;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -22,6 +25,7 @@ public class MainActivity extends LabsBaseActivity {
     @Bind(R.id.activity_main_tabs)
     TabLayout mTabLayout;
 
+    //region Stock
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,13 +39,16 @@ public class MainActivity extends LabsBaseActivity {
 
         setupTabLayout();
 
+        mEventBus.register(this);
+
 //        startService(new Intent(mContext, BackgroundService.class));
     }
 
     @Override
     public void onBackPressed() {
-
+        mEventBus.post(new BackPressedEvent());
     }
+    //endregion
 
     //region Activity setup
     private void setupToolbar(int colorRes, String title) {
@@ -64,6 +71,15 @@ public class MainActivity extends LabsBaseActivity {
     private void setupTabLayout() {
         mPager.setAdapter(new AdminSectionPagerAdapter(getSupportFragmentManager()));
         mTabLayout.setupWithViewPager(mPager);
+    }
+    //endregion
+
+    //region Event Bus
+    @Subscribe
+    private void onFinishActivityEvent(FinishActivityEvent event){
+        // TODO: 2/15/16 add logout login if needed.
+
+        finish();
     }
     //endregion
 }

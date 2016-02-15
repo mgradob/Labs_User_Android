@@ -37,7 +37,7 @@ import rx.schedulers.Schedulers;
  */
 public class UsersFragment extends LabsBaseFragment {
 
-    private final String TAG = UsersFragment.class.getSimpleName();
+    private static final String TAG = UsersFragment.class.getSimpleName();
 
     @Bind(R.id.fragment_users_list)
     ListView mListView;

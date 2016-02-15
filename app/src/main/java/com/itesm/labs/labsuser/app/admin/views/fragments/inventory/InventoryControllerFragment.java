@@ -6,18 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.bases.LabsBaseFragment;
 
 /**
  * Created by mgradob on 2/12/16.
  */
-public class InventoryMainFragment extends LabsBaseFragment {
+public class InventoryControllerFragment extends LabsBaseFragment {
 
-    private static final String TAG = InventoryMainFragment.class.getSimpleName();
+    private static final String TAG = InventoryControllerFragment.class.getSimpleName();
 
-    public InventoryMainFragment() {
+    public InventoryControllerFragment() {
     }
 
+    //region Stock
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,4 +35,5 @@ public class InventoryMainFragment extends LabsBaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
+    //endregion
 }

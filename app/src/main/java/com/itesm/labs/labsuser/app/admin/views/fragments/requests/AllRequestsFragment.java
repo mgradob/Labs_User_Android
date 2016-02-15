@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.admin.adapters.RequestRecyclerAdapter;
 import com.itesm.labs.labsuser.app.admin.adapters.models.ItemUserCart;
-import com.itesm.labs.labsuser.app.admin.views.callbacks.RequestsCallbacks;
+import com.itesm.labs.labsuser.app.admin.events.GoToRequestDetailsEvent;
 import com.itesm.labs.labsuser.app.bases.LabsBaseFragment;
 import com.mgb.labsapi.clients.CartClient;
 import com.mgb.labsapi.clients.UserClient;
@@ -49,8 +49,6 @@ public class AllRequestsFragment extends LabsBaseFragment {
     @Inject
     UserClient mUserClient;
 
-    private RequestsCallbacks mCallbacks;
-
     private RequestRecyclerAdapter mAdapter;
     private ArrayList<ItemUserCart> cartsList = new ArrayList<>();
 
@@ -58,6 +56,7 @@ public class AllRequestsFragment extends LabsBaseFragment {
         // Required empty public constructor
     }
 
+    //region Stock
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,12 +81,14 @@ public class AllRequestsFragment extends LabsBaseFragment {
 
         getAllRequests();
     }
+    //endregion
 
     @OnItemClick(R.id.fragment_requests_all_recycler_view)
     void onCartClicked(int position) {
-        mCallbacks.goToRequestDetail(cartsList.get(position).getUserId());
+        mEventBus.post(new GoToRequestDetailsEvent(cartsList.get(position).getUserId()));
     }
 
+    //region Fragment Setup
     /**
      * Configures the {@link LinearLayoutManager} and {@link RequestRecyclerAdapter}.
      */
@@ -178,4 +179,5 @@ public class AllRequestsFragment extends LabsBaseFragment {
                     }
                 });
     }
+    //endregion
 }

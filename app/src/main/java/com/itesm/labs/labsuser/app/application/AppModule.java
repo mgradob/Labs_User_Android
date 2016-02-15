@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import com.itesm.labs.labsuser.app.admin.views.fragments.inventory.AllInventoryFragment;
 import com.itesm.labs.labsuser.app.admin.views.fragments.ReportsFragment;
 import com.itesm.labs.labsuser.app.admin.views.fragments.requests.DetailRequestFragment;
-import com.itesm.labs.labsuser.app.admin.views.fragments.requests.RequestsMainFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.requests.RequestsControllerFragment;
 import com.itesm.labs.labsuser.app.admin.views.fragments.users.UsersFragment;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.LabsBaseActivity;
@@ -20,6 +20,7 @@ import com.itesm.labs.labsuser.app.commons.services.BackgroundService;
 import com.itesm.labs.labsuser.app.commons.views.activities.LaboratoriesActivity;
 import com.itesm.labs.labsuser.app.commons.views.activities.LoginActivity;
 import com.itesm.labs.labsuser.app.commons.views.activities.MainActivity;
+import com.squareup.otto.Bus;
 
 import javax.inject.Singleton;
 
@@ -76,13 +77,19 @@ public class AppModule {
     LabsPreferences providesLabsPreferences(SharedPreferences sharedPreferences) {
         return new LabsPreferences(sharedPreferences);
     }
+
+    @Provides
+    @Singleton
+    Bus providesEventBus(){
+        return new Bus();
+    }
     //endregion
 
     //region Fragments
     @Provides
     @Singleton
-    RequestsMainFragment providesRequestsFragment() {
-        return new RequestsMainFragment();
+    RequestsControllerFragment providesRequestsFragment() {
+        return new RequestsControllerFragment();
     }
 
     @Provides

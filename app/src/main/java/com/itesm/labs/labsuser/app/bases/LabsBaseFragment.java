@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import com.itesm.labs.labsuser.app.application.LabsApp;
 import com.itesm.labs.labsuser.app.application.LabsPreferences;
 import com.itesm.labs.labsuser.app.commons.utils.SnackbarUtil;
+import com.squareup.otto.Bus;
 
 import javax.inject.Inject;
 
@@ -26,6 +27,9 @@ public abstract class LabsBaseFragment extends Fragment {
 
     @Inject
     public Subscription mSubscription;
+
+    @Inject
+    public Bus mEventBus;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

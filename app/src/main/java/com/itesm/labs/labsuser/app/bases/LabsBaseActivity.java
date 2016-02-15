@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.itesm.labs.labsuser.app.application.LabsApp;
 import com.itesm.labs.labsuser.app.application.LabsPreferences;
+import com.squareup.otto.Bus;
 
 import javax.inject.Inject;
 
@@ -22,6 +23,8 @@ public abstract class LabsBaseActivity extends AppCompatActivity {
     public Context mContext;
     @Inject
     public LabsPreferences mLabsPreferences;
+    @Inject
+    public Bus mEventBus;
 
     private MaterialDialog mDialog;
     public Subscription mSubscription;

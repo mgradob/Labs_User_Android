@@ -56,4 +56,7 @@ dependencies {
     // Reactive Java
     compile rootProject.ext.libs.rxAndroid
     compile rootProject.ext.libs.rxJava
+
+    // Otto
+    compile rootProject.ext.libs.otto
 }
