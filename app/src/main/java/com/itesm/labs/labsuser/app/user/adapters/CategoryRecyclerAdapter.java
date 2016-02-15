@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.itesm.labs.labsuser.R;
+import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
+import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
 import com.mgb.labsapi.models.Category;
 
 import butterknife.Bind;
@@ -31,7 +33,7 @@ public class CategoryRecyclerAdapter extends BaseRecyclerAdapter<Category, Categ
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        View itemView = inflater.inflate(R.layout.cat_grid_item, parent, false);
+        View itemView = inflater.inflate(R.layout.category_grid_item, parent, false);
         return new ViewHolder(itemView);
     }
 
@@ -48,7 +50,6 @@ public class CategoryRecyclerAdapter extends BaseRecyclerAdapter<Category, Categ
     }
 
     // region ViewHolder
-
     /**
      * ViewHolder for categories views.
      */

@@ -8,18 +8,18 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.itesm.labs.labsuser.R;
+import com.itesm.labs.labsuser.app.admin.adapters.models.ItemCategory;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
-import com.mgb.labsapi.models.Category;
 
 import butterknife.Bind;
 
 /**
  * Created by mgradob on 7/1/15.
  */
-public class CategoryRecyclerAdapter extends BaseRecyclerAdapter<Category, CategoryRecyclerAdapter.ViewHolder> {
+public class UserCategoryRecyclerAdapter extends BaseRecyclerAdapter<ItemCategory, UserCategoryRecyclerAdapter.ViewHolder> {
 
-    public CategoryRecyclerAdapter() {
+    public UserCategoryRecyclerAdapter() {
         super();
     }
 
@@ -33,7 +33,7 @@ public class CategoryRecyclerAdapter extends BaseRecyclerAdapter<Category, Categ
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        View itemView = inflater.inflate(R.layout.cat_grid_item, parent, false);
+        View itemView = inflater.inflate(R.layout.category_grid_item, parent, false);
         return new ViewHolder(itemView);
     }
 
@@ -54,7 +54,7 @@ public class CategoryRecyclerAdapter extends BaseRecyclerAdapter<Category, Categ
     /**
      * ViewHolder for categories views.
      */
-    public class ViewHolder extends BaseViewHolder<Category> {
+    public class ViewHolder extends BaseViewHolder<ItemCategory> {
         @Bind(R.id.cat_grid_item_image)
         ImageView categoryImage;
 
@@ -71,7 +71,7 @@ public class CategoryRecyclerAdapter extends BaseRecyclerAdapter<Category, Categ
          * @param category the category to fill data from.
          */
         @Override
-        public void bindData(Category category) {
+        public void bindData(ItemCategory category) {
             Glide.with(mContext)
                     .load(category.getImageResource())
                     .into(categoryImage);
