@@ -7,7 +7,13 @@ public enum FragmentState {
     ALL_ITEMS(0),
     DETAIL_ITEMS(1);
 
-    FragmentState(int i) {
+    private final int value;
 
+    FragmentState(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
     }
 }
