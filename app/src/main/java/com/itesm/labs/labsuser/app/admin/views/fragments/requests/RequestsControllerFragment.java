@@ -11,6 +11,7 @@ import com.itesm.labs.labsuser.app.admin.events.GoToRequestDetailsEvent;
 import com.itesm.labs.labsuser.app.bases.LabsBaseFragment;
 import com.itesm.labs.labsuser.app.commons.events.BackPressedEvent;
 import com.itesm.labs.labsuser.app.commons.events.FinishActivityEvent;
+import com.itesm.labs.labsuser.app.commons.utils.FragmentState;
 import com.squareup.otto.Subscribe;
 
 import javax.inject.Inject;
@@ -31,7 +32,7 @@ public class RequestsControllerFragment extends LabsBaseFragment {
     @Inject
     DetailRequestFragment mDetailRequestFragment;
 
-    private DETAIL_STATE fragmentState = DETAIL_STATE.ALL_REQUESTS;
+    private FragmentState fragmentState = FragmentState.ALL_ITEMS;
 
     public RequestsControllerFragment() {
         // Required empty public constructor
@@ -73,7 +74,7 @@ public class RequestsControllerFragment extends LabsBaseFragment {
                 .setCustomAnimations(R.anim.popup_enter, R.anim.popup_exit)
                 .commit();
 
-        fragmentState = DETAIL_STATE.ALL_REQUESTS;
+        fragmentState = FragmentState.ALL_ITEMS;
     }
     //endregion
 
@@ -87,29 +88,20 @@ public class RequestsControllerFragment extends LabsBaseFragment {
                 .setCustomAnimations(R.anim.popup_enter, R.anim.popup_exit)
                 .commit();
 
-        fragmentState = DETAIL_STATE.REQUEST_DETAIL;
+        fragmentState = FragmentState.DETAIL_ITEMS;
     }
 
     @Subscribe
     public void onBackPressedEvent(BackPressedEvent event) {
-        if(fragmentState == DETAIL_STATE.REQUEST_DETAIL) {
+        if (fragmentState == FragmentState.DETAIL_ITEMS) {
             getFragmentManager().beginTransaction()
                     .replace(R.id.fragment_requests_main_container, mAllRequestsFragment)
                     .setCustomAnimations(R.anim.popup_enter, R.anim.popup_exit)
                     .commit();
 
-            fragmentState = DETAIL_STATE.ALL_REQUESTS;
+            fragmentState = FragmentState.ALL_ITEMS;
         } else
             mEventBus.post(new FinishActivityEvent());
     }
     //endregion
-
-    public enum DETAIL_STATE {
-        ALL_REQUESTS(0),
-        REQUEST_DETAIL(1);
-
-        DETAIL_STATE(int i) {
-
-        }
-    }
 }
