@@ -21,9 +21,9 @@ public interface ComponentClient {
                                                       @Path(Constants.LAB) String lab);
 
     @GET("/{lab}/component/")
-    Observable<ArrayList<Component>> getComponents(@Header(Constants.AUTHORIZATION) String token,
-                                                   @Path(Constants.LAB) String lab,
-                                                   @Query(Constants.ID_CATEGORY_FK) int categoryFk);
+    Observable<ArrayList<Component>> getComponentsOfCategory(@Header(Constants.AUTHORIZATION) String token,
+                                                             @Path(Constants.LAB) String lab,
+                                                             @Query(Constants.ID_CATEGORY_FK) int categoryFk);
 
     @GET("/{lab}/component/{id_component}")
     Observable<Component> getComponent(@Header(Constants.AUTHORIZATION) String token,
