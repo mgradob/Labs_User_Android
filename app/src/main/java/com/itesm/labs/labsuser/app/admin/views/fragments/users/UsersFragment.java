@@ -1,4 +1,4 @@
-package com.itesm.labs.labsuser.app.admin.views.fragments;
+package com.itesm.labs.labsuser.app.admin.views.fragments.users;
 
 
 import android.app.Fragment;
