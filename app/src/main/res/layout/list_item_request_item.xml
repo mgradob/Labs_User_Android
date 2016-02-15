@@ -20,4 +20,5 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         tools:text="@string/request_item_list_item_quantity" />
+
 </RelativeLayout>

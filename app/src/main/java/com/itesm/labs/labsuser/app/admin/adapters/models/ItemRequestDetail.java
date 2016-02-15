@@ -5,18 +5,17 @@ package com.itesm.labs.labsuser.app.admin.adapters.models;
  */
 public class ItemRequestDetail {
 
-    private boolean isHeader = false;
-    private String headerTitle;
+    private String categoryName;
     private String componentName;
-    // TODO: 1/3/16 add component note
     private int total;
 
-    public boolean isHeader() {
-        return isHeader;
+    public ItemRequestDetail() {
     }
 
-    public String getHeaderTitle() {
-        return headerTitle;
+    public ItemRequestDetail(Builder builder) {
+        this.categoryName = builder.categoryName;
+        this.componentName = builder.componentName;
+        this.total = builder.total;
     }
 
     public String getComponentName() {
@@ -27,26 +26,17 @@ public class ItemRequestDetail {
         return total;
     }
 
-    public ItemRequestDetail(Builder builder) {
-        this.isHeader = builder.isHeader;
-        this.headerTitle = builder.headerTitle;
-        this.componentName = builder.componentName;
-        this.total = builder.total;
+    public String getCategoryName() {
+        return categoryName;
     }
 
     public static class Builder {
-        private boolean isHeader;
-        private String headerTitle;
+        private String categoryName;
         private String componentName;
         private int total;
 
-        public Builder setIsHeader(boolean isHeader) {
-            this.isHeader = isHeader;
-            return this;
-        }
-
-        public Builder setHeaderTitle(String headerTitle) {
-            this.headerTitle = headerTitle;
+        public Builder setCategoryName(String categoryName) {
+            this.categoryName = categoryName;
             return this;
         }
 
@@ -60,7 +50,7 @@ public class ItemRequestDetail {
             return this;
         }
 
-        public ItemRequestDetail build(){
+        public ItemRequestDetail build() {
             return new ItemRequestDetail(this);
         }
     }

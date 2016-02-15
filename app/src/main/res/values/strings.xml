@@ -62,6 +62,7 @@
 
     <!-- Admin Flow -->
         <!-- Requests Fragment -->
+    <string name="request_item_list_item_quantity">Total: %s</string>
         <!-- Inventory Fragment -->
         <!-- Users Fragment -->
         <!-- Reports Fragment -->

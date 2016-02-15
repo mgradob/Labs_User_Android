@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.admin.adapters.models.ItemRequestDetail;
+import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

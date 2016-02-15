@@ -5,7 +5,7 @@
     tools:context=".app.admin.views.fragments.RequestDetailFragment">
 
     <TextView
-        android:id="@+id/fragment_request_detal_user_info"
+        android:id="@+id/fragment_request_detail_user_info"
         style="@style/LabsTheme.Compat.Text.Caption"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,19 +14,25 @@
         android:padding="8dp"
         tools:text="Armando Colomo Baray | A00123456" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/fragment_request_detail_list"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/fragment_request_detail_swipe_refresh_layout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/fragment_request_detal_user_info"
-        android:animateLayoutChanges="true" />
+        android:layout_below="@id/fragment_request_detail_user_info">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/fragment_request_detail_list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:animateLayoutChanges="true" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fragment_request_detail_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/fragment_request_detail_list"
-        android:layout_alignRight="@id/fragment_request_detail_list"
+        android:layout_alignBottom="@id/fragment_request_detail_swipe_refresh_layout"
+        android:layout_alignRight="@id/fragment_request_detail_swipe_refresh_layout"
         android:layout_margin="16dp"
         android:src="@drawable/ic_done_white" />
 
