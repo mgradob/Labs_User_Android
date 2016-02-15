@@ -6,10 +6,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.itesm.labs.labsuser.R;
-import com.itesm.labs.labsuser.app.admin.views.fragments.InventoryFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.inventory.AllInventoryFragment;
 import com.itesm.labs.labsuser.app.admin.views.fragments.ReportsFragment;
-import com.itesm.labs.labsuser.app.admin.views.fragments.RequestsFragment;
-import com.itesm.labs.labsuser.app.admin.views.fragments.UsersFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.requests.RequestsMainFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.users.UsersFragment;
 
 import javax.inject.Inject;
 
@@ -22,9 +22,9 @@ public class AdminSectionPagerAdapter extends FragmentPagerAdapter {
     @Inject
     Context mContext;
     @Inject
-    RequestsFragment mRequestsFragment;
+    RequestsMainFragment mRequestsMainFragment;
     @Inject
-    InventoryFragment mInventoryFragment;
+    AllInventoryFragment mAllInventoryFragment;
     @Inject
     UsersFragment mUsersFragment;
     @Inject
@@ -38,15 +38,15 @@ public class AdminSectionPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return mRequestsFragment;
+                return mRequestsMainFragment;
             case 1:
-                return mInventoryFragment;
+                return mAllInventoryFragment;
             case 2:
                 return mUsersFragment;
             case 3:
                 return mReportsFragment;
             default:
-                return mRequestsFragment;
+                return mRequestsMainFragment;
         }
     }
 
