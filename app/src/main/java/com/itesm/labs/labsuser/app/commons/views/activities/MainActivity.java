@@ -2,22 +2,18 @@ package com.itesm.labs.labsuser.app.commons.views.activities;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 
 import com.itesm.labs.labsuser.R;
-import com.itesm.labs.labsuser.app.admin.views.presenters.RequestsPresenter;
-import com.itesm.labs.labsuser.app.bases.BasePresenter;
-import com.itesm.labs.labsuser.app.bases.LabsBaseActivity;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminSectionPagerAdapter;
+import com.itesm.labs.labsuser.app.bases.LabsBaseActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends LabsBaseActivity implements
-        BasePresenter, RequestsPresenter {
+public class MainActivity extends LabsBaseActivity {
 
     @Bind(R.id.activity_main_toolbar)
     Toolbar mToolbar;
@@ -39,9 +35,12 @@ public class MainActivity extends LabsBaseActivity implements
 
         setupTabLayout();
 
-        getDataFromLab();
-
 //        startService(new Intent(mContext, BackgroundService.class));
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 
     //region Activity setup
@@ -64,38 +63,7 @@ public class MainActivity extends LabsBaseActivity implements
 
     private void setupTabLayout() {
         mPager.setAdapter(new AdminSectionPagerAdapter(getSupportFragmentManager()));
-//        mTabLayout.setBackgroundColor(getResources().getIntArray(R.array.material_colors)[mAppGlobals.getLaboratory().getColorResource()]);
         mTabLayout.setupWithViewPager(mPager);
-    }
-    //endregion
-
-    //region Data sync
-    private void getDataFromLab(){
-
-    }
-    //endregion
-
-    //region Interfaces
-    @Override
-    public void updateToolbar(int colorRes, String title) {
-        setupStatusBar(colorRes);
-        setupToolbar(colorRes, title);
-    }
-
-    @Override
-    public void showSnackbar(int stringRes) {
-        Snackbar.make(findViewById(R.id.activity_main), stringRes, Snackbar.LENGTH_LONG)
-                .show();
-    }
-
-    @Override
-    public void showDialog(int titleResource, int contentResource) {
-        showMaterialDialog(titleResource, contentResource);
-    }
-
-    @Override
-    public void dismissDialog() {
-        dismissMaterialDialog();
     }
     //endregion
 }

@@ -36,28 +36,56 @@ public class CartItem {
         return cartId;
     }
 
+    public void setCartId(int cartId) {
+        this.cartId = cartId;
+    }
+
     public String getStudentId() {
         return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 
     public int getComponentId() {
         return componentId;
     }
 
+    public void setComponentId(int componentId) {
+        this.componentId = componentId;
+    }
+
     public int getQuantity() {
         return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public boolean isCheckout() {
         return checkout;
     }
 
+    public void setCheckout(boolean checkout) {
+        this.checkout = checkout;
+    }
+
     public boolean isReady() {
         return ready;
     }
 
+    public void setReady(boolean ready) {
+        this.ready = ready;
+    }
+
     public String getDateCheckout() {
         return dateCheckout;
+    }
+
+    public void setDateCheckout(String dateCheckout) {
+        this.dateCheckout = dateCheckout;
     }
 
     @Override

@@ -22,9 +22,6 @@ public abstract class BaseRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
     @Inject
     public Context mContext;
 
-    @Inject
-    public AppGlobals mAppGlobals;
-
     public ArrayList<T> DATA = new ArrayList<>();
 
     private IOnClickListener mOnClickListener;

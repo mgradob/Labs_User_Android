@@ -3,16 +3,16 @@ package com.itesm.labs.labsuser.app.application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.itesm.labs.labsuser.app.admin.views.fragments.InventoryFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.inventory.AllInventoryFragment;
 import com.itesm.labs.labsuser.app.admin.views.fragments.ReportsFragment;
-import com.itesm.labs.labsuser.app.admin.views.fragments.RequestDetailFragment;
-import com.itesm.labs.labsuser.app.admin.views.fragments.RequestsFragment;
-import com.itesm.labs.labsuser.app.admin.views.fragments.UsersFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.requests.DetailRequestFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.requests.RequestsMainFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.users.UsersFragment;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.LabsBaseActivity;
 import com.itesm.labs.labsuser.app.bases.LabsBaseFragment;
 import com.itesm.labs.labsuser.app.commons.adapters.CartRecyclerAdapter;
-import com.itesm.labs.labsuser.app.commons.adapters.CategoryRecyclerAdapter;
+import com.itesm.labs.labsuser.app.commons.adapters.UserCategoryRecyclerAdapter;
 import com.itesm.labs.labsuser.app.commons.adapters.ComponentRecyclerAdapter;
 import com.itesm.labs.labsuser.app.commons.adapters.LabsRecyclerAdapter;
 import com.itesm.labs.labsuser.app.commons.adapters.RecordRecyclerAdapter;
@@ -39,14 +39,11 @@ import dagger.Provides;
                 LoginActivity.class,
                 LaboratoriesActivity.class,
                 MainActivity.class,
-                MaterialsFragment.class,
-                CartFragment.class,
-                RecordFragment.class,
                 BaseRecyclerAdapter.class,
                 BackgroundService.class,
                 BaseRecyclerAdapter.class,
                 LabsRecyclerAdapter.class,
-                CategoryRecyclerAdapter.class,
+                UserCategoryRecyclerAdapter.class,
                 ComponentRecyclerAdapter.class,
                 CartRecyclerAdapter.class,
                 RecordRecyclerAdapter.class
@@ -84,20 +81,20 @@ public class AppModule {
     //region Fragments
     @Provides
     @Singleton
-    RequestsFragment providesRequestsFragment() {
-        return new RequestsFragment();
+    RequestsMainFragment providesRequestsFragment() {
+        return new RequestsMainFragment();
     }
 
     @Provides
     @Singleton
-    RequestDetailFragment providesRequestDetailFragment() {
-        return new RequestDetailFragment();
+    DetailRequestFragment providesRequestDetailFragment() {
+        return new DetailRequestFragment();
     }
 
     @Provides
     @Singleton
-    InventoryFragment providesInventoryFragment() {
-        return new InventoryFragment();
+    AllInventoryFragment providesInventoryFragment() {
+        return new AllInventoryFragment();
     }
 
     @Provides

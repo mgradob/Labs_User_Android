@@ -20,12 +20,16 @@ import rx.Observable;
 public interface HistoryClient {
 
     @GET("/{lab}/detailhistory/")
-    Observable<ArrayList<History>> getRecordOf(@Header(Constants.AUTHORIZATION) String token,
-                                               @Path(Constants.LAB) String lab,
-                                               @Query(Constants.ID_STUDENT_FK) String studentId);
+    Observable<ArrayList<History>> getAllHistories(@Header(Constants.AUTHORIZATION) String token,
+                                                   @Path(Constants.LAB) String lab);
+
+    @GET("/{lab}/detailhistory/")
+    Observable<ArrayList<History>> getHistoryOf(@Header(Constants.AUTHORIZATION) String token,
+                                                @Path(Constants.LAB) String lab,
+                                                @Query(Constants.ID_STUDENT_FK) String studentId);
 
     @POST("/{lab}/detailhistory/")
-    Observable<Response> postRecordItem(@Header(Constants.AUTHORIZATION) String token,
-                                        @Path(Constants.LAB) String lab,
-                                        @Body History item);
+    Observable<Response> postHistoryItem(@Header(Constants.AUTHORIZATION) String token,
+                                         @Path(Constants.LAB) String lab,
+                                         @Body History item);
 }
