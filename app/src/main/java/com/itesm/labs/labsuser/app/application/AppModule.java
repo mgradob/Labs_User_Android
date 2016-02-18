@@ -13,7 +13,7 @@ import com.itesm.labs.labsuser.app.bases.LabsBaseActivity;
 import com.itesm.labs.labsuser.app.bases.LabsBaseFragment;
 import com.itesm.labs.labsuser.app.commons.adapters.CartRecyclerAdapter;
 import com.itesm.labs.labsuser.app.commons.adapters.UserCategoryRecyclerAdapter;
-import com.itesm.labs.labsuser.app.commons.adapters.ComponentRecyclerAdapter;
+import com.itesm.labs.labsuser.app.admin.adapters.AdminComponentRecyclerAdapter;
 import com.itesm.labs.labsuser.app.commons.adapters.LabsRecyclerAdapter;
 import com.itesm.labs.labsuser.app.commons.adapters.RecordRecyclerAdapter;
 import com.itesm.labs.labsuser.app.commons.services.BackgroundService;
@@ -45,7 +45,7 @@ import dagger.Provides;
                 BaseRecyclerAdapter.class,
                 LabsRecyclerAdapter.class,
                 UserCategoryRecyclerAdapter.class,
-                ComponentRecyclerAdapter.class,
+                AdminComponentRecyclerAdapter.class,
                 CartRecyclerAdapter.class,
                 RecordRecyclerAdapter.class
         }

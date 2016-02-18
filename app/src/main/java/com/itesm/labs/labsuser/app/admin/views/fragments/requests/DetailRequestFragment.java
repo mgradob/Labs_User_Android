@@ -158,7 +158,7 @@ public class DetailRequestFragment extends LabsBaseFragment {
                                                 .doOnNext(category -> detailsList.add(new ItemRequestDetail.Builder()
                                                                 .setCategoryName(category.getName())
                                                                 .setComponentName(component.getName())
-                                                                .setTotal(cartItem.getQuantity())
+                                                                .setCartItem(cartItem)
                                                                 .build()
                                                 ))
                                 )

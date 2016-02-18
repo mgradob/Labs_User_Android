@@ -135,7 +135,9 @@ public class AllRequestsFragment extends LabsBaseFragment {
                         ItemUserCart.Builder builder = new ItemUserCart.Builder();
                         builder.setUserId(userId);
 
-                        for (User user : users) builder.setUserName(user.getUserFullName());
+                        for (User user : users)
+                            if(user.getUserId().equals(userId))
+                                builder.setUserName(user.getUserFullName());
 
                         for (int i = 0; i < cartItems.size(); i++)
                             if (cartItems.get(i).getStudentId().equals(userId))
