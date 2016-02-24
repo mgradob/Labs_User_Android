@@ -1,6 +1,5 @@
 package com.itesm.labs.labsuser.app.admin.adapters.models;
 
-import com.mgb.labsapi.BuildConfig;
 import com.mgb.labsapi.models.CartItem;
 
 /**

@@ -1,61 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:padding="16dp">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/record_item_category_name"
+        style="@style/LabsTheme.Compat.Text.Subhead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Resistencias" />
+
+    <TextView
+        android:id="@+id/record_item_component_name_note_qty"
+        style="@style/LabsTheme.Compat.Text.Body1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="10 Ohm 1/4 W\t\tQuantity: 10" />
+
+    <TextView
+        android:id="@+id/record_item_date_out_in"
+        style="@style/LabsTheme.Compat.Text.Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:orientation="vertical">
+        tools:text="Check out: 10-02-2016 15:30:20\nCheck in: 10-02-2016 15:40:20" />
 
-        <TextView
-            android:id="@+id/record_item_category_name"
-            style="@style/LabsTheme.Compat.Text.Subhead"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:text="CATEGORY_NAME" />
-
-        <TextView
-            android:id="@+id/record_item_component_name_note"
-            style="@style/LabsTheme.Compat.Text.Body1"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:text="COMPONENT_NAME_NOTE" />
-
-        <TextView
-            android:id="@+id/record_item_component_quantity"
-            style="@style/LabsTheme.Compat.Text.Body1"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:text="COMPONENT_QUANTITY" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:gravity="right"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/record_item_date_out"
-            style="@style/LabsTheme.Compat.Text.Subhead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="DATE_OUT" />
-
-        <TextView
-            android:id="@+id/record_item_date_in"
-            style="@style/LabsTheme.Compat.Text.Body1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="DATE_IN" />
-
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>

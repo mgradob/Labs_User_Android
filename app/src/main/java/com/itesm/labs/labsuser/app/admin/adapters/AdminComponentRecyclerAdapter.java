@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
+import com.itesm.labs.labsuser.app.commons.events.ItemLongClickEvent;
 import com.mgb.labsapi.models.Component;
 
 import butterknife.Bind;
@@ -24,7 +25,7 @@ public class AdminComponentRecyclerAdapter extends BaseRecyclerAdapter<Component
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        View itemView = inflater.inflate(R.layout.inventory_list_item_component, parent, false);
+        View itemView = inflater.inflate(R.layout.admin_component_list_item, parent, false);
         return new ViewHolder(itemView);
     }
 
@@ -32,16 +33,20 @@ public class AdminComponentRecyclerAdapter extends BaseRecyclerAdapter<Component
     public void onBindViewHolder(ViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         holder.bindData(DATA.get(position));
+        holder.itemView.setOnLongClickListener(v -> {
+            mEventBus.post(new ItemLongClickEvent<>(DATA.get(position)));
+            return true;
+        });
     }
 
     //region ViewHolder
     public class ViewHolder extends BaseViewHolder<Component> {
 
-        @Bind(R.id.categories_component_name)
+        @Bind(R.id.component_item_name)
         TextView mComponentName;
-        @Bind(R.id.categories_component_note)
+        @Bind(R.id.component_item_note)
         TextView mComponentNote;
-        @Bind(R.id.categories_component_available)
+        @Bind(R.id.component_item_available)
         TextView mComponentAvailable;
 
         public ViewHolder(View itemView) {
@@ -49,10 +54,10 @@ public class AdminComponentRecyclerAdapter extends BaseRecyclerAdapter<Component
         }
 
         @Override
-        public void bindData(final Component holderItem) {
+        public void bindData(Component holderItem) {
             mComponentName.setText(holderItem.getName());
             mComponentNote.setText(holderItem.getNote());
-            mComponentAvailable.setText(String.valueOf(holderItem.getAvailable()));
+            mComponentAvailable.setText(String.format(mContext.getString(R.string.component_list_item_available), holderItem.getAvailable()));
         }
     }
     //endregion

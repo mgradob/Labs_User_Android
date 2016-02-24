@@ -3,29 +3,41 @@ package com.itesm.labs.labsuser.app.application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.itesm.labs.labsuser.app.admin.views.fragments.inventory.AllInventoryFragment;
-import com.itesm.labs.labsuser.app.admin.views.fragments.ReportsFragment;
-import com.itesm.labs.labsuser.app.admin.views.fragments.requests.DetailRequestFragment;
-import com.itesm.labs.labsuser.app.admin.views.fragments.requests.RequestsControllerFragment;
-import com.itesm.labs.labsuser.app.admin.views.fragments.users.UsersFragment;
-import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
-import com.itesm.labs.labsuser.app.bases.LabsBaseActivity;
-import com.itesm.labs.labsuser.app.bases.LabsBaseFragment;
-import com.itesm.labs.labsuser.app.commons.adapters.CartRecyclerAdapter;
-import com.itesm.labs.labsuser.app.commons.adapters.UserCategoryRecyclerAdapter;
+import com.itesm.labs.labsuser.app.admin.adapters.AdminCategoryRecyclerAdapter;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminComponentRecyclerAdapter;
+import com.itesm.labs.labsuser.app.admin.adapters.AdminRequestDetailRecyclerAdapter;
+import com.itesm.labs.labsuser.app.admin.adapters.AdminRequestRecyclerAdapter;
+import com.itesm.labs.labsuser.app.admin.adapters.AdminSectionPagerAdapter;
+import com.itesm.labs.labsuser.app.admin.adapters.AdminUserDetailRecyclerAdapter;
+import com.itesm.labs.labsuser.app.admin.adapters.AdminUserRecyclerAdapter;
+import com.itesm.labs.labsuser.app.admin.views.fragments.InventoryFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.ReportsFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.RequestsFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.UsersFragment;
+import com.itesm.labs.labsuser.app.admin.views.presenters.InventoryFragmentPresenter;
+import com.itesm.labs.labsuser.app.admin.views.presenters.RequestsFragmentPresenter;
+import com.itesm.labs.labsuser.app.admin.views.presenters.UsersFragmentPresenter;
+import com.itesm.labs.labsuser.app.bases.BaseActivity;
+import com.itesm.labs.labsuser.app.bases.BaseActivityPresenter;
+import com.itesm.labs.labsuser.app.bases.BaseFragment;
+import com.itesm.labs.labsuser.app.bases.BaseFragmentPresenter;
+import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
+import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
 import com.itesm.labs.labsuser.app.commons.adapters.LabsRecyclerAdapter;
-import com.itesm.labs.labsuser.app.commons.adapters.RecordRecyclerAdapter;
-import com.itesm.labs.labsuser.app.commons.services.BackgroundService;
-import com.itesm.labs.labsuser.app.commons.views.activities.LaboratoriesActivity;
+import com.itesm.labs.labsuser.app.commons.views.activities.LabsActivity;
 import com.itesm.labs.labsuser.app.commons.views.activities.LoginActivity;
 import com.itesm.labs.labsuser.app.commons.views.activities.MainActivity;
+import com.itesm.labs.labsuser.app.commons.views.presenters.LabsActivityPresenter;
+import com.itesm.labs.labsuser.app.commons.views.presenters.LoginActivityPresenter;
+import com.itesm.labs.labsuser.app.commons.views.presenters.MainActivityPresenter;
 import com.squareup.otto.Bus;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import rx.Subscription;
+import rx.subscriptions.Subscriptions;
 
 /**
  * Created by mgradob on 10/26/15.
@@ -35,19 +47,33 @@ import dagger.Provides;
         library = true,
         injects = {
                 LabsApp.class,
-                LabsBaseActivity.class,
-                LabsBaseFragment.class,
+                BaseActivity.class,
+                BaseFragment.class,
                 LoginActivity.class,
-                LaboratoriesActivity.class,
+                LabsActivity.class,
                 MainActivity.class,
                 BaseRecyclerAdapter.class,
-                BackgroundService.class,
-                BaseRecyclerAdapter.class,
+                BaseViewHolder.class,
                 LabsRecyclerAdapter.class,
-                UserCategoryRecyclerAdapter.class,
+                AdminSectionPagerAdapter.class,
+                AdminCategoryRecyclerAdapter.class,
                 AdminComponentRecyclerAdapter.class,
-                CartRecyclerAdapter.class,
-                RecordRecyclerAdapter.class
+                AdminRequestDetailRecyclerAdapter.class,
+                AdminRequestRecyclerAdapter.class,
+                AdminUserDetailRecyclerAdapter.class,
+                AdminUserRecyclerAdapter.class,
+                BaseActivityPresenter.class,
+                BaseFragmentPresenter.class,
+                LoginActivityPresenter.class,
+                LabsActivityPresenter.class,
+                MainActivityPresenter.class,
+                RequestsFragment.class,
+                RequestsFragmentPresenter.class,
+                InventoryFragment.class,
+                InventoryFragmentPresenter.class,
+                UsersFragment.class,
+                UsersFragmentPresenter.class,
+                ReportsFragment.class
         }
 )
 public class AppModule {
@@ -80,28 +106,27 @@ public class AppModule {
 
     @Provides
     @Singleton
-    Bus providesEventBus(){
+    Bus providesEventBus() {
         return new Bus();
+    }
+
+    @Provides
+    Subscription providesSubscription() {
+        return Subscriptions.empty();
     }
     //endregion
 
     //region Fragments
     @Provides
     @Singleton
-    RequestsControllerFragment providesRequestsFragment() {
-        return new RequestsControllerFragment();
+    RequestsFragment providesRequestsFragment() {
+        return new RequestsFragment();
     }
 
     @Provides
     @Singleton
-    DetailRequestFragment providesRequestDetailFragment() {
-        return new DetailRequestFragment();
-    }
-
-    @Provides
-    @Singleton
-    AllInventoryFragment providesInventoryFragment() {
-        return new AllInventoryFragment();
+    InventoryFragment providesInventoryFragment() {
+        return new InventoryFragment();
     }
 
     @Provides

@@ -8,20 +8,26 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.itesm.labs.labsuser.R;
-import com.itesm.labs.labsuser.app.bases.LabsBaseFragment;
+import com.itesm.labs.labsuser.app.bases.BaseFragment;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ReportsFragment extends LabsBaseFragment {
+public class ReportsFragment extends BaseFragment {
 
 
     public ReportsFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,5 +36,25 @@ public class ReportsFragment extends LabsBaseFragment {
         View view = inflater.inflate(R.layout.fragment_reports, container, false);
         ButterKnife.bind(this, view);
         return view;
+    }
+
+    @Override
+    public void setupUi() {
+
+    }
+
+    @Override
+    public void updateAll(List list) {
+
+    }
+
+    @Override
+    public void updateDetails(List list) {
+
+    }
+
+    @Override
+    public void showError() {
+
     }
 }

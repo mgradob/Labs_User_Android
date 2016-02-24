@@ -1,6 +1,6 @@
 package com.mgb.labsapi.clients;
 
-import com.mgb.labsapi.Constants;
+import com.mgb.labsapi.ApiConstants;
 import com.mgb.labsapi.models.History;
 
 import java.util.ArrayList;
@@ -20,16 +20,16 @@ import rx.Observable;
 public interface HistoryClient {
 
     @GET("/{lab}/detailhistory/")
-    Observable<ArrayList<History>> getAllHistories(@Header(Constants.AUTHORIZATION) String token,
-                                                   @Path(Constants.LAB) String lab);
+    Observable<ArrayList<History>> getAllHistories(@Header(ApiConstants.AUTHORIZATION) String token,
+                                                   @Path(ApiConstants.LAB) String lab);
 
     @GET("/{lab}/detailhistory/")
-    Observable<ArrayList<History>> getHistoryOf(@Header(Constants.AUTHORIZATION) String token,
-                                                @Path(Constants.LAB) String lab,
-                                                @Query(Constants.ID_STUDENT_FK) String studentId);
+    Observable<ArrayList<History>> getHistoryOf(@Header(ApiConstants.AUTHORIZATION) String token,
+                                                @Path(ApiConstants.LAB) String lab,
+                                                @Query(ApiConstants.ID_STUDENT_FK) String studentId);
 
     @POST("/{lab}/detailhistory/")
-    Observable<Response> postHistoryItem(@Header(Constants.AUTHORIZATION) String token,
-                                         @Path(Constants.LAB) String lab,
+    Observable<Response> postHistoryItem(@Header(ApiConstants.AUTHORIZATION) String token,
+                                         @Path(ApiConstants.LAB) String lab,
                                          @Body History item);
 }

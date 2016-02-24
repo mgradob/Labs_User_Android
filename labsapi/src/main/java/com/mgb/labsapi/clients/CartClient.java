@@ -1,6 +1,6 @@
 package com.mgb.labsapi.clients;
 
-import com.mgb.labsapi.Constants;
+import com.mgb.labsapi.ApiConstants;
 import com.mgb.labsapi.models.CartItem;
 
 import java.util.ArrayList;
@@ -22,27 +22,27 @@ import rx.Observable;
 public interface CartClient {
 
     @GET("/{lab}/detailcart/")
-    Observable<ArrayList<CartItem>> getCartsItems(@Header(Constants.AUTHORIZATION) String token,
-                                                  @Path(Constants.LAB) String lab);
+    Observable<ArrayList<CartItem>> getCartsItems(@Header(ApiConstants.AUTHORIZATION) String token,
+                                                  @Path(ApiConstants.LAB) String lab);
 
     @GET("/{lab}/detailcart/")
-    Observable<ArrayList<CartItem>> getCartItemsOf(@Header(Constants.AUTHORIZATION) String token,
-                                                   @Path(Constants.LAB) String lab,
-                                                   @Query(Constants.ID_STUDENT_FK) String userId);
+    Observable<ArrayList<CartItem>> getCartItemsOf(@Header(ApiConstants.AUTHORIZATION) String token,
+                                                   @Path(ApiConstants.LAB) String lab,
+                                                   @Query(ApiConstants.ID_STUDENT_FK) String userId);
 
     @POST("/{lab}/detailcart/")
-    Observable<Response> postNewCartItem(@Header(Constants.AUTHORIZATION) String token,
-                                         @Path(Constants.LAB) String lab,
+    Observable<Response> postNewCartItem(@Header(ApiConstants.AUTHORIZATION) String token,
+                                         @Path(ApiConstants.LAB) String lab,
                                          @Body CartItem item);
 
     @PUT("/{lab}/detailcart/{id_cart}/")
-    Observable<Response> editCartItem(@Header(Constants.AUTHORIZATION) String token,
-                                      @Path(Constants.LAB) String lab,
-                                      @Path(Constants.ID_CART) int cartId,
+    Observable<Response> editCartItem(@Header(ApiConstants.AUTHORIZATION) String token,
+                                      @Path(ApiConstants.LAB) String lab,
+                                      @Path(ApiConstants.ID_CART) int cartId,
                                       @Body CartItem cartItemBody);
 
     @DELETE("/{lab}/detailcart/{id_cart}/")
-    Observable<Response> deleteCartItem(@Header(Constants.AUTHORIZATION) String token,
-                                        @Path(Constants.LAB) String lab,
-                                        @Path(Constants.ID_CART) int cartId);
+    Observable<Response> deleteCartItem(@Header(ApiConstants.AUTHORIZATION) String token,
+                                        @Path(ApiConstants.LAB) String lab,
+                                        @Path(ApiConstants.ID_CART) int cartId);
 }

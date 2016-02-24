@@ -80,6 +80,10 @@
     <!-- Default rounded corner for controls -->
     <dimen name="control_corner_material">2dp</dimen>
 
-    <dimen name="alert_dialog_padding_material">24dp</dimen>
-    <dimen name="alert_dialog_padding_top_material">18dp</dimen>
+    <!-- Material Dialogs -->
+    <dimen name="dialog_padding_material">24dp</dimen>
+    <dimen name="dialog_title_padding">20dp</dimen>
+    <dimen name="dialog_content_padding">24dp</dimen>
+    <dimen name="dialog_actions_size">52dp</dimen>
+    <dimen name="dialog_actions_padding">8dp</dimen>
 </resources>

@@ -1,7 +1,7 @@
 package com.mgb.labsapi.clients;
 
 
-import com.mgb.labsapi.Constants;
+import com.mgb.labsapi.ApiConstants;
 import com.mgb.labsapi.models.Laboratory;
 
 import java.util.ArrayList;
@@ -17,9 +17,9 @@ import rx.Observable;
 public interface LaboratoryClient {
 
     @GET("/labs/")
-    Observable<ArrayList<Laboratory>> getLaboratories(@Header(Constants.AUTHORIZATION) String token);
+    Observable<ArrayList<Laboratory>> getLaboratories(@Header(ApiConstants.AUTHORIZATION) String token);
 
     @GET("/labs/{lab_name}")
-    Observable<Laboratory> getLaboratoryFromUrl(@Header(Constants.AUTHORIZATION) String token,
-                                                @Path(Constants.LAB_NAME) String labName);
+    Observable<Laboratory> getLaboratoryFromUrl(@Header(ApiConstants.AUTHORIZATION) String token,
+                                                @Path(ApiConstants.LAB_NAME) String labName);
 }

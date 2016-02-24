@@ -11,12 +11,14 @@ import butterknife.ButterKnife;
 public abstract class BaseViewHolder<T> extends RecyclerView.ViewHolder {
 
     /**
-     * Constructor that binds to Butterknife automatically.
+     * Constructor that binds to Butterknife automatically and sets
+     * {@link android.view.View.OnClickListener} and {@link android.view.View.OnLongClickListener}
      *
      * @param itemView
      */
     public BaseViewHolder(View itemView) {
         super(itemView);
+
         ButterKnife.bind(this, itemView);
     }
 

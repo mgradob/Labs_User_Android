@@ -1,9 +1,12 @@
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 apply plugin: 'me.tatarka.retrolambda'
 
 def MAJOR_VERSION = 1
 def MINOR_VERSION = 1
 def BUILD_VERSION = 0
+
+def ENABLE_FABRIC = "ENABLE_FABRIC"
 
 android {
     compileSdkVersion 23
@@ -15,12 +18,14 @@ android {
         targetSdkVersion 23
         versionCode MAJOR_VERSION * 10000 + MINOR_VERSION * 100 + BUILD_VERSION * 1
         versionName "${MAJOR_VERSION}.${MINOR_VERSION}.${BUILD_VERSION}"
+        buildConfigField("boolean", ENABLE_FABRIC, "false")
     }
 
     buildTypes {
-        prod {
+        release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("boolean", ENABLE_FABRIC, "true")
         }
     }
 
@@ -42,9 +47,6 @@ dependencies {
     compile rootProject.ext.libs.palette
     compile rootProject.ext.libs.design
 
-    // Material Dialogs
-    compile rootProject.ext.libs.materialDialogs
-
     // Image Loading
     compile rootProject.ext.libs.glide
 
@@ -59,4 +61,9 @@ dependencies {
 
     // Otto
     compile rootProject.ext.libs.otto
+
+    // Crashlytics
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+        transitive = true;
+    }
 }

@@ -1,6 +1,6 @@
 package com.mgb.labsapi.clients;
 
-import com.mgb.labsapi.Constants;
+import com.mgb.labsapi.ApiConstants;
 import com.mgb.labsapi.models.Auth;
 import com.mgb.labsapi.models.LoginBody;
 import com.mgb.labsapi.models.User;
@@ -26,22 +26,22 @@ public interface UserClient {
     Observable<Auth> loginUser(@Body LoginBody loginUser);
 
     @GET("/students/{user_id}")
-    Observable<User> getUser(@Header(Constants.AUTHORIZATION) String token,
-                             @Path(Constants.ID_USER) String userId);
+    Observable<User> getUser(@Header(ApiConstants.AUTHORIZATION) String token,
+                             @Path(ApiConstants.ID_USER) String userId);
 
     @GET("/students/")
-    Observable<ArrayList<User>> getUsers(@Header(Constants.AUTHORIZATION) String token);
+    Observable<ArrayList<User>> getUsers(@Header(ApiConstants.AUTHORIZATION) String token);
 
     @POST("/students/")
-    Observable<Response> postNewUser(@Header(Constants.AUTHORIZATION) String token,
+    Observable<Response> postNewUser(@Header(ApiConstants.AUTHORIZATION) String token,
                                      @Body User body);
 
     @PUT("/students/{user_id}/")
-    Observable<Response> editUser(@Header(Constants.AUTHORIZATION) String token,
-                                  @Path(Constants.ID_USER) String userId,
+    Observable<Response> editUser(@Header(ApiConstants.AUTHORIZATION) String token,
+                                  @Path(ApiConstants.ID_USER) String userId,
                                   @Body User body);
 
     @DELETE("/students/{user_id}/")
-    Observable<Response> deleteUser(@Header(Constants.AUTHORIZATION) String token,
-                                    @Path(Constants.ID_USER) String userId);
+    Observable<Response> deleteUser(@Header(ApiConstants.AUTHORIZATION) String token,
+                                    @Path(ApiConstants.ID_USER) String userId);
 }

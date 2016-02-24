@@ -9,10 +9,11 @@ public class AppConstants {
      * Intent keys.
      */
     public static final String INTENT_LINK = "LINK";
-    public static final String INTENT_LAB_NAME = "LABNAME";
+    public static final String INTENT_LAB_NAME = "LAB_NAME";
     public static final String INTENT_COLOR = "COLOR";
-    public static final String INTENT_USER_ID = "USERID";
-    public static final String INTENT_ALLOWED_LABS = "ALLOWEDLABS";
+    public static final String INTENT_USER_ID = "USER_ID";
+    public static final String INTENT_ALLOWED_LABS = "ALLOWED_LABS";
+    public static final String INTENT_SELECTED_CATEGORY = "SELECTED_CATEGORY";
 
     /**
      * Shared preferences keys.

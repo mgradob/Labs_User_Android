@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/component_item_name"
+        style="@style/LabsTheme.Compat.Text.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="10 ohm" />
+
+    <TextView
+        android:id="@+id/component_item_note"
+        style="@style/LabsTheme.Compat.Text.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="1/4 W" />
+
+    <TextView
+        android:id="@+id/component_item_available"
+        style="@style/LabsTheme.Compat.Text.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Disponible: 6" />
+
+</LinearLayout>

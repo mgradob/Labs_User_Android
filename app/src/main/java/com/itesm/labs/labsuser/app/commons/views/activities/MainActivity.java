@@ -8,15 +8,15 @@ import android.support.v7.widget.Toolbar;
 
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminSectionPagerAdapter;
-import com.itesm.labs.labsuser.app.bases.LabsBaseActivity;
+import com.itesm.labs.labsuser.app.bases.BaseActivity;
 import com.itesm.labs.labsuser.app.commons.events.BackPressedEvent;
-import com.itesm.labs.labsuser.app.commons.events.FinishActivityEvent;
-import com.squareup.otto.Subscribe;
+import com.itesm.labs.labsuser.app.commons.events.DismissDialogEvent;
+import com.itesm.labs.labsuser.app.commons.events.ShowDialogEvent;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends LabsBaseActivity {
+public class MainActivity extends BaseActivity {
 
     @Bind(R.id.activity_main_toolbar)
     Toolbar mToolbar;
@@ -33,15 +33,17 @@ public class MainActivity extends LabsBaseActivity {
 
         ButterKnife.bind(this);
 
+        setupUi();
+//        startService(new Intent(mContext, BackgroundService.class));
+    }
+
+    @Override
+    public void setupUi() {
         setupToolbar(mLabsPreferences.getLabColor(), mLabsPreferences.getCurrentLab().getName());
 
         setupStatusBar(mLabsPreferences.getLabColor());
 
-        setupTabLayout();
-
-        mEventBus.register(this);
-
-//        startService(new Intent(mContext, BackgroundService.class));
+        setupTabLayout(mLabsPreferences.getLabColor());
     }
 
     @Override
@@ -52,34 +54,32 @@ public class MainActivity extends LabsBaseActivity {
 
     //region Activity setup
     private void setupToolbar(int colorRes, String title) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            mToolbar.setBackgroundColor(getResources().getColor(colorRes, getTheme()));
-        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-            mToolbar.setBackgroundColor(getResources().getColor(colorRes));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            mToolbar.setBackgroundColor(colorRes);
 
         mToolbar.setTitle(title);
         setSupportActionBar(mToolbar);
     }
 
     private void setupStatusBar(int colorRes) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            getWindow().setStatusBarColor(getResources().getColor(colorRes, getTheme()));
-        else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-            getWindow().setStatusBarColor(getResources().getColor(colorRes));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            getWindow().setStatusBarColor(colorRes);
     }
 
-    private void setupTabLayout() {
+    private void setupTabLayout(int colorRes) {
         mPager.setAdapter(new AdminSectionPagerAdapter(getSupportFragmentManager()));
         mTabLayout.setupWithViewPager(mPager);
+        mTabLayout.setBackgroundColor(colorRes);
     }
     //endregion
 
     //region Event Bus
-    @Subscribe
-    private void onFinishActivityEvent(FinishActivityEvent event){
-        // TODO: 2/15/16 add logout login if needed.
+    @Override
+    public void onShowDialogEvent(ShowDialogEvent event) {
+    }
 
-        finish();
+    @Override
+    public void onDismissDialogEvent(DismissDialogEvent event) {
     }
     //endregion
 }

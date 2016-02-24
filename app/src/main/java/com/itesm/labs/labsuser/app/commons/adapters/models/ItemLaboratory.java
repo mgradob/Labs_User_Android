@@ -28,12 +28,24 @@ public class ItemLaboratory {
         return laboratory;
     }
 
+    public void setLaboratory(Laboratory laboratory) {
+        this.laboratory = laboratory;
+    }
+
     public Integer getImageResource() {
         return imageResource;
     }
 
+    public void setImageResource(Integer imageResource) {
+        this.imageResource = imageResource;
+    }
+
     public Integer getColorResource() {
         return colorResource;
+    }
+
+    public void setColorResource(Integer colorResource) {
+        this.colorResource = colorResource;
     }
 
     public static class Builder {

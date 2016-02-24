@@ -11,6 +11,8 @@ import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.admin.adapters.models.ItemCategory;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
+import com.itesm.labs.labsuser.app.commons.events.ItemClickEvent;
+import com.itesm.labs.labsuser.app.commons.events.ItemLongClickEvent;
 
 import butterknife.Bind;
 
@@ -30,6 +32,12 @@ public class AdminCategoryRecyclerAdapter extends BaseRecyclerAdapter<ItemCatego
     public void onBindViewHolder(ViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         holder.bindData(DATA.get(position));
+        holder.itemView.setOnClickListener(v ->
+                mEventBus.post(new ItemClickEvent<>(DATA.get(position))));
+        holder.itemView.setOnLongClickListener(v -> {
+            mEventBus.post(new ItemLongClickEvent<>(DATA.get(position)));
+            return true;
+        });
     }
 
     public class ViewHolder extends BaseViewHolder<ItemCategory> {

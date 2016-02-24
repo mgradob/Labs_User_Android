@@ -10,6 +10,8 @@ import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
 import com.itesm.labs.labsuser.app.commons.adapters.models.ItemLaboratory;
+import com.itesm.labs.labsuser.app.commons.events.ItemClickEvent;
+import com.itesm.labs.labsuser.app.commons.events.ItemLongClickEvent;
 
 import java.util.Random;
 
@@ -21,6 +23,7 @@ import butterknife.Bind;
 public class LabsRecyclerAdapter extends BaseRecyclerAdapter<ItemLaboratory, LabsRecyclerAdapter.ViewHolder> {
 
     private int[] colorArray;
+    private Random mRandom = new Random();
 
     public LabsRecyclerAdapter() {
         super();
@@ -30,6 +33,13 @@ public class LabsRecyclerAdapter extends BaseRecyclerAdapter<ItemLaboratory, Lab
     public void onBindViewHolder(ViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         holder.bindData(DATA.get(position));
+        holder.itemView.setOnClickListener(v ->
+                        mEventBus.post(new ItemClickEvent<>(DATA.get(position)))
+        );
+        holder.itemView.setOnLongClickListener(v -> {
+            mEventBus.post(new ItemLongClickEvent<>(DATA.get(position)));
+            return true;
+        });
     }
 
     @Override
@@ -58,14 +68,14 @@ public class LabsRecyclerAdapter extends BaseRecyclerAdapter<ItemLaboratory, Lab
         @Override
         public void bindData(ItemLaboratory holderItem) {
             labsGridItemImage.setImageDrawable(mContext.getDrawable(holderItem.getImageResource()));
-            labsGridItemText.setText(holderItem.getName());
+            labsGridItemText.setText(holderItem.getLaboratory().getName());
 
             colorArray = mContext.getResources().getIntArray(R.array.material_colors);
-            int color = new Random().nextInt(colorArray.length - 1);
+            int color = colorArray[mRandom.nextInt(colorArray.length - 1)];
 
             holderItem.setColorResource(color);
 
-            labsGridItemText.setBackgroundColor(colorArray[color]);
+            labsGridItemText.setBackgroundColor(color);
         }
     }
 }

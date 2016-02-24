@@ -50,19 +50,6 @@ public class LabsPreferences {
         this.mSharedPreferences = mSharedPreferences;
     }
 
-    //region Shared Preferences
-    public AppFlow getAppFlow() {
-        int i = mSharedPreferences.getInt(PREFERENCES_APP_FLOW, 0);
-        return AppFlow.getValue(i);
-    }
-
-    public void putAppFlow(AppFlow flow) {
-        mSharedPreferences.edit()
-                .putInt(PREFERENCES_APP_FLOW, flow.getValue())
-                .apply();
-    }
-    //endregion
-
     //region User preferences,
     public User getUser() {
         User.Builder userBuilder = new User.Builder()
@@ -172,7 +159,7 @@ public class LabsPreferences {
     }
 
     public ArrayList<String> getUserAllowedLabs() {
-        ArrayList<String> arrayList =  new ArrayList<>();
+        ArrayList<String> arrayList = new ArrayList<>();
         arrayList.addAll(mSharedPreferences.getStringSet(PREFERENCES_KEY_USER_ALLOWED_LABS, null));
         return arrayList;
     }
@@ -230,7 +217,7 @@ public class LabsPreferences {
     }
 
     public int getLabColor() {
-        return mSharedPreferences.getInt(PREFERENCES_KEY_LAB_COLOR, LabsApp.get().getColor(R.color.primary));
+        return mSharedPreferences.getInt(PREFERENCES_KEY_LAB_COLOR, LabsApp.get().getResources().getColor(R.color.primary));
     }
 
     public void putLabColor(int color) {

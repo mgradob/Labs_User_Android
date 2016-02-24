@@ -1,6 +1,6 @@
 package com.mgb.labsapi.clients;
 
-import com.mgb.labsapi.Constants;
+import com.mgb.labsapi.ApiConstants;
 import com.mgb.labsapi.models.Component;
 
 import java.util.ArrayList;
@@ -17,16 +17,16 @@ import rx.Observable;
 public interface ComponentClient {
 
     @GET("/{lab}/component/")
-    Observable<ArrayList<Component>> getAllComponents(@Header(Constants.AUTHORIZATION) String token,
-                                                      @Path(Constants.LAB) String lab);
+    Observable<ArrayList<Component>> getAllComponents(@Header(ApiConstants.AUTHORIZATION) String token,
+                                                      @Path(ApiConstants.LAB) String lab);
 
     @GET("/{lab}/component/")
-    Observable<ArrayList<Component>> getComponentsOfCategory(@Header(Constants.AUTHORIZATION) String token,
-                                                             @Path(Constants.LAB) String lab,
-                                                             @Query(Constants.ID_CATEGORY_FK) int categoryFk);
+    Observable<ArrayList<Component>> getComponentsOfCategory(@Header(ApiConstants.AUTHORIZATION) String token,
+                                                             @Path(ApiConstants.LAB) String lab,
+                                                             @Query(ApiConstants.ID_CATEGORY_FK) int categoryFk);
 
     @GET("/{lab}/component/{id_component}")
-    Observable<Component> getComponent(@Header(Constants.AUTHORIZATION) String token,
-                                       @Path(Constants.LAB) String lab,
-                                       @Path(Constants.ID_COMPONENT) int componentId);
+    Observable<Component> getComponent(@Header(ApiConstants.AUTHORIZATION) String token,
+                                       @Path(ApiConstants.LAB) String lab,
+                                       @Path(ApiConstants.ID_COMPONENT) int componentId);
 }

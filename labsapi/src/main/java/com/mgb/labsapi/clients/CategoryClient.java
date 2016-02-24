@@ -1,7 +1,7 @@
 package com.mgb.labsapi.clients;
 
 
-import com.mgb.labsapi.Constants;
+import com.mgb.labsapi.ApiConstants;
 import com.mgb.labsapi.models.Category;
 
 import java.util.ArrayList;
@@ -22,27 +22,27 @@ import rx.Observable;
 public interface CategoryClient {
 
     @GET("/{lab}/category/")
-    Observable<ArrayList<Category>> getCategories(@Header(Constants.AUTHORIZATION) String token,
-                                                  @Path(Constants.LAB) String lab);
+    Observable<ArrayList<Category>> getCategories(@Header(ApiConstants.AUTHORIZATION) String token,
+                                                  @Path(ApiConstants.LAB) String lab);
 
     @GET("/{lab}/category/{id_category}")
-    Observable<Category> getCategory(@Header(Constants.AUTHORIZATION) String token,
-                                     @Path(Constants.LAB) String lab,
-                                     @Path(Constants.ID_CATEGORY) int categoryId);
+    Observable<Category> getCategory(@Header(ApiConstants.AUTHORIZATION) String token,
+                                     @Path(ApiConstants.LAB) String lab,
+                                     @Path(ApiConstants.ID_CATEGORY) int categoryId);
 
     @POST("/{lab}/category/")
-    Observable<Response> postNewCategory(@Header(Constants.AUTHORIZATION) String token,
-                                         @Path(Constants.LAB) String lab,
+    Observable<Response> postNewCategory(@Header(ApiConstants.AUTHORIZATION) String token,
+                                         @Path(ApiConstants.LAB) String lab,
                                          @Body Category body);
 
     @PUT("/{lab}/category/{id_category}/")
-    Observable<Response> editCategory(@Header(Constants.AUTHORIZATION) String token,
-                                      @Path(Constants.LAB) String lab,
-                                      @Path(Constants.ID_CATEGORY) int categoryId,
+    Observable<Response> editCategory(@Header(ApiConstants.AUTHORIZATION) String token,
+                                      @Path(ApiConstants.LAB) String lab,
+                                      @Path(ApiConstants.ID_CATEGORY) int categoryId,
                                       @Body Category body);
 
     @DELETE("/{lab}/category/{id_category}/")
-    Observable<Response> deleteCategory(@Header(Constants.AUTHORIZATION) String token,
-                                        @Path(Constants.LAB) String lab,
-                                        @Path(Constants.ID_CATEGORY) int categoryId);
+    Observable<Response> deleteCategory(@Header(ApiConstants.AUTHORIZATION) String token,
+                                        @Path(ApiConstants.LAB) String lab,
+                                        @Path(ApiConstants.ID_CATEGORY) int categoryId);
 }

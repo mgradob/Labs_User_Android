@@ -1,19 +1,25 @@
 package com.itesm.labs.labsuser.app.commons.utils;
 
-import android.nfc.NfcAdapter;
+import android.annotation.TargetApi;
+import android.nfc.NfcAdapter.ReaderCallback;
 import android.nfc.Tag;
+import android.os.Build;
 
-import java.lang.ref.WeakReference;
+import com.itesm.labs.labsuser.app.commons.events.UIDEvent;
+import com.squareup.otto.Bus;
+
+import javax.inject.Inject;
 
 /**
  * Created by mgradob on 1/22/15.
  */
-public class NfcHandler implements NfcAdapter.ReaderCallback {
+@TargetApi(Build.VERSION_CODES.KITKAT)
+public class NfcHandler implements ReaderCallback {
 
-    private WeakReference<UidCallback> mCallback;
+    @Inject
+    Bus mEventBus;
 
-    public NfcHandler(UidCallback mCallback) {
-        this.mCallback = new WeakReference<UidCallback>(mCallback);
+    public NfcHandler() {
     }
 
     public static long bytesToLong(byte[] data) {
@@ -69,12 +75,6 @@ public class NfcHandler implements NfcAdapter.ReaderCallback {
 
     @Override
     public void onTagDiscovered(Tag tag) {
-        long tagUid = bytesToLong(tag.getId());
-        mCallback.get().getUid(tagUid);
-        tagUid = 0;
-    }
-
-    public interface UidCallback {
-        void getUid(long uid);
+        mEventBus.post(new UIDEvent(bytesToLong(tag.getId())));
     }
 }

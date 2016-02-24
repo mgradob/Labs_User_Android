@@ -2,7 +2,11 @@ package com.itesm.labs.labsuser.app.application;
 
 import android.app.Application;
 
+import com.crashlytics.android.Crashlytics;
+import com.itesm.labs.labsuser.BuildConfig;
+
 import dagger.ObjectGraph;
+import io.fabric.sdk.android.Fabric;
 
 /**
  * Created by mgradob on 10/26/15.
@@ -19,6 +23,8 @@ public class LabsApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        if (BuildConfig.ENABLE_FABRIC) Fabric.with(this, new Crashlytics());
 
         mAppContext = (LabsApp) getApplicationContext();
 
