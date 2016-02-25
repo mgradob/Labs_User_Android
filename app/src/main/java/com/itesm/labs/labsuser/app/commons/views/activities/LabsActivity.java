@@ -51,6 +51,8 @@ public class LabsActivity extends BaseActivity {
     //region UI setup
     @Override
     public void setupUi() {
+        setupStatusBar(getResources().getColor(R.color.primary));
+
         setupRefreshLayout();
 
         setupLabsGrid();

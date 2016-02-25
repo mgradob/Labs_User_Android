@@ -1,5 +1,6 @@
 package com.itesm.labs.labsuser.app.commons.views.activities;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -59,11 +60,6 @@ public class MainActivity extends BaseActivity {
 
         mToolbar.setTitle(title);
         setSupportActionBar(mToolbar);
-    }
-
-    private void setupStatusBar(int colorRes) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-            getWindow().setStatusBarColor(colorRes);
     }
 
     private void setupTabLayout(int colorRes) {

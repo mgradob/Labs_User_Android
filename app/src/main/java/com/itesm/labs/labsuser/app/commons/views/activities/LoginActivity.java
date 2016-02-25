@@ -49,10 +49,14 @@ public class LoginActivity extends BaseActivity {
     public void setupUi() {
         userMat.setText(mLabsPreferences.getUserId());
         userPass.setText(mLabsPreferences.getUserPass());
+
+        setupStatusBar(getResources().getColor(R.color.primary));;
     }
 
     @OnClick(R.id.login_button)
     void doLogin() {
+        loginBtn.setEnabled(false);
+
         String userM = userMat.getText().toString();
         String userP = userPass.getText().toString();
 
@@ -71,7 +75,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     public void goToLabsView() {
-        Intent intent = new Intent(getApplicationContext(), LabsActivity.class);
+        Intent intent = new Intent(mContext, LabsActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_from_top, R.anim.abc_slide_in_bottom);
     }
@@ -80,5 +84,7 @@ public class LoginActivity extends BaseActivity {
         Snackbar.make(findViewById(R.id.login_activity), R.string.login_snackbar_error_content,
                 Snackbar.LENGTH_LONG)
                 .show();
+
+        loginBtn.setEnabled(true);
     }
 }

@@ -1,6 +1,8 @@
 package com.itesm.labs.labsuser.app.bases;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -76,5 +78,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     private void unregisterBus() {
         if (isBusRegistered) mEventBus.unregister(this);
         isBusRegistered = false;
+    }
+
+    public void setupStatusBar(int colorRes) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            getWindow().setStatusBarColor(colorRes);
     }
 }
