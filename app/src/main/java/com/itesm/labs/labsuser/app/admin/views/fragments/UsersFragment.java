@@ -72,7 +72,7 @@ public class UsersFragment extends BaseFragment {
 
         setupUi();
 
-        // TODO: 2/20/16 presenter call.
+        mPresenter.getUsers();
     }
     //endregion
 
@@ -141,19 +141,23 @@ public class UsersFragment extends BaseFragment {
     public void onItemClickEvent(ItemClickEvent<User> event) {
         if (event == null) return;
 
-        mPresenter.setSelectedUserId(event.getItem());
-        mFragmentState = FragmentState.ITEMS_DETAILS;
+        if(event.getItem() instanceof User) {
+            mPresenter.setSelectedUserId(event.getItem());
+            mFragmentState = FragmentState.ITEMS_DETAILS;
 
-        setupUi();
+            setupUi();
 
-        mPresenter.getUserHistory();
+            mPresenter.getUserHistory();
+        }
     }
 
     @Subscribe
     public void onItemLongClickEvent(ItemLongClickEvent<User> event) {
         if (event == null) return;
 
-        // TODO: 2/23/16 add edit fragment dialog.
+        if(event.getItem() instanceof User) {
+            // TODO: 2/23/16 add edit fragment dialog.
+        }
     }
     //endregion
 }

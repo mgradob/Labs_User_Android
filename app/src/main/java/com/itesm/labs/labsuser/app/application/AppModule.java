@@ -10,6 +10,7 @@ import com.itesm.labs.labsuser.app.admin.adapters.AdminRequestRecyclerAdapter;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminSectionPagerAdapter;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminUserDetailRecyclerAdapter;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminUserRecyclerAdapter;
+import com.itesm.labs.labsuser.app.admin.views.dialogs.EditUserDialog;
 import com.itesm.labs.labsuser.app.admin.views.fragments.InventoryFragment;
 import com.itesm.labs.labsuser.app.admin.views.fragments.ReportsFragment;
 import com.itesm.labs.labsuser.app.admin.views.fragments.RequestsFragment;
@@ -19,6 +20,7 @@ import com.itesm.labs.labsuser.app.admin.views.presenters.RequestsFragmentPresen
 import com.itesm.labs.labsuser.app.admin.views.presenters.UsersFragmentPresenter;
 import com.itesm.labs.labsuser.app.bases.BaseActivity;
 import com.itesm.labs.labsuser.app.bases.BaseActivityPresenter;
+import com.itesm.labs.labsuser.app.bases.BaseDialogFragment;
 import com.itesm.labs.labsuser.app.bases.BaseFragment;
 import com.itesm.labs.labsuser.app.bases.BaseFragmentPresenter;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
@@ -52,6 +54,8 @@ import rx.subscriptions.Subscriptions;
                 LoginActivity.class,
                 LabsActivity.class,
                 MainActivity.class,
+                BaseDialogFragment.class,
+                EditUserDialog.class,
                 BaseRecyclerAdapter.class,
                 BaseViewHolder.class,
                 LabsRecyclerAdapter.class,

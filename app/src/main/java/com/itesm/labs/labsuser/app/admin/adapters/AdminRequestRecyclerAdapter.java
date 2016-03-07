@@ -27,10 +27,6 @@ public class AdminRequestRecyclerAdapter extends BaseRecyclerAdapter<ItemUserCar
         holder.bindData(DATA.get(position));
         holder.itemView.setOnClickListener(v ->
                 mEventBus.post(new ItemClickEvent<>(DATA.get(position))));
-        holder.itemView.setOnLongClickListener(v -> {
-            mEventBus.post(new ItemLongClickEvent<>(DATA.get(position)));
-            return true;
-        });
     }
 
     @Override
@@ -66,7 +62,6 @@ public class AdminRequestRecyclerAdapter extends BaseRecyclerAdapter<ItemUserCar
                 requestItemImage.setImageResource(R.drawable.ic_done_white);
                 requestItemImage.setBackground(ContextCompat.getDrawable(mContext, R.drawable.request_indicator_done));
             } else {
-
                 requestItemImage.setImageResource(R.drawable.ic_cancel_white);
                 requestItemImage.setBackground(ContextCompat.getDrawable(mContext, R.drawable.request_indicator_pending));
             }

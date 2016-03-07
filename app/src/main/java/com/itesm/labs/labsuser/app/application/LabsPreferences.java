@@ -34,6 +34,7 @@ public class LabsPreferences {
     public static final String PREFERENCES_KEY_USER_ID_CREDENTIAL = "id_credential";
     public static final String PREFERENCES_KEY_USER_MAIL = "mail";
     public static final String PREFERENCES_KEY_USER_ALLOWED_LABS = "allowed_labs";
+    public static final String PREFERENCES_KEY_USER_IS_ADMIN = "is_admin";
     public static final String PREFERENCES_KEY_USER_IS_LOGGED = "is_logged";
     public static final String PREFERENCES_KEY_USER_REMEMBER_INFO = "remember_info";
 
@@ -59,7 +60,8 @@ public class LabsPreferences {
                 .setUserId(mSharedPreferences.getString(PREFERENCES_KEY_USER_ID, null))
                 .setUserCareer(mSharedPreferences.getString(PREFERENCES_KEY_USER_CAREER, null))
                 .setUserUid(mSharedPreferences.getLong(PREFERENCES_KEY_USER_ID_CREDENTIAL, -1))
-                .setUserMail(mSharedPreferences.getString(PREFERENCES_KEY_USER_MAIL, null));
+                .setUserMail(mSharedPreferences.getString(PREFERENCES_KEY_USER_MAIL, null))
+                .setIsAdmin(mSharedPreferences.getBoolean(PREFERENCES_KEY_USER_IS_ADMIN, false));
 
         ArrayList<String> labs = new ArrayList<>();
         Set<String> list = mSharedPreferences.getStringSet(PREFERENCES_KEY_USER_ALLOWED_LABS, null);
@@ -82,7 +84,8 @@ public class LabsPreferences {
                 .putString(PREFERENCES_KEY_USER_CAREER, user.getUserCareer())
                 .putLong(PREFERENCES_KEY_USER_ID_CREDENTIAL, user.getUserUid())
                 .putString(PREFERENCES_KEY_USER_MAIL, user.getUserMail())
-                .putStringSet(PREFERENCES_KEY_USER_ALLOWED_LABS, user.getAllowedLabs().isEmpty() ? new HashSet<String>() : new HashSet<>(user.getAllowedLabs()))
+                .putStringSet(PREFERENCES_KEY_USER_ALLOWED_LABS, user.getAllowedLabs().isEmpty() ? new HashSet<>() : new HashSet<>(user.getAllowedLabs()))
+                .putBoolean(PREFERENCES_KEY_USER_IS_ADMIN, user.isAdmin())
                 .apply();
     }
 
@@ -107,7 +110,8 @@ public class LabsPreferences {
     }
 
     public void putToken(String token) {
-        mSharedPreferences.edit().putString(PREFERENCES_KEY_USER_TOKEN, token).apply();
+        String formattedToken = "Token " + token;
+        mSharedPreferences.edit().putString(PREFERENCES_KEY_USER_TOKEN, formattedToken).apply();
     }
 
     public String getUserName() {
@@ -166,6 +170,14 @@ public class LabsPreferences {
 
     public void putUserAllowedLabs(Set<String> labs) {
         mSharedPreferences.edit().putStringSet(PREFERENCES_KEY_USER_ALLOWED_LABS, labs).apply();
+    }
+
+    public boolean getIsAdmin() {
+        return mSharedPreferences.getBoolean(PREFERENCES_KEY_USER_IS_ADMIN, false);
+    }
+
+    public void putIsAdmin(boolean isAdmin) {
+        mSharedPreferences.edit().putBoolean(PREFERENCES_KEY_USER_IS_ADMIN, isAdmin).apply();
     }
 
     public boolean getIsLogged() {

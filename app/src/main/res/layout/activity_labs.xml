@@ -25,8 +25,7 @@
             android:id="@+id/labs_grid"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:gravity="center_horizontal"/>
-
+            android:gravity="center_horizontal" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

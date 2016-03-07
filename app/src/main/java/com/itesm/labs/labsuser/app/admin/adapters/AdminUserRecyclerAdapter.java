@@ -29,7 +29,7 @@ public class AdminUserRecyclerAdapter extends BaseRecyclerAdapter<User, AdminUse
         super();
 
         mColors = mContext.getResources().getIntArray(R.array.material_colors);
-        mRandom = new Random(mColors.length - 1);
+        mRandom = new Random();
     }
 
     @Override
@@ -71,7 +71,7 @@ public class AdminUserRecyclerAdapter extends BaseRecyclerAdapter<User, AdminUse
 
         @Override
         public void bindData(User holderItem) {
-            mUserInitial.setText(holderItem.getUserName().charAt(0));
+            mUserInitial.setText("" + holderItem.getUserName().charAt(0));
             mUserName.setText(holderItem.getUserFullName());
             mUserExtra.setText(String.format(
                     mContext.getString(R.string.user_list_item_extra),
@@ -79,7 +79,7 @@ public class AdminUserRecyclerAdapter extends BaseRecyclerAdapter<User, AdminUse
                     holderItem.getUserId()));
 
             GradientDrawable gradientDrawable = (GradientDrawable) mUserInitial.getBackground();
-            gradientDrawable.setColor(mColors[mRandom.nextInt()]);
+            gradientDrawable.setColor(mColors[mRandom.nextInt(mColors.length-1)]);
         }
     }
 }

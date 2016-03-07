@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.itesm.labs.labsuser.R;
-import com.itesm.labs.labsuser.app.admin.adapters.models.ItemRequestDetail;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
+import com.mgb.labsapi.models.CartItem;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
 /**
  * Created by mgradob on 12/27/15.
  */
-public class AdminRequestDetailRecyclerAdapter extends BaseRecyclerAdapter<ItemRequestDetail, AdminRequestDetailRecyclerAdapter.ViewHolder> {
+public class AdminRequestDetailRecyclerAdapter extends BaseRecyclerAdapter<CartItem, AdminRequestDetailRecyclerAdapter.ViewHolder> {
 
     public AdminRequestDetailRecyclerAdapter() {
         super();
@@ -47,9 +47,9 @@ public class AdminRequestDetailRecyclerAdapter extends BaseRecyclerAdapter<ItemR
             ButterKnife.bind(this, itemView);
         }
 
-        public void bindData(ItemRequestDetail holderItem) {
-            mComponentName.setText(holderItem.getComponentName());
-            mComponentTotal.setText(holderItem.getCartItem().getQuantity());
+        public void bindData(CartItem holderItem) {
+            mComponentName.setText("" + holderItem.getComponentId());
+            mComponentTotal.setText(String.format(mContext.getString(R.string.request_item_list_item_quantity), holderItem.getQuantity()));
         }
     }
 }

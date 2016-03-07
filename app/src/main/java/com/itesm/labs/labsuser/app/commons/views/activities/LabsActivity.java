@@ -2,11 +2,15 @@ package com.itesm.labs.labsuser.app.commons.views.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.BottomSheetDialog;
+import android.support.design.widget.BottomSheetDialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.itesm.labs.labsuser.R;
+import com.itesm.labs.labsuser.app.admin.views.dialogs.EditUserDialog;
 import com.itesm.labs.labsuser.app.bases.BaseActivity;
 import com.itesm.labs.labsuser.app.commons.adapters.LabsRecyclerAdapter;
 import com.itesm.labs.labsuser.app.commons.adapters.models.ItemLaboratory;
@@ -127,7 +131,9 @@ public class LabsActivity extends BaseActivity {
 
     @Subscribe
     public void onItemLongClickEvent(ItemLongClickEvent event) {
-
+        FragmentManager fm = getSupportFragmentManager();
+        EditUserDialog dialog = new EditUserDialog();
+        dialog.show(fm, "test");
     }
 
     @Override

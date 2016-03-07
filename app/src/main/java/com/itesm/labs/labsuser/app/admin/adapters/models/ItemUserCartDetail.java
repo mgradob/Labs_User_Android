@@ -5,16 +5,16 @@ import com.mgb.labsapi.models.CartItem;
 /**
  * Created by mgradob on 1/1/16.
  */
-public class ItemRequestDetail {
+public class ItemUserCartDetail {
 
     private String categoryName;
     private String componentName;
     private CartItem cartItem;
 
-    public ItemRequestDetail() {
+    public ItemUserCartDetail() {
     }
 
-    public ItemRequestDetail(Builder builder) {
+    public ItemUserCartDetail(Builder builder) {
         this.categoryName = builder.categoryName;
         this.componentName = builder.componentName;
         this.cartItem = builder.cartItem;
@@ -52,8 +52,8 @@ public class ItemRequestDetail {
             return this;
         }
 
-        public ItemRequestDetail build() {
-            return new ItemRequestDetail(this);
+        public ItemUserCartDetail build() {
+            return new ItemUserCartDetail(this);
         }
     }
 }

@@ -140,26 +140,32 @@ public class InventoryFragment extends BaseFragment {
     public void onCategoryItemClickEvent(ItemClickEvent<ItemCategory> event) {
         if (event == null) return;
 
-        mPresenter.setSelectedCategory(event.getItem());
-        mFragmentState = FragmentState.ITEMS_DETAILS;
+        if(event.getItem() instanceof ItemCategory) {
+            mPresenter.setSelectedCategory(event.getItem());
+            mFragmentState = FragmentState.ITEMS_DETAILS;
 
-        setupUi();
+            setupUi();
 
-        mPresenter.getCategoryDetail();
+            mPresenter.getCategoryDetail();
+        }
     }
 
     @Subscribe
     public void onCategoryItemLongClickEvent(ItemLongClickEvent<ItemCategory> event) {
         if (event == null) return;
 
-        // TODO: 2/23/16 add edit fragment dialog.
+        if(event.getItem() instanceof ItemCategory) {
+            // TODO: 2/23/16 add edit fragment dialog.
+        }
     }
 
     @Subscribe
     public void onComponentItemLongClickEvent(ItemLongClickEvent<Component> event) {
         if (event == null) return;
 
-        // TODO: 2/23/16 add edit fragment dialog.
+        if(event.getItem() instanceof Component) {
+            // TODO: 2/23/16 add edit fragment dialog.
+        }
     }
     //endregion
 }

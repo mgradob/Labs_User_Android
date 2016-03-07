@@ -5,9 +5,14 @@ import android.util.Log;
 import com.itesm.labs.labsuser.app.admin.adapters.models.ItemUserCart;
 import com.itesm.labs.labsuser.app.admin.views.fragments.RequestsFragment;
 import com.itesm.labs.labsuser.app.bases.BaseFragmentPresenter;
+import com.itesm.labs.labsuser.app.commons.utils.DateTimeUtil;
 import com.mgb.labsapi.clients.CartClient;
+import com.mgb.labsapi.clients.CategoryClient;
+import com.mgb.labsapi.clients.ComponentClient;
+import com.mgb.labsapi.clients.HistoryClient;
 import com.mgb.labsapi.clients.UserClient;
 import com.mgb.labsapi.models.CartItem;
+import com.mgb.labsapi.models.History;
 import com.mgb.labsapi.models.User;
 
 import java.util.ArrayList;
@@ -15,8 +20,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import retrofit.client.Response;
 import rx.Observable;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -31,6 +38,12 @@ public class RequestsFragmentPresenter extends BaseFragmentPresenter {
     CartClient mCartClient;
     @Inject
     UserClient mUserClient;
+    @Inject
+    CategoryClient mCategoryClient;
+    @Inject
+    ComponentClient mComponentClient;
+    @Inject
+    HistoryClient mHistoryClient;
 
     private RequestsFragment mView;
 
@@ -38,7 +51,7 @@ public class RequestsFragmentPresenter extends BaseFragmentPresenter {
 
     private User mValidateUser;
 
-    private List<ItemUserCart> userCartsList = new ArrayList<>();
+    private List<ItemUserCart> usersCartsList = new ArrayList<>();
     private List<CartItem> cartItemsList = new ArrayList<>();
 
     public RequestsFragmentPresenter(RequestsFragment view) {
@@ -104,7 +117,7 @@ public class RequestsFragmentPresenter extends BaseFragmentPresenter {
                     public void onCompleted() {
                         Log.d(TAG, "Get carts task finished");
 
-                        mView.updateAll(userCartsList);
+                        mView.updateAll(usersCartsList);
                     }
 
                     @Override
@@ -114,7 +127,7 @@ public class RequestsFragmentPresenter extends BaseFragmentPresenter {
 
                     @Override
                     public void onNext(ArrayList<ItemUserCart> itemUserCarts) {
-                        userCartsList = itemUserCarts;
+                        usersCartsList = itemUserCarts;
                     }
                 });
     }
@@ -125,8 +138,7 @@ public class RequestsFragmentPresenter extends BaseFragmentPresenter {
     public void getRequestDetail() {
         mSubscription.unsubscribe();
         mSubscription = Observable.zip(
-                mCartClient.getCartItemsOf(mLabsPreferences.getToken(),
-                        mLabsPreferences.getCurrentLab().getLink(), selectedUserId),
+                mCartClient.getCartItemsOf(mLabsPreferences.getToken(), mLabsPreferences.getCurrentLab().getLink(), selectedUserId),
                 mUserClient.getUser(mLabsPreferences.getToken(), selectedUserId),
                 (cartItems, user) -> {
                     mValidateUser = user;
@@ -162,18 +174,75 @@ public class RequestsFragmentPresenter extends BaseFragmentPresenter {
     }
 
     /**
+     * Ready the user cart.
+     */
+    public void readyUserCart() {
+        mSubscription.unsubscribe();
+        mSubscription = Observable.from(cartItemsList)
+                .map(cartItem -> {
+                    cartItem.setReady(true);
+                    return cartItem;
+                })
+                .map(cartItem1 -> mCartClient.editCartItem(
+                                mLabsPreferences.getToken(),
+                                mLabsPreferences.getCurrentLab().getLink(),
+                                cartItem1.getCartId(),
+                                cartItem1
+                        )
+                                .subscribe()
+                )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Subscription>() {
+                    @Override
+                    public void onStart() {
+                        Log.d(TAG, "Task validate cart started");
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                        Log.d(TAG, "Task validate cart completed");
+
+                        mView.showValidationSuccess();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "Task validate cart error: " + e.getMessage());
+
+                        mView.showValidationError();
+                    }
+
+                    @Override
+                    public void onNext(Subscription subscription) {
+
+                    }
+                });
+    }
+
+    /**
      * Updates the user cart (validates it).
      */
     public void updateUserCart(long UID, boolean force) {
         if (!force) {
             if (UID != mValidateUser.getUserUid()) mView.showError();
+            return;
         }
 
         mSubscription.unsubscribe();
         mSubscription = Observable.from(cartItemsList)
-                .doOnNext(cartItem -> mCartClient.editCartItem(mLabsPreferences.getToken(),
-                                mLabsPreferences.getCurrentLab().getLink(), cartItem.getCartId(), cartItem)
-                )
+                .map(cartItem -> {
+                    History.Builder builder = new History.Builder()
+                            .setStudentId(cartItem.getStudentId())
+                            .setComponentId(cartItem.getComponentId())
+                            .setQuantity(cartItem.getQuantity())
+                            .setDateOut(DateTimeUtil.getCurrentDateTimeUtc())
+                            .setDateIn("");
+                    mHistoryClient.postHistoryItem(mLabsPreferences.getToken(), mLabsPreferences.getCurrentLab().getLink(), builder.build())
+                            .doOnNext(response -> mCartClient.deleteCartItem(mLabsPreferences.getToken(), mLabsPreferences.getCurrentLab().getLink(), cartItem.getCartId()))
+                            .subscribe();
+                    return cartItem;
+                })
                 .toList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -188,7 +257,6 @@ public class RequestsFragmentPresenter extends BaseFragmentPresenter {
                         Log.d(TAG, "Task validate cart completed");
 
                         mView.showValidationSuccess();
-                        mView.updateDetails(cartItemsList);
                     }
 
                     @Override
@@ -200,7 +268,7 @@ public class RequestsFragmentPresenter extends BaseFragmentPresenter {
 
                     @Override
                     public void onNext(List<CartItem> cartItems) {
-                        cartItemsList = cartItems;
+
                     }
                 });
     }

@@ -50,7 +50,8 @@ public class LabsActivityPresenter extends BaseActivityPresenter {
 
     //region Api calls
     public void getAllowedLabs() {
-        mLaboratoryClient.getLaboratories(mLabsPreferences.getToken())
+        mSubscription.unsubscribe();
+        mSubscription = mLaboratoryClient.getLaboratories(mLabsPreferences.getToken())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<ArrayList<Laboratory>>() {

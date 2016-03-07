@@ -46,6 +46,13 @@ public class LoginActivity extends BaseActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        loginBtn.setEnabled(true);
+    }
+
+    @Override
     public void setupUi() {
         userMat.setText(mLabsPreferences.getUserId());
         userPass.setText(mLabsPreferences.getUserPass());

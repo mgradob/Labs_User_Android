@@ -20,6 +20,6 @@ public interface LaboratoryClient {
     Observable<ArrayList<Laboratory>> getLaboratories(@Header(ApiConstants.AUTHORIZATION) String token);
 
     @GET("/labs/{lab_name}")
-    Observable<Laboratory> getLaboratoryFromUrl(@Header(ApiConstants.AUTHORIZATION) String token,
+    Observable<Laboratory> getLaboratoryFromName(@Header(ApiConstants.AUTHORIZATION) String token,
                                                 @Path(ApiConstants.LAB_NAME) String labName);
 }

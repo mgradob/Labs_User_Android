@@ -22,6 +22,7 @@ import com.itesm.labs.labsuser.app.commons.events.BackPressedEvent;
 import com.itesm.labs.labsuser.app.commons.events.ItemClickEvent;
 import com.itesm.labs.labsuser.app.commons.events.UIDEvent;
 import com.itesm.labs.labsuser.app.commons.utils.FragmentState;
+import com.mgb.labsapi.models.CartItem;
 import com.squareup.otto.Subscribe;
 
 import java.util.List;
@@ -149,12 +150,21 @@ public class RequestsFragment extends BaseFragment {
     //region UI update
     @Override
     public void updateAll(List list) {
+        mSwipeRefreshLayout.setRefreshing(false);
+
         mAdapter.refresh(list);
     }
 
     @Override
     public void updateDetails(List list) {
+        mSwipeRefreshLayout.setRefreshing(false);
+
         mAdapter.refresh(list);
+
+        if(((CartItem) list.get(0)).isReady())
+            mFab.setImageResource(R.drawable.ic_done_white);
+        else
+            mFab.setImageResource(R.drawable.ic_cart_white);
     }
 
     @Override
@@ -197,12 +207,16 @@ public class RequestsFragment extends BaseFragment {
 
     @Subscribe
     public void onItemClickEvent(ItemClickEvent<ItemUserCart> event) {
-        mPresenter.setSelectedUserId(event.getItem().getUserId());
-        mFragmentState = FragmentState.ITEMS_DETAILS;
+        if(event == null) return;
 
-        setupUi();
+        if(event.getItem() instanceof ItemUserCart) {
+            mPresenter.setSelectedUserId(event.getItem().getUserId());
+            mFragmentState = FragmentState.ITEMS_DETAILS;
 
-        mPresenter.getRequestDetail();
+            setupUi();
+
+            mPresenter.getRequestDetail();
+        }
     }
     //endregion
 }

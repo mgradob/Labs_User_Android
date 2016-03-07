@@ -25,6 +25,8 @@ public class User {
     private String userMail;
     @SerializedName("labs")
     private ArrayList<String> allowedLabs;
+    @SerializedName("is_admin")
+    private boolean isAdmin;
 
     public User(Builder builder) {
         this.userName = builder.userName;
@@ -35,7 +37,7 @@ public class User {
         this.userUid = builder.userUid;
         this.userMail = builder.userMail;
         this.allowedLabs = builder.allowedLabs;
-
+        this.isAdmin = builder.isAdmin;
     }
 
     public String getUserName() {
@@ -74,6 +76,10 @@ public class User {
         return allowedLabs;
     }
 
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -85,6 +91,7 @@ public class User {
                 ", userUid=" + userUid +
                 ", userMail='" + userMail + '\'' +
                 ", allowedLabs=" + allowedLabs +
+                ", isAdmin=" + isAdmin +
                 '}';
     }
 
@@ -97,6 +104,7 @@ public class User {
         private long userUid;
         private String userMail;
         private ArrayList<String> allowedLabs;
+        private boolean isAdmin;
 
         public Builder setUserName(String userName) {
             this.userName = userName;
@@ -135,6 +143,11 @@ public class User {
 
         public Builder setAllowedLabs(ArrayList<String> allowedLabs) {
             this.allowedLabs = allowedLabs;
+            return this;
+        }
+
+        public Builder setIsAdmin(boolean isAdmin){
+            this.isAdmin = isAdmin;
             return this;
         }
 

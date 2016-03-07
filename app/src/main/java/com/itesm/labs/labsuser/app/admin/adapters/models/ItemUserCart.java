@@ -20,6 +20,7 @@ public class ItemUserCart {
         this.userId = builder.userId;
         this.cartDate = builder.cartDate;
         this.cartList = builder.cartList;
+        this.ready = builder.ready;
     }
 
     public String getUserName() {
