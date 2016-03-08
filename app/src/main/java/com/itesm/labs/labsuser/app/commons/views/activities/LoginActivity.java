@@ -4,6 +4,7 @@ package com.itesm.labs.labsuser.app.commons.views.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -82,9 +83,9 @@ public class LoginActivity extends BaseActivity {
     }
 
     public void goToLabsView() {
+        Log.d(TAG, "Going to labs view");
         Intent intent = new Intent(mContext, LabsActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_from_top, R.anim.abc_slide_in_bottom);
     }
 
     public void displayLoginError() {

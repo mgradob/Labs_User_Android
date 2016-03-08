@@ -67,7 +67,7 @@ public class UsersDetailPresenter extends BaseFragmentPresenter {
                                 builder.setComponentNote(component.getNote());
 
                                 for (Category category : categories) {
-                                    if (category.getId() == component.getId()) {
+                                    if (category.getId() == component.getCategory()) {
                                         builder.setCategoryName(category.getName());
                                     }
                                 }

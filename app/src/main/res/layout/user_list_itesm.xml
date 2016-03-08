@@ -1,26 +1,28 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="60dp"
     android:background="@drawable/ripple_user_list_item"
-    android:padding="16dp">
+    android:gravity="center_vertical">
 
     <TextView
         android:id="@+id/user_item_user_initial"
         style="@style/LabsTheme.v21.Light.Text.Display1"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
         android:background="@drawable/rounded_letter"
+        android:layout_marginLeft="16dp"
         android:gravity="center"
+        android:textSize="16sp"
         tools:text="R" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="56dp"
-        android:layout_toRightOf="@id/user_item_user_initial"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        android:paddingLeft="32dp">
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
 
         <TextView
             android:id="@+id/user_item_user_name"
@@ -29,14 +31,11 @@
             android:layout_height="wrap_content"
             tools:text="Rodrigo Rodriguez Rodriguez" />
 
-
         <TextView
             android:id="@+id/user_item_user_extra"
             style="@style/LabsTheme.v21.Text.Body1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             tools:text="IMT\t\tA01234567" />
-
     </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>
