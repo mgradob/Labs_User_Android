@@ -1,6 +1,5 @@
 package com.itesm.labs.labsuser.app.commons.views.activities;
 
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -26,7 +25,6 @@ public class MainActivity extends BaseActivity {
     @Bind(R.id.activity_main_tabs)
     TabLayout mTabLayout;
 
-    //region Stock
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,13 +45,6 @@ public class MainActivity extends BaseActivity {
         setupTabLayout(mLabsPreferences.getLabColor());
     }
 
-    @Override
-    public void onBackPressed() {
-        mEventBus.post(new BackPressedEvent());
-    }
-    //endregion
-
-    //region Activity setup
     private void setupToolbar(int colorRes, String title) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             mToolbar.setBackgroundColor(colorRes);
@@ -67,15 +58,14 @@ public class MainActivity extends BaseActivity {
         mTabLayout.setupWithViewPager(mPager);
         mTabLayout.setBackgroundColor(colorRes);
     }
-    //endregion
 
-    //region Event Bus
     @Override
     public void onShowDialogEvent(ShowDialogEvent event) {
+
     }
 
     @Override
     public void onDismissDialogEvent(DismissDialogEvent event) {
+
     }
-    //endregion
 }

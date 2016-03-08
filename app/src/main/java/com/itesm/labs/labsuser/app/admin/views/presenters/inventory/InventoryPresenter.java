@@ -1,10 +1,10 @@
-package com.itesm.labs.labsuser.app.admin.views.presenters;
+package com.itesm.labs.labsuser.app.admin.views.presenters.inventory;
 
 import android.util.Log;
 
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.admin.adapters.models.ItemCategory;
-import com.itesm.labs.labsuser.app.admin.views.fragments.InventoryFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.inventory.InventoryFragment;
 import com.itesm.labs.labsuser.app.bases.BaseFragmentPresenter;
 import com.mgb.labsapi.clients.CategoryClient;
 import com.mgb.labsapi.clients.ComponentClient;
@@ -22,35 +22,25 @@ import rx.schedulers.Schedulers;
 /**
  * Created by mgradob on 2/19/16.
  */
-public class InventoryFragmentPresenter extends BaseFragmentPresenter {
+public class InventoryPresenter extends BaseFragmentPresenter {
 
-    private final String TAG = InventoryFragmentPresenter.class.getSimpleName();
+    private final String TAG = InventoryPresenter.class.getSimpleName();
 
     @Inject
     CategoryClient mCategoryClient;
-    @Inject
-    ComponentClient mComponentClient;
 
     private InventoryFragment mView;
 
     private ArrayList<ItemCategory> mCategoriesData = new ArrayList<>();
-    private ArrayList<Component> mComponentsData = new ArrayList<>();
 
-    private int selectedCategory;
-
-    public InventoryFragmentPresenter(InventoryFragment view) {
+    public InventoryPresenter(InventoryFragment view) {
         super();
         this.mView = view;
     }
 
-    //region UI
-    public void setSelectedCategory(ItemCategory selectedCategory) {
-        this.selectedCategory = selectedCategory.getId();
-    }
-    //endregion
-
-    //region API calls.
     public void getCategoriesInfo() {
+        mCategoriesData.clear();
+
         mSubscription.unsubscribe();
         mSubscription = mCategoryClient.getCategories(mLabsPreferences.getToken(), mLabsPreferences.getCurrentLab().getLink())
                 .flatMap(categories -> Observable.from(categories))
@@ -75,7 +65,7 @@ public class InventoryFragmentPresenter extends BaseFragmentPresenter {
                     public void onCompleted() {
                         Log.d(TAG, "Task get categories completed");
 
-                        mView.updateAll(mCategoriesData);
+                        mView.updateInfo(mCategoriesData);
                     }
 
                     @Override
@@ -128,40 +118,6 @@ public class InventoryFragmentPresenter extends BaseFragmentPresenter {
                 return R.drawable.transistores;
             default:
                 return R.drawable.ic_career;
-
         }
     }
-
-    public void getCategoryDetail() {
-        mSubscription.unsubscribe();
-        mSubscription = mComponentClient.getComponentsOfCategory(mLabsPreferences.getToken(),
-                mLabsPreferences.getCurrentLab().getLink(), selectedCategory)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ArrayList<Component>>() {
-                    @Override
-                    public void onStart() {
-                        Log.d(TAG, "Task get components started");
-                    }
-
-                    @Override
-                    public void onCompleted() {
-                        Log.d(TAG, "Task get categories completed");
-
-                        mView.updateDetails(mComponentsData);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.d(TAG, "Task get categories error: " + e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(ArrayList<Component> components) {
-                        mComponentsData = components;
-                    }
-                });
-
-    }
-    //endregion
 }

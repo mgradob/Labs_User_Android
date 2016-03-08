@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.itesm.labs.labsuser.R;
+import com.itesm.labs.labsuser.app.admin.adapters.models.ItemUserCart;
+import com.itesm.labs.labsuser.app.admin.adapters.models.ItemUserCartDetail;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.mgb.labsapi.models.CartItem;
 
@@ -16,11 +18,7 @@ import butterknife.ButterKnife;
 /**
  * Created by mgradob on 12/27/15.
  */
-public class AdminRequestDetailRecyclerAdapter extends BaseRecyclerAdapter<CartItem, AdminRequestDetailRecyclerAdapter.ViewHolder> {
-
-    public AdminRequestDetailRecyclerAdapter() {
-        super();
-    }
+public class AdminRequestDetailRecyclerAdapter extends BaseRecyclerAdapter<ItemUserCartDetail, AdminRequestDetailRecyclerAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
@@ -47,9 +45,9 @@ public class AdminRequestDetailRecyclerAdapter extends BaseRecyclerAdapter<CartI
             ButterKnife.bind(this, itemView);
         }
 
-        public void bindData(CartItem holderItem) {
-            mComponentName.setText("" + holderItem.getComponentId());
-            mComponentTotal.setText(String.format(mContext.getString(R.string.request_item_list_item_quantity), holderItem.getQuantity()));
+        public void bindData(ItemUserCartDetail holderItem) {
+            mComponentName.setText("" + holderItem.getCategoryName() + " " + holderItem.getComponentName());
+            mComponentTotal.setText(String.format(mContext.getString(R.string.request_item_list_item_quantity), holderItem.getCartItem().getQuantity()));
         }
     }
 }

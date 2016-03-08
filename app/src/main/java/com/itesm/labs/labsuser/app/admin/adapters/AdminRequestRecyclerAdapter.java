@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.admin.adapters.models.ItemUserCart;
+import com.itesm.labs.labsuser.app.admin.views.fragments.requests.RequestsFragment;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
 import com.itesm.labs.labsuser.app.commons.events.ItemClickEvent;

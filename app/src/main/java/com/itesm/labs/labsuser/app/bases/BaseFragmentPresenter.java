@@ -12,7 +12,7 @@ import rx.Subscription;
 /**
  * Created by mgradob on 2/17/16.
  */
-public abstract class BaseFragmentPresenter {
+public class BaseFragmentPresenter {
 
     @Inject
     public Context mContext;

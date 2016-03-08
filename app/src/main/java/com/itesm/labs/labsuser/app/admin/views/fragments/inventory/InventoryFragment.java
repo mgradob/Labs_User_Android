@@ -1,4 +1,4 @@
-package com.itesm.labs.labsuser.app.admin.views.fragments;
+package com.itesm.labs.labsuser.app.admin.views.fragments.inventory;
 
 
 import android.os.Bundle;
@@ -11,16 +11,14 @@ import android.view.ViewGroup;
 
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminCategoryRecyclerAdapter;
-import com.itesm.labs.labsuser.app.admin.adapters.AdminComponentRecyclerAdapter;
 import com.itesm.labs.labsuser.app.admin.adapters.models.ItemCategory;
-import com.itesm.labs.labsuser.app.admin.views.presenters.InventoryFragmentPresenter;
+import com.itesm.labs.labsuser.app.admin.views.presenters.inventory.InventoryPresenter;
 import com.itesm.labs.labsuser.app.bases.BaseFragment;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
-import com.itesm.labs.labsuser.app.commons.events.BackPressedEvent;
 import com.itesm.labs.labsuser.app.commons.events.ItemClickEvent;
 import com.itesm.labs.labsuser.app.commons.events.ItemLongClickEvent;
-import com.itesm.labs.labsuser.app.commons.utils.FragmentState;
-import com.mgb.labsapi.models.Component;
+import com.itesm.labs.labsuser.app.commons.utils.ErrorType;
+import com.itesm.labs.labsuser.app.commons.utils.IFragmentCallback;
 import com.squareup.otto.Subscribe;
 
 import java.util.List;
@@ -33,17 +31,26 @@ public class InventoryFragment extends BaseFragment {
 
     private final String TAG = InventoryFragment.class.getSimpleName();
 
-    @Bind(R.id.fragment_inventory_all_swipe_layout)
+    @Bind(R.id.fragment_inventory_swipe_layout)
     SwipeRefreshLayout mRefreshLayout;
-    @Bind(R.id.fragment_inventory_all_recycler_view)
+    @Bind(R.id.fragment_inventory_recycler_view)
     RecyclerView mListView;
 
-    private InventoryFragmentPresenter mPresenter;
+    private InventoryPresenter mPresenter;
+    private IFragmentCallback<ItemCategory> mCallback;
 
     private BaseRecyclerAdapter mAdapter;
 
+    // Required empty public constructor
     public InventoryFragment() {
-        // Required empty public constructor
+    }
+
+    public static InventoryFragment newInstance(IFragmentCallback callback) {
+        InventoryFragment fragment = new InventoryFragment();
+
+        fragment.mCallback = callback;
+
+        return fragment;
     }
 
     //region Stock
@@ -53,7 +60,7 @@ public class InventoryFragment extends BaseFragment {
 
         setHasOptionsMenu(true);
 
-        mPresenter = new InventoryFragmentPresenter(this);
+        mPresenter = new InventoryPresenter(this);
     }
 
     @Override
@@ -78,75 +85,49 @@ public class InventoryFragment extends BaseFragment {
     //region UI setup
     @Override
     public void setupUi() {
-        setupCategoriesList();
-        setupRefreshLayout();
+        setupList();
+        setupRefresh();
     }
 
-    private void setupCategoriesList() {
+    @Override
+    public void setupList() {
         mListView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         mListView.setHasFixedSize(true);
 
-        if (mFragmentState == FragmentState.ITEMS_ALL)
-            mAdapter = new AdminCategoryRecyclerAdapter();
-        else if (mFragmentState == FragmentState.ITEMS_DETAILS)
-            mAdapter = new AdminComponentRecyclerAdapter();
+        mAdapter = new AdminCategoryRecyclerAdapter();
 
         mListView.setAdapter(mAdapter);
     }
 
-    private void setupRefreshLayout() {
+    @Override
+    public void setupRefresh() {
         mRefreshLayout.setColorSchemeColors(
                 R.color.material_red,
                 R.color.material_green,
                 R.color.material_blue
         );
 
-        if (mFragmentState == FragmentState.ITEMS_ALL)
-            mRefreshLayout.setOnRefreshListener(() -> mPresenter.getCategoriesInfo());
-        else if (mFragmentState == FragmentState.ITEMS_DETAILS)
-            mRefreshLayout.setOnRefreshListener(() -> mPresenter.getCategoryDetail());
-    }
-    //endregion
-
-    //region UI Update
-    @Override
-    public void updateAll(List list) {
-        mAdapter.refresh(list);
+        mRefreshLayout.setOnRefreshListener(() -> mPresenter.getCategoriesInfo());
     }
 
     @Override
-    public void updateDetails(List list) {
-        mAdapter.refresh(list);
+    public void updateInfo(List data) {
+        mRefreshLayout.setRefreshing(false);
+
+        mAdapter.refresh(data);
     }
 
     @Override
-    public void showError() {
+    public void showError(ErrorType error) {
 
-    }
-    //endregion
-
-    //region Event bus
-    @Subscribe
-    public void onBackPressedEvent(BackPressedEvent event) {
-        if (mFragmentState == FragmentState.ITEMS_ALL) {
-            getActivity().finish();
-        } else if (mFragmentState == FragmentState.ITEMS_DETAILS) {
-            mFragmentState = FragmentState.ITEMS_ALL;
-            setupUi();
-        }
     }
 
     @Subscribe
     public void onCategoryItemClickEvent(ItemClickEvent<ItemCategory> event) {
         if (event == null) return;
 
-        if(event.getItem() instanceof ItemCategory) {
-            mPresenter.setSelectedCategory(event.getItem());
-            mFragmentState = FragmentState.ITEMS_DETAILS;
-
-            setupUi();
-
-            mPresenter.getCategoryDetail();
+        if (event.getItem() instanceof ItemCategory) {
+            mCallback.onListItemClicked(event.getItem());
         }
     }
 
@@ -154,18 +135,8 @@ public class InventoryFragment extends BaseFragment {
     public void onCategoryItemLongClickEvent(ItemLongClickEvent<ItemCategory> event) {
         if (event == null) return;
 
-        if(event.getItem() instanceof ItemCategory) {
+        if (event.getItem() instanceof ItemCategory) {
             // TODO: 2/23/16 add edit fragment dialog.
         }
     }
-
-    @Subscribe
-    public void onComponentItemLongClickEvent(ItemLongClickEvent<Component> event) {
-        if (event == null) return;
-
-        if(event.getItem() instanceof Component) {
-            // TODO: 2/23/16 add edit fragment dialog.
-        }
-    }
-    //endregion
 }

@@ -47,11 +47,10 @@ public class LoginActivityPresenter extends BaseActivityPresenter {
 
         mSubscription.unsubscribe();
         mSubscription = mUserClient.loginUser(new LoginBody.Builder()
-                .setId_student(mLabsPreferences.getUserId())
-                .setPassword(mLabsPreferences.getUserPass()).build())
-                .doOnNext(auth -> {
-                    mLabsPreferences.putToken(auth.getAuthToken());
-                })
+                    .setId_student(mLabsPreferences.getUserId())
+                    .setPassword(mLabsPreferences.getUserPass()).build()
+                )
+                .doOnNext(auth -> mLabsPreferences.putToken(auth.getAuthToken()))
                 .flatMap(auth1 -> mUserClient.getUser(auth1.getAuthToken(), mLabsPreferences.getUserId())
                         .doOnNext(user -> mLabsPreferences.putUser(user)))
                 .subscribeOn(Schedulers.io())

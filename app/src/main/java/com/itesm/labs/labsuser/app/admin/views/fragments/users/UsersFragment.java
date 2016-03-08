@@ -1,4 +1,4 @@
-package com.itesm.labs.labsuser.app.admin.views.fragments;
+package com.itesm.labs.labsuser.app.admin.views.fragments.users;
 
 
 import android.app.Fragment;
@@ -13,13 +13,13 @@ import android.view.ViewGroup;
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminUserDetailRecyclerAdapter;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminUserRecyclerAdapter;
-import com.itesm.labs.labsuser.app.admin.views.presenters.UsersFragmentPresenter;
+import com.itesm.labs.labsuser.app.admin.views.presenters.users.UsersPresenter;
 import com.itesm.labs.labsuser.app.bases.BaseFragment;
-import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
-import com.itesm.labs.labsuser.app.commons.events.BackPressedEvent;
 import com.itesm.labs.labsuser.app.commons.events.ItemClickEvent;
 import com.itesm.labs.labsuser.app.commons.events.ItemLongClickEvent;
+import com.itesm.labs.labsuser.app.commons.utils.ErrorType;
 import com.itesm.labs.labsuser.app.commons.utils.FragmentState;
+import com.itesm.labs.labsuser.app.commons.utils.IFragmentCallback;
 import com.mgb.labsapi.models.User;
 import com.squareup.otto.Subscribe;
 
@@ -40,22 +40,28 @@ public class UsersFragment extends BaseFragment {
     @Bind(R.id.fragment_users_list)
     RecyclerView mListView;
 
-    private UsersFragmentPresenter mPresenter;
+    private UsersPresenter mPresenter;
+    private IFragmentCallback<User> mCallback;
 
-    private BaseRecyclerAdapter mAdapter;
-
+    // Required empty public constructor
     public UsersFragment() {
-        // Required empty public constructor
     }
 
-    //region Stock
+    public static UsersFragment newInstance(IFragmentCallback callback) {
+        UsersFragment fragment = new UsersFragment();
+
+        fragment.mCallback = callback;
+
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setHasOptionsMenu(true);
 
-        mPresenter = new UsersFragmentPresenter(this);
+        mPresenter = new UsersPresenter(this);
     }
 
     @Override
@@ -74,67 +80,45 @@ public class UsersFragment extends BaseFragment {
 
         mPresenter.getUsers();
     }
-    //endregion
 
-    //region UI setup
     @Override
     public void setupUi() {
-        setupUsersList();
-        setupRefreshLayout();
+        setupList();
+        setupRefresh();
     }
 
-    private void setupUsersList() {
+    @Override
+    public void setupList() {
         mListView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         mListView.setHasFixedSize(true);
 
-        if (mFragmentState == FragmentState.ITEMS_ALL)
-            mAdapter = new AdminUserRecyclerAdapter();
-        else if (mFragmentState == FragmentState.ITEMS_DETAILS)
-            mAdapter = new AdminUserDetailRecyclerAdapter();
+        mAdapter = new AdminUserRecyclerAdapter();
 
         mListView.setAdapter(mAdapter);
     }
 
-    private void setupRefreshLayout() {
+    @Override
+    public void setupRefresh() {
         mRefreshLayout.setColorSchemeColors(
                 R.color.material_red,
                 R.color.material_green,
                 R.color.material_blue
         );
 
-        if (mFragmentState == FragmentState.ITEMS_ALL)
-            mRefreshLayout.setOnRefreshListener(() -> mPresenter.getUsers());
-        else if (mFragmentState == FragmentState.ITEMS_DETAILS)
-            mRefreshLayout.setOnRefreshListener(() -> mPresenter.getUserHistory());
-    }
-    //endregion
+        mRefreshLayout.setOnRefreshListener(() -> mPresenter.getUsers());
 
-    //region UI
-    @Override
-    public void updateAll(List list) {
-        mAdapter.refresh(list);
     }
 
     @Override
-    public void updateDetails(List list) {
-        mAdapter.refresh(list);
+    public void updateInfo(List data) {
+        mRefreshLayout.setRefreshing(false);
+
+        mAdapter.refresh(data);
     }
 
     @Override
-    public void showError() {
+    public void showError(ErrorType error) {
 
-    }
-    //endregion
-
-    //region Event bus
-    @Subscribe
-    public void onBackPressedEvent(BackPressedEvent event) {
-        if (mFragmentState == FragmentState.ITEMS_ALL) {
-            getActivity().finish();
-        } else if (mFragmentState == FragmentState.ITEMS_DETAILS) {
-            mFragmentState = FragmentState.ITEMS_ALL;
-            setupUi();
-        }
     }
 
     @Subscribe
@@ -142,12 +126,7 @@ public class UsersFragment extends BaseFragment {
         if (event == null) return;
 
         if(event.getItem() instanceof User) {
-            mPresenter.setSelectedUserId(event.getItem());
-            mFragmentState = FragmentState.ITEMS_DETAILS;
-
-            setupUi();
-
-            mPresenter.getUserHistory();
+            mCallback.onListItemClicked(event.getItem());
         }
     }
 
@@ -159,5 +138,4 @@ public class UsersFragment extends BaseFragment {
             // TODO: 2/23/16 add edit fragment dialog.
         }
     }
-    //endregion
 }

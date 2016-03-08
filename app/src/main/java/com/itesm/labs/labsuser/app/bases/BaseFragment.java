@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.itesm.labs.labsuser.app.application.LabsApp;
-import com.itesm.labs.labsuser.app.commons.utils.FragmentState;
+import com.itesm.labs.labsuser.app.commons.utils.ErrorType;
 import com.squareup.otto.Bus;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public abstract class BaseFragment extends Fragment {
     @Inject
     public Bus mEventBus;
 
-    public FragmentState mFragmentState = FragmentState.ITEMS_ALL;
+    public BaseRecyclerAdapter mAdapter;
 
     private boolean isBusRegistered = false;
 
@@ -44,7 +44,7 @@ public abstract class BaseFragment extends Fragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
 
-        if(hidden) unregisterBus();
+        if (hidden) unregisterBus();
     }
 
     @Override
@@ -54,14 +54,35 @@ public abstract class BaseFragment extends Fragment {
         super.onPause();
     }
 
+    /**
+     * Sets up the UI for the fragment.
+     */
     public abstract void setupUi();
 
-    public abstract void updateAll(List list);
+    /**
+     * Sets up the list of the fragment.
+     */
+    public abstract void setupList();
 
-    public abstract void updateDetails(List list);
+    /**
+     * Sets up the refresh of the list.
+     */
+    public abstract void setupRefresh();
 
-    public abstract void showError();
+    /**
+     * Updates the information of the fragment. Use if fragment contains a list.
+     * @param data the list data to update.
+     */
+    public abstract void updateInfo(List data);
 
+    /**
+     * Display a {@link android.support.design.widget.Snackbar} when an error occurs.
+     */
+    public abstract void showError(ErrorType error);
+
+    /**
+     * Register the fragment to the event bus.
+     */
     private void registerBus() {
         if (!isBusRegistered) {
             mEventBus.register(this);
@@ -69,6 +90,9 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
+    /**
+     * Unregister the fragment from the event bus.
+     */
     private void unregisterBus() {
         if (isBusRegistered) {
             mEventBus.unregister(this);

@@ -1,14 +1,13 @@
-package com.itesm.labs.labsuser.app.admin.views.presenters;
+package com.itesm.labs.labsuser.app.admin.views.presenters.users;
 
 import android.util.Log;
 
 import com.itesm.labs.labsuser.app.admin.adapters.models.ItemHistory;
-import com.itesm.labs.labsuser.app.admin.views.fragments.UsersFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.users.UsersDetailFragment;
 import com.itesm.labs.labsuser.app.bases.BaseFragmentPresenter;
 import com.mgb.labsapi.clients.CategoryClient;
 import com.mgb.labsapi.clients.ComponentClient;
 import com.mgb.labsapi.clients.HistoryClient;
-import com.mgb.labsapi.clients.UserClient;
 import com.mgb.labsapi.models.Category;
 import com.mgb.labsapi.models.Component;
 import com.mgb.labsapi.models.History;
@@ -24,11 +23,11 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * Created by mgradob on 2/20/16.
+ * Created by mgradob on 3/7/16.
  */
-public class UsersFragmentPresenter extends BaseFragmentPresenter {
+public class UsersDetailPresenter extends BaseFragmentPresenter {
 
-    private static final String TAG = UsersFragmentPresenter.class.getSimpleName();
+    private static final String TAG = UsersDetailPresenter.class.getSimpleName();
 
     @Inject
     HistoryClient mHistoryClient;
@@ -36,62 +35,22 @@ public class UsersFragmentPresenter extends BaseFragmentPresenter {
     CategoryClient mCategoryClient;
     @Inject
     ComponentClient mComponentClient;
-    @Inject
-    UserClient mUserClient;
 
-    private UsersFragment mView;
-
-    private ArrayList<User> mUsersList = new ArrayList<>();
+    private UsersDetailFragment mView;
     private ArrayList<ItemHistory> mHistoriesList = new ArrayList<>();
 
-    private String selectedUserId;
+    private User mUser;
 
-    public UsersFragmentPresenter(UsersFragment view) {
+    public UsersDetailPresenter(UsersDetailFragment mView, User user) {
         super();
-        this.mView = view;
+        this.mView = mView;
+        this.mUser = user;
     }
 
-    //region UI
-    public void setSelectedUserId(User selectedUser) {
-        this.selectedUserId = selectedUser.getUserId();
-    }
-    //endregion
-
-    //region API calls.
-    public void getUsers() {
-        mSubscription.unsubscribe();
-        mSubscription = mUserClient.getUsers(mLabsPreferences.getToken())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ArrayList<User>>() {
-                    @Override
-                    public void onStart() {
-                        Log.i(TAG, "Task get users started");
-                    }
-
-                    @Override
-                    public void onCompleted() {
-                        Log.i(TAG, "Task get users completed");
-                        mView.updateAll(mUsersList);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e(TAG, "Task get users error: " + e.getMessage());
-
-                    }
-
-                    @Override
-                    public void onNext(ArrayList<User> users) {
-                        mUsersList = users;
-                    }
-                });
-    }
-
-    public void getUserHistory() {
+    public void getUserDetail() {
         mSubscription.unsubscribe();
         mSubscription = Observable.zip(
-                mHistoryClient.getHistoryOf(mLabsPreferences.getToken(), mLabsPreferences.getCurrentLab().getLink(), selectedUserId),
+                mHistoryClient.getHistoryOf(mLabsPreferences.getToken(), mLabsPreferences.getCurrentLab().getLink(), mUser.getUserId()),
                 mCategoryClient.getCategories(mLabsPreferences.getToken(), mLabsPreferences.getCurrentLab().getLink()),
                 mComponentClient.getAllComponents(mLabsPreferences.getToken(), mLabsPreferences.getCurrentLab().getLink()),
                 (histories, categories, components) -> {
@@ -131,7 +90,7 @@ public class UsersFragmentPresenter extends BaseFragmentPresenter {
                     @Override
                     public void onCompleted() {
                         Log.d(TAG, "Task get histories completed");
-                        mView.updateDetails(mHistoriesList);
+                        mView.updateInfo(mHistoriesList);
                     }
 
                     @Override
@@ -146,5 +105,4 @@ public class UsersFragmentPresenter extends BaseFragmentPresenter {
                     }
                 });
     }
-    //endregion
 }

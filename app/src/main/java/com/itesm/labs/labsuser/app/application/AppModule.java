@@ -11,13 +11,22 @@ import com.itesm.labs.labsuser.app.admin.adapters.AdminSectionPagerAdapter;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminUserDetailRecyclerAdapter;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminUserRecyclerAdapter;
 import com.itesm.labs.labsuser.app.admin.views.dialogs.EditUserDialog;
-import com.itesm.labs.labsuser.app.admin.views.fragments.InventoryFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.inventory.InventoryControllerFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.inventory.InventoryDetailFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.inventory.InventoryFragment;
 import com.itesm.labs.labsuser.app.admin.views.fragments.ReportsFragment;
-import com.itesm.labs.labsuser.app.admin.views.fragments.RequestsFragment;
-import com.itesm.labs.labsuser.app.admin.views.fragments.UsersFragment;
-import com.itesm.labs.labsuser.app.admin.views.presenters.InventoryFragmentPresenter;
-import com.itesm.labs.labsuser.app.admin.views.presenters.RequestsFragmentPresenter;
-import com.itesm.labs.labsuser.app.admin.views.presenters.UsersFragmentPresenter;
+import com.itesm.labs.labsuser.app.admin.views.fragments.requests.RequestsControllerFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.requests.RequestsDetailFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.requests.RequestsFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.users.UsersControllerFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.users.UsersDetailFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.users.UsersFragment;
+import com.itesm.labs.labsuser.app.admin.views.presenters.inventory.InventoryDetailPresenter;
+import com.itesm.labs.labsuser.app.admin.views.presenters.inventory.InventoryPresenter;
+import com.itesm.labs.labsuser.app.admin.views.presenters.requests.RequestsDetailPresenter;
+import com.itesm.labs.labsuser.app.admin.views.presenters.requests.RequestsPresenter;
+import com.itesm.labs.labsuser.app.admin.views.presenters.users.UsersDetailPresenter;
+import com.itesm.labs.labsuser.app.admin.views.presenters.users.UsersPresenter;
 import com.itesm.labs.labsuser.app.bases.BaseActivity;
 import com.itesm.labs.labsuser.app.bases.BaseActivityPresenter;
 import com.itesm.labs.labsuser.app.bases.BaseDialogFragment;
@@ -71,12 +80,21 @@ import rx.subscriptions.Subscriptions;
                 LoginActivityPresenter.class,
                 LabsActivityPresenter.class,
                 MainActivityPresenter.class,
+                RequestsControllerFragment.class,
+                InventoryControllerFragment.class,
+                UsersControllerFragment.class,
                 RequestsFragment.class,
-                RequestsFragmentPresenter.class,
+                RequestsPresenter.class,
+                RequestsDetailFragment.class,
+                RequestsDetailPresenter.class,
                 InventoryFragment.class,
-                InventoryFragmentPresenter.class,
+                InventoryPresenter.class,
+                InventoryDetailFragment.class,
+                InventoryDetailPresenter.class,
                 UsersFragment.class,
-                UsersFragmentPresenter.class,
+                UsersPresenter.class,
+                UsersDetailFragment.class,
+                UsersDetailPresenter.class,
                 ReportsFragment.class
         }
 )
@@ -89,7 +107,6 @@ public class AppModule {
         this.context = app.getApplicationContext();
     }
 
-    //region Global Objects
     @Provides
     @Singleton
     Context providesApplicationContext() {
@@ -118,25 +135,23 @@ public class AppModule {
     Subscription providesSubscription() {
         return Subscriptions.empty();
     }
-    //endregion
 
-    //region Fragments
     @Provides
     @Singleton
-    RequestsFragment providesRequestsFragment() {
-        return new RequestsFragment();
+    RequestsControllerFragment providesRequestsControllerFragment() {
+        return new RequestsControllerFragment();
     }
 
     @Provides
     @Singleton
-    InventoryFragment providesInventoryFragment() {
-        return new InventoryFragment();
+    InventoryControllerFragment providesInventoryControllerFragment() {
+        return new InventoryControllerFragment();
     }
 
     @Provides
     @Singleton
-    UsersFragment providesUsersFragment() {
-        return new UsersFragment();
+    UsersControllerFragment providesUsersControllerFragment() {
+        return new UsersControllerFragment();
     }
 
     @Provides
@@ -144,5 +159,4 @@ public class AppModule {
     ReportsFragment providesReportsFragment() {
         return new ReportsFragment();
     }
-    //endregion
 }
