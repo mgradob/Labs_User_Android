@@ -1,15 +1,14 @@
 package com.itesm.labs.labsuser.app.bases;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.itesm.labs.labsuser.app.application.LabsApp;
 import com.itesm.labs.labsuser.app.application.LabsPreferences;
-import com.itesm.labs.labsuser.app.commons.events.DismissDialogEvent;
-import com.itesm.labs.labsuser.app.commons.events.ShowDialogEvent;
+import com.itesm.labs.labsuser.app.commons.events.DialogDismissEvent;
+import com.itesm.labs.labsuser.app.commons.events.DialogShowEvent;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
@@ -65,10 +64,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     public abstract void setupUi();
 
     @Subscribe
-    public abstract void onShowDialogEvent(ShowDialogEvent event);
+    public abstract void onShowDialogEvent(DialogShowEvent event);
 
     @Subscribe
-    public abstract void onDismissDialogEvent(DismissDialogEvent event);
+    public abstract void onDismissDialogEvent(DialogDismissEvent event);
 
     private void registerBus() {
         if (!isBusRegistered) mEventBus.register(this);

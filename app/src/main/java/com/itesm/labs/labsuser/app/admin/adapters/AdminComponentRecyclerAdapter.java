@@ -25,7 +25,7 @@ public class AdminComponentRecyclerAdapter extends BaseRecyclerAdapter<Component
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        View itemView = inflater.inflate(R.layout.admin_component_list_item, parent, false);
+        View itemView = inflater.inflate(R.layout.list_item_admin_component, parent, false);
         return new ViewHolder(itemView);
     }
 

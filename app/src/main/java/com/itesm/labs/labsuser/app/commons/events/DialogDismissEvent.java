@@ -3,8 +3,8 @@ package com.itesm.labs.labsuser.app.commons.events;
 /**
  * Created by mgradob on 2/21/16.
  */
-public class DismissDialogEvent {
+public class DialogDismissEvent {
 
-    public DismissDialogEvent() {
+    public DialogDismissEvent() {
     }
 }

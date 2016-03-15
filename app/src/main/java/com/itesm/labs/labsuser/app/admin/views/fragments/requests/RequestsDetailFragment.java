@@ -17,6 +17,7 @@ import com.itesm.labs.labsuser.app.admin.adapters.models.ItemUserCart;
 import com.itesm.labs.labsuser.app.admin.adapters.models.ItemUserCartDetail;
 import com.itesm.labs.labsuser.app.admin.views.presenters.requests.RequestsDetailPresenter;
 import com.itesm.labs.labsuser.app.bases.BaseFragment;
+import com.itesm.labs.labsuser.app.commons.events.SnackbarEvent;
 import com.itesm.labs.labsuser.app.commons.events.UIDEvent;
 import com.itesm.labs.labsuser.app.commons.utils.ErrorType;
 import com.mgb.labsapi.models.CartItem;
@@ -156,14 +157,10 @@ public class RequestsDetailFragment extends BaseFragment {
     }
 
     public void showValidationSuccess() {
-        Snackbar.make(getActivity().findViewById(R.id.fragment_requests),
-                R.string.request_item_validate_success, Snackbar.LENGTH_LONG)
-                .show();
+        mEventBus.post(new SnackbarEvent(R.string.request_item_validate_success));
     }
 
     public void showValidationError() {
-        Snackbar.make(getActivity().findViewById(R.id.fragment_requests),
-                R.string.request_item_validate_error, Snackbar.LENGTH_LONG)
-                .show();
+        mEventBus.post(new SnackbarEvent(R.string.request_item_validate_error));
     }
 }

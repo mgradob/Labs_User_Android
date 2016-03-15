@@ -92,9 +92,10 @@
         </android.support.design.widget.TextInputLayout>
 
         <LinearLayout
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/login_user_pass_til"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="8dp"
             android:gravity="center"
             android:orientation="horizontal">
@@ -106,6 +107,13 @@
                 android:layout_height="wrap_content"
                 android:text="@string/login_button"
                 android:textColor="@color/primary" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/login_remember_me"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Remember me" />
 
         </LinearLayout>
 

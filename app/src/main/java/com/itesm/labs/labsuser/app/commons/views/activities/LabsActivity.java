@@ -2,8 +2,6 @@ package com.itesm.labs.labsuser.app.commons.views.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.BottomSheetDialog;
-import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -14,10 +12,10 @@ import com.itesm.labs.labsuser.app.admin.views.dialogs.EditUserDialog;
 import com.itesm.labs.labsuser.app.bases.BaseActivity;
 import com.itesm.labs.labsuser.app.commons.adapters.LabsRecyclerAdapter;
 import com.itesm.labs.labsuser.app.commons.adapters.models.ItemLaboratory;
-import com.itesm.labs.labsuser.app.commons.events.DismissDialogEvent;
+import com.itesm.labs.labsuser.app.commons.events.DialogDismissEvent;
 import com.itesm.labs.labsuser.app.commons.events.ItemClickEvent;
 import com.itesm.labs.labsuser.app.commons.events.ItemLongClickEvent;
-import com.itesm.labs.labsuser.app.commons.events.ShowDialogEvent;
+import com.itesm.labs.labsuser.app.commons.events.DialogShowEvent;
 import com.itesm.labs.labsuser.app.commons.views.presenters.LabsActivityPresenter;
 import com.mgb.labsapi.models.Laboratory;
 import com.squareup.otto.Subscribe;
@@ -137,12 +135,12 @@ public class LabsActivity extends BaseActivity {
     }
 
     @Override
-    public void onShowDialogEvent(ShowDialogEvent event) {
+    public void onShowDialogEvent(DialogShowEvent event) {
 
     }
 
     @Override
-    public void onDismissDialogEvent(DismissDialogEvent event) {
+    public void onDismissDialogEvent(DialogDismissEvent event) {
 
     }
     //endregion

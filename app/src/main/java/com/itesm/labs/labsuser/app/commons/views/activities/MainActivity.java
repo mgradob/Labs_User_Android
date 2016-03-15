@@ -2,6 +2,7 @@ package com.itesm.labs.labsuser.app.commons.views.activities;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
@@ -9,9 +10,10 @@ import android.support.v7.widget.Toolbar;
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminSectionPagerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseActivity;
-import com.itesm.labs.labsuser.app.commons.events.BackPressedEvent;
-import com.itesm.labs.labsuser.app.commons.events.DismissDialogEvent;
-import com.itesm.labs.labsuser.app.commons.events.ShowDialogEvent;
+import com.itesm.labs.labsuser.app.commons.events.DialogDismissEvent;
+import com.itesm.labs.labsuser.app.commons.events.DialogShowEvent;
+import com.itesm.labs.labsuser.app.commons.events.SnackbarEvent;
+import com.squareup.otto.Subscribe;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -60,12 +62,19 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    public void onShowDialogEvent(ShowDialogEvent event) {
+    public void onShowDialogEvent(DialogShowEvent event) {
 
     }
 
     @Override
-    public void onDismissDialogEvent(DismissDialogEvent event) {
+    public void onDismissDialogEvent(DialogDismissEvent event) {
 
+    }
+
+    @Subscribe
+    public void onSnackbarEvent(SnackbarEvent event) {
+        if (event != null)
+            Snackbar.make(findViewById(R.id.activity_main), event.getBodyRes(), Snackbar.LENGTH_LONG)
+                    .show();
     }
 }

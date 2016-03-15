@@ -35,7 +35,7 @@ public class AdminUserRecyclerAdapter extends BaseRecyclerAdapter<User, AdminUse
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        View view = inflater.inflate(R.layout.user_list_itesm, parent, false);
+        View view = inflater.inflate(R.layout.list_itesm_user, parent, false);
         return new ViewHolder(view);
     }
 

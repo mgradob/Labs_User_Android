@@ -24,7 +24,7 @@ public class AdminCategoryRecyclerAdapter extends BaseRecyclerAdapter<ItemCatego
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        View view = inflater.inflate(R.layout.category_list_item, parent, false);
+        View view = inflater.inflate(R.layout.list_item_category, parent, false);
         return new ViewHolder(view);
     }
 

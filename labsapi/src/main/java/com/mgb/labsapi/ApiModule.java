@@ -8,6 +8,7 @@ import com.mgb.labsapi.clients.ComponentClient;
 import com.mgb.labsapi.clients.HistoryClient;
 import com.mgb.labsapi.clients.LaboratoryClient;
 import com.mgb.labsapi.clients.UserClient;
+import com.mgb.labsapi.models.LabsRequestInterceptor;
 
 import javax.inject.Singleton;
 
@@ -49,6 +50,7 @@ public class ApiModule {
                 .setConverter(new GsonConverter(gson))
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setErrorHandler(new LabsErrorHandler())
+                .setRequestInterceptor(new LabsRequestInterceptor())
                 .build();
     }
 

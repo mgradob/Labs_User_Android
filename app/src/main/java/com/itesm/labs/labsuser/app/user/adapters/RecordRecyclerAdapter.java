@@ -28,7 +28,7 @@
 //    @Override
 //    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 //        LayoutInflater inflater = LayoutInflater.from(mContext);
-//        View view = inflater.inflate(R.layout.record_list_item, parent, false);
+//        View view = inflater.inflate(R.layout.list_item_record, parent, false);
 //        return new ViewHolder(view);
 //    }
 //

@@ -9,6 +9,6 @@ import org.joda.time.DateTimeZone;
 public class DateTimeUtil {
 
     public static String getCurrentDateTimeUtc() {
-        return new DateTime(DateTimeZone.UTC).toString();
+        return new DateTime().toDateTimeISO().toString();
     }
 }

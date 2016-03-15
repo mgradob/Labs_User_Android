@@ -77,7 +77,7 @@ public class LoginActivityPresenter extends BaseActivityPresenter {
 
                     @Override
                     public void onNext(User user) {
-
+                        if(!user.isAdmin()) throw new SecurityException("User is not admin");
                     }
                 });
     }

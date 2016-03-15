@@ -11,14 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.itesm.labs.labsuser.R;
-import com.itesm.labs.labsuser.app.admin.adapters.AdminUserDetailRecyclerAdapter;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminUserRecyclerAdapter;
 import com.itesm.labs.labsuser.app.admin.views.presenters.users.UsersPresenter;
 import com.itesm.labs.labsuser.app.bases.BaseFragment;
 import com.itesm.labs.labsuser.app.commons.events.ItemClickEvent;
 import com.itesm.labs.labsuser.app.commons.events.ItemLongClickEvent;
 import com.itesm.labs.labsuser.app.commons.utils.ErrorType;
-import com.itesm.labs.labsuser.app.commons.utils.FragmentState;
 import com.itesm.labs.labsuser.app.commons.utils.IFragmentCallback;
 import com.mgb.labsapi.models.User;
 import com.squareup.otto.Subscribe;
@@ -125,7 +123,7 @@ public class UsersFragment extends BaseFragment {
     public void onItemClickEvent(ItemClickEvent<User> event) {
         if (event == null) return;
 
-        if(event.getItem() instanceof User) {
+        if (event.getItem() instanceof User) {
             mCallback.onListItemClicked(event.getItem());
         }
     }
@@ -134,7 +132,7 @@ public class UsersFragment extends BaseFragment {
     public void onItemLongClickEvent(ItemLongClickEvent<User> event) {
         if (event == null) return;
 
-        if(event.getItem() instanceof User) {
+        if (event.getItem() instanceof User) {
             // TODO: 2/23/16 add edit fragment dialog.
         }
     }

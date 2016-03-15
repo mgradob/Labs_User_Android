@@ -4,14 +4,15 @@ package com.itesm.labs.labsuser.app.commons.views.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.bases.BaseActivity;
-import com.itesm.labs.labsuser.app.commons.events.DismissDialogEvent;
-import com.itesm.labs.labsuser.app.commons.events.ShowDialogEvent;
+import com.itesm.labs.labsuser.app.commons.events.DialogDismissEvent;
+import com.itesm.labs.labsuser.app.commons.events.DialogShowEvent;
 import com.itesm.labs.labsuser.app.commons.views.presenters.LoginActivityPresenter;
 
 import butterknife.Bind;
@@ -31,13 +32,16 @@ public class LoginActivity extends BaseActivity {
     EditText userMat;
     @Bind(R.id.login_user_pass)
     EditText userPass;
+    @Bind(R.id.login_remember_me)
+    AppCompatCheckBox loginRememberMe;
+
 
     private LoginActivityPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.admin_activity_login);
+        setContentView(R.layout.activity_login);
 
         ButterKnife.bind(this);
 
@@ -55,15 +59,20 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void setupUi() {
-        userMat.setText(mLabsPreferences.getUserId());
-        userPass.setText(mLabsPreferences.getUserPass());
+        if (mLabsPreferences.getRememberInfo()) {
+            userMat.setText(mLabsPreferences.getUserId());
+            userPass.setText(mLabsPreferences.getUserPass());
+        }
 
-        setupStatusBar(getResources().getColor(R.color.primary));;
+        setupStatusBar(getResources().getColor(R.color.primary));
     }
 
     @OnClick(R.id.login_button)
     void doLogin() {
         loginBtn.setEnabled(false);
+
+        if(loginRememberMe.isChecked()) mLabsPreferences.putRememberInfo(true);
+        else mLabsPreferences.putRememberInfo(false);
 
         String userM = userMat.getText().toString();
         String userP = userPass.getText().toString();
@@ -75,11 +84,11 @@ public class LoginActivity extends BaseActivity {
     }
 
     @Override
-    public void onShowDialogEvent(ShowDialogEvent event) {
+    public void onShowDialogEvent(DialogShowEvent event) {
     }
 
     @Override
-    public void onDismissDialogEvent(DismissDialogEvent event) {
+    public void onDismissDialogEvent(DialogDismissEvent event) {
     }
 
     public void goToLabsView() {

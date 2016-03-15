@@ -30,7 +30,7 @@
 //    @Override
 //    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 //        LayoutInflater inflater = LayoutInflater.from(mContext);
-//        View view = inflater.inflate(R.layout.cart_list_item_component, parent, false);
+//        View view = inflater.inflate(R.layout.list_item_cart_component, parent, false);
 //        return new ViewHolder(view);
 //    }
 //
