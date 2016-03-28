@@ -4,9 +4,12 @@ import android.annotation.TargetApi;
 import android.nfc.NfcAdapter.ReaderCallback;
 import android.nfc.Tag;
 import android.os.Build;
+import android.util.Log;
 
+import com.itesm.labs.labsuser.app.application.LabsApp;
 import com.itesm.labs.labsuser.app.commons.events.UIDEvent;
 import com.squareup.otto.Bus;
+import com.squareup.otto.Produce;
 
 import javax.inject.Inject;
 
@@ -16,10 +19,13 @@ import javax.inject.Inject;
 @TargetApi(Build.VERSION_CODES.KITKAT)
 public class NfcHandler implements ReaderCallback {
 
+    private static final String TAG = NfcHandler.class.getSimpleName();
+
     @Inject
     Bus mEventBus;
 
     public NfcHandler() {
+        LabsApp.get().inject(this);
     }
 
     public static long bytesToLong(byte[] data) {
@@ -75,6 +81,7 @@ public class NfcHandler implements ReaderCallback {
 
     @Override
     public void onTagDiscovered(Tag tag) {
+        Log.i(TAG, "Detected UID: " + bytesToLong(tag.getId()));
         mEventBus.post(new UIDEvent(bytesToLong(tag.getId())));
     }
 }

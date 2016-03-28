@@ -35,6 +35,7 @@ import com.itesm.labs.labsuser.app.bases.BaseFragmentPresenter;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
 import com.itesm.labs.labsuser.app.commons.adapters.LabsRecyclerAdapter;
+import com.itesm.labs.labsuser.app.commons.utils.NfcHandler;
 import com.itesm.labs.labsuser.app.commons.views.activities.LabsActivity;
 import com.itesm.labs.labsuser.app.commons.views.activities.LoginActivity;
 import com.itesm.labs.labsuser.app.commons.views.activities.MainActivity;
@@ -42,6 +43,7 @@ import com.itesm.labs.labsuser.app.commons.views.presenters.LabsActivityPresente
 import com.itesm.labs.labsuser.app.commons.views.presenters.LoginActivityPresenter;
 import com.itesm.labs.labsuser.app.commons.views.presenters.MainActivityPresenter;
 import com.squareup.otto.Bus;
+import com.squareup.otto.ThreadEnforcer;
 
 import javax.inject.Singleton;
 
@@ -95,7 +97,8 @@ import rx.subscriptions.Subscriptions;
                 UsersPresenter.class,
                 UsersDetailFragment.class,
                 UsersDetailPresenter.class,
-                ReportsFragment.class
+                ReportsFragment.class,
+                NfcHandler.class
         }
 )
 public class AppModule {
@@ -128,7 +131,7 @@ public class AppModule {
     @Provides
     @Singleton
     Bus providesEventBus() {
-        return new Bus();
+        return new Bus(ThreadEnforcer.MAIN);
     }
 
     @Provides

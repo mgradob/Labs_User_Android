@@ -3,7 +3,6 @@ package com.itesm.labs.labsuser.app.admin.views.fragments.requests;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,7 +19,6 @@ import com.itesm.labs.labsuser.app.bases.BaseFragment;
 import com.itesm.labs.labsuser.app.commons.events.SnackbarEvent;
 import com.itesm.labs.labsuser.app.commons.events.UIDEvent;
 import com.itesm.labs.labsuser.app.commons.utils.ErrorType;
-import com.mgb.labsapi.models.CartItem;
 import com.squareup.otto.Subscribe;
 
 import java.util.List;
@@ -141,12 +139,13 @@ public class RequestsDetailFragment extends BaseFragment {
 
     @Subscribe
     public void onUIDEvent(UIDEvent event) {
-        if (event != null) mUserUid = event.getUID();
+        if (event != null)
+            mUserUid = event.getUID();
     }
 
     @OnClick(R.id.fragment_requests_detail_fab)
     void onValidateWithUid() {
-        if(!mUserCart.isReady()) mPresenter.readyUserCart();
+        if (!mUserCart.isReady()) mPresenter.readyUserCart();
         else mPresenter.validateUserCart(mUserUid, false);
     }
 
