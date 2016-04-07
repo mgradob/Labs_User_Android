@@ -3,6 +3,7 @@
     package="com.itesm.labs.labsuser">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.NFC" />
 
     <application
         android:name=".app.application.LabsApp"
@@ -39,6 +40,7 @@
         </activity>
 
         <service android:name=".app.commons.services.BackgroundService" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="727c1a1f00406d3676ef61ba0a55466fe6877f40" />
