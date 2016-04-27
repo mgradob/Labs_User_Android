@@ -5,8 +5,10 @@ import com.mgb.labsapi.models.Component;
 
 import java.util.ArrayList;
 
+import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.Header;
+import retrofit.http.PUT;
 import retrofit.http.Path;
 import retrofit.http.Query;
 import rx.Observable;
@@ -29,4 +31,10 @@ public interface ComponentClient {
     Observable<Component> getComponent(@Header(ApiConstants.AUTHORIZATION) String token,
                                        @Path(ApiConstants.LAB) String lab,
                                        @Path(ApiConstants.ID_COMPONENT) int componentId);
+
+    @PUT("/{lab}/component/{id_component}")
+    Observable<Component> editComponent(@Header(ApiConstants.AUTHORIZATION) String token,
+                                        @Path(ApiConstants.LAB) String lab,
+                                        @Path(ApiConstants.ID_COMPONENT) int componentId,
+                                        @Body Component component);
 }

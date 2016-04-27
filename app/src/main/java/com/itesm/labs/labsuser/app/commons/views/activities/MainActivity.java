@@ -2,7 +2,6 @@ package com.itesm.labs.labsuser.app.commons.views.activities;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
@@ -11,9 +10,6 @@ import android.util.Log;
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminSectionPagerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseActivity;
-import com.itesm.labs.labsuser.app.commons.events.DialogDismissEvent;
-import com.itesm.labs.labsuser.app.commons.events.DialogShowEvent;
-import com.itesm.labs.labsuser.app.commons.events.SnackbarEvent;
 import com.itesm.labs.labsuser.app.commons.events.UIDEvent;
 import com.itesm.labs.labsuser.app.commons.views.presenters.MainActivityPresenter;
 import com.squareup.otto.Subscribe;
@@ -44,6 +40,7 @@ public class MainActivity extends BaseActivity {
         mPresenter.enableNfc();
 
         setupUi();
+
 //        startService(new Intent(mContext, BackgroundService.class));
     }
 
@@ -74,25 +71,6 @@ public class MainActivity extends BaseActivity {
         mPager.setAdapter(new AdminSectionPagerAdapter(getSupportFragmentManager()));
         mTabLayout.setupWithViewPager(mPager);
         mTabLayout.setBackgroundColor(colorRes);
-    }
-
-
-
-    @Override
-    public void onShowDialogEvent(DialogShowEvent event) {
-
-    }
-
-    @Override
-    public void onDismissDialogEvent(DialogDismissEvent event) {
-
-    }
-
-    @Subscribe
-    public void onSnackbarEvent(SnackbarEvent event) {
-        if (event != null)
-            Snackbar.make(findViewById(R.id.activity_main), event.getBodyRes(), Snackbar.LENGTH_LONG)
-                    .show();
     }
 
     @Subscribe

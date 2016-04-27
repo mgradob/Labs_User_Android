@@ -15,13 +15,13 @@ import rx.Subscription;
 public abstract class BaseActivityPresenter {
 
     @Inject
-    public Context mContext;
+    protected Context mContext;
     @Inject
-    public LabsPreferences mLabsPreferences;
+    protected LabsPreferences mLabsPreferences;
     @Inject
-    public Subscription mSubscription;
+    protected Subscription mSubscription;
 
-    public BaseActivityPresenter() {
+    protected BaseActivityPresenter() {
         LabsApp.get().inject(this);
     }
 }

@@ -18,6 +18,10 @@ public class History {
     @SerializedName("date_in")
     private String dateIn;
 
+    transient String categoryName;
+    transient String componentName;
+    transient String componentNote;
+
     public History(Builder builder) {
         this.studentId = builder.studentId;
         this.componentId = builder.componentId;
@@ -55,7 +59,34 @@ public class History {
                 ", quantity=" + quantity +
                 ", dateOut='" + dateOut + '\'' +
                 ", dateIn='" + dateIn + '\'' +
+                ", categoryName='" + categoryName + '\'' +
+                ", componentName='" + componentName + '\'' +
+                ", componentNote='" + componentNote + '\'' +
                 '}';
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getComponentName() {
+        return componentName;
+    }
+
+    public void setComponentName(String componentName) {
+        this.componentName = componentName;
+    }
+
+    public String getComponentNote() {
+        return componentNote;
+    }
+
+    public void setComponentNote(String componentNote) {
+        this.componentNote = componentNote;
     }
 
     public static class Builder {

@@ -7,8 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.itesm.labs.labsuser.app.application.LabsApp;
 import com.itesm.labs.labsuser.app.application.LabsPreferences;
-import com.itesm.labs.labsuser.app.commons.events.DialogDismissEvent;
-import com.itesm.labs.labsuser.app.commons.events.DialogShowEvent;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
@@ -28,7 +26,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     public LabsPreferences mLabsPreferences;
     @Inject
     public Bus mEventBus;
-
+    @Inject
     public Subscription mSubscription;
 
     private boolean isBusRegistered = false;
@@ -62,12 +60,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public abstract void setupUi();
-
-    @Subscribe
-    public abstract void onShowDialogEvent(DialogShowEvent event);
-
-    @Subscribe
-    public abstract void onDismissDialogEvent(DialogDismissEvent event);
 
     private void registerBus() {
         if (!isBusRegistered) mEventBus.register(this);

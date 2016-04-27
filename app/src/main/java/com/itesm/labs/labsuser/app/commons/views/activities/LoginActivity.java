@@ -11,8 +11,6 @@ import android.widget.EditText;
 
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.bases.BaseActivity;
-import com.itesm.labs.labsuser.app.commons.events.DialogDismissEvent;
-import com.itesm.labs.labsuser.app.commons.events.DialogShowEvent;
 import com.itesm.labs.labsuser.app.commons.views.presenters.LoginActivityPresenter;
 
 import butterknife.Bind;
@@ -71,7 +69,7 @@ public class LoginActivity extends BaseActivity {
     void doLogin() {
         loginBtn.setEnabled(false);
 
-        if(loginRememberMe.isChecked()) mLabsPreferences.putRememberInfo(true);
+        if (loginRememberMe.isChecked()) mLabsPreferences.putRememberInfo(true);
         else mLabsPreferences.putRememberInfo(false);
 
         String userM = userMat.getText().toString();
@@ -81,14 +79,6 @@ public class LoginActivity extends BaseActivity {
         mLabsPreferences.putUserPass(userP);
 
         mPresenter.loginUser();
-    }
-
-    @Override
-    public void onShowDialogEvent(DialogShowEvent event) {
-    }
-
-    @Override
-    public void onDismissDialogEvent(DialogDismissEvent event) {
     }
 
     public void goToLabsView() {

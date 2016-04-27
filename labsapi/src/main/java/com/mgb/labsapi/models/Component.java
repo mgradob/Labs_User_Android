@@ -53,6 +53,10 @@ public class Component {
         return available;
     }
 
+    public void setAvailable(int available) {
+        this.available = available;
+    }
+
     @Override
     public String toString() {
         return "Component{" +

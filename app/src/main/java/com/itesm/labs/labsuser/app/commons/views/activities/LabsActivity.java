@@ -1,24 +1,14 @@
 package com.itesm.labs.labsuser.app.commons.views.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.itesm.labs.labsuser.R;
-import com.itesm.labs.labsuser.app.admin.views.dialogs.EditUserDialog;
 import com.itesm.labs.labsuser.app.bases.BaseActivity;
 import com.itesm.labs.labsuser.app.commons.adapters.LabsRecyclerAdapter;
-import com.itesm.labs.labsuser.app.commons.adapters.models.ItemLaboratory;
-import com.itesm.labs.labsuser.app.commons.events.DialogDismissEvent;
-import com.itesm.labs.labsuser.app.commons.events.ItemClickEvent;
-import com.itesm.labs.labsuser.app.commons.events.ItemLongClickEvent;
-import com.itesm.labs.labsuser.app.commons.events.DialogShowEvent;
 import com.itesm.labs.labsuser.app.commons.views.presenters.LabsActivityPresenter;
-import com.mgb.labsapi.models.Laboratory;
-import com.squareup.otto.Subscribe;
 
 import java.util.List;
 
@@ -50,7 +40,6 @@ public class LabsActivity extends BaseActivity {
         setupUi();
     }
 
-    //region UI setup
     @Override
     public void setupUi() {
         setupStatusBar(getResources().getColor(R.color.primary));
@@ -99,49 +88,4 @@ public class LabsActivity extends BaseActivity {
     public void showError() {
         mRefreshLayout.setRefreshing(false);
     }
-    //endregion
-
-    //region Event Bus
-    @Subscribe
-    public void onItemClickEvent(ItemClickEvent<ItemLaboratory> event) {
-        if (event.getItem() == null) return;
-
-        ItemLaboratory item = event.getItem();
-
-        String[] params = item.getLaboratory().getLink().split("/");
-        item = new ItemLaboratory.Builder()
-                .setLaboratory(new Laboratory.Builder()
-                        .setName(item.getLaboratory().getName())
-                        .setLink(params[params.length - 1])
-                        .build())
-                .setColorResource(item.getColorResource())
-                .setImageResource(item.getImageResource())
-                .build();
-
-        mLabsPreferences.putLabLink(params[params.length - 1]);
-        mLabsPreferences.putCurrentLab(item.getLaboratory());
-        mLabsPreferences.putLabColor(item.getColorResource());
-
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.abc_slide_in_top, R.anim.abc_slide_in_top);
-    }
-
-    @Subscribe
-    public void onItemLongClickEvent(ItemLongClickEvent event) {
-        FragmentManager fm = getSupportFragmentManager();
-        EditUserDialog dialog = new EditUserDialog();
-        dialog.show(fm, "test");
-    }
-
-    @Override
-    public void onShowDialogEvent(DialogShowEvent event) {
-
-    }
-
-    @Override
-    public void onDismissDialogEvent(DialogDismissEvent event) {
-
-    }
-    //endregion
 }

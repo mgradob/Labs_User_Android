@@ -1,5 +1,6 @@
 package com.itesm.labs.labsuser.app.admin.adapters;
 
+import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +10,9 @@ import android.widget.TextView;
 
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.admin.adapters.models.ItemUserCart;
-import com.itesm.labs.labsuser.app.admin.views.fragments.requests.RequestsFragment;
+import com.itesm.labs.labsuser.app.admin.views.activities.RequestDetailActivity;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
-import com.itesm.labs.labsuser.app.commons.events.ItemClickEvent;
-import com.itesm.labs.labsuser.app.commons.events.ItemLongClickEvent;
 
 import butterknife.Bind;
 
@@ -26,8 +25,6 @@ public class AdminRequestRecyclerAdapter extends BaseRecyclerAdapter<ItemUserCar
     public void onBindViewHolder(ViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         holder.bindData(DATA.get(position));
-        holder.itemView.setOnClickListener(v ->
-                mEventBus.post(new ItemClickEvent<>(DATA.get(position))));
     }
 
     @Override
@@ -59,7 +56,9 @@ public class AdminRequestRecyclerAdapter extends BaseRecyclerAdapter<ItemUserCar
 
         @Override
         public void bindData(ItemUserCart holderItem) {
-            if (holderItem.isReady()) {
+            mModel = holderItem;
+
+            if (mModel.isReady()) {
                 requestItemImage.setImageResource(R.drawable.ic_done_white);
                 requestItemImage.setBackground(ContextCompat.getDrawable(mContext, R.drawable.request_indicator_done));
             } else {
@@ -67,9 +66,22 @@ public class AdminRequestRecyclerAdapter extends BaseRecyclerAdapter<ItemUserCar
                 requestItemImage.setBackground(ContextCompat.getDrawable(mContext, R.drawable.request_indicator_pending));
             }
 
-            requestItemUserName.setText(holderItem.getUserName());
-            requestItemUserId.setText(holderItem.getUserId());
-            requestItemUserDate.setText(holderItem.getCartDate());
+            requestItemUserName.setText(mModel.getUserName());
+            requestItemUserId.setText(mModel.getUserId());
+            requestItemUserDate.setText(mModel.getCartDate());
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(mContext, RequestDetailActivity.class);
+            intent.putExtra(RequestDetailActivity.EXTRA_USER_ID, mModel.getUserId());
+            intent.putExtra(RequestDetailActivity.EXTRA_IS_READY, mModel.isReady());
+            mContext.startActivity(intent);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            return false;
         }
     }
 }

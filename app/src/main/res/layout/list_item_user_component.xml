@@ -1,0 +1,76 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/component_item_name"
+            style="@style/LabsTheme.Compat.Text.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="10 ohm" />
+
+        <TextView
+            android:id="@+id/component_item_note"
+            style="@style/LabsTheme.Compat.Text.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="1/4 W" />
+
+        <TextView
+            android:id="@+id/component_item_available"
+            style="@style/LabsTheme.Compat.Text.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/component_list_item_available" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/component_item_in_cart"
+            style="@style/LabsTheme.Compat.Text.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/component_list_item_in_cart"
+            android:textColor="@color/secondary_text" />
+
+        <ImageButton
+            android:id="@+id/component_item_add"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="#00000000"
+            android:src="@drawable/ic_add_black"
+            android:tint="@color/primary" />
+
+        <ImageButton
+            android:id="@+id/component_item_remove"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="#00000000"
+            android:src="@drawable/ic_cancel_black"
+            android:tint="@color/material_red" />
+
+    </LinearLayout>
+
+</LinearLayout>

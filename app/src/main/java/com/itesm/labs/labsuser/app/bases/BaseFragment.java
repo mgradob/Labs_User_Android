@@ -18,11 +18,11 @@ import javax.inject.Inject;
 public abstract class BaseFragment extends Fragment {
 
     @Inject
-    public Context mContext;
+    protected Context mContext;
     @Inject
-    public Bus mEventBus;
+    protected Bus mEventBus;
 
-    public BaseRecyclerAdapter mAdapter;
+    protected BaseRecyclerAdapter mAdapter;
 
     private boolean isBusRegistered = false;
 
@@ -57,28 +57,12 @@ public abstract class BaseFragment extends Fragment {
     /**
      * Sets up the UI for the fragment.
      */
-    public abstract void setupUi();
-
-    /**
-     * Sets up the list of the fragment.
-     */
-    public abstract void setupList();
-
-    /**
-     * Sets up the refresh of the list.
-     */
-    public abstract void setupRefresh();
-
-    /**
-     * Updates the information of the fragment. Use if fragment contains a list.
-     * @param data the list data to update.
-     */
-    public abstract void updateInfo(List data);
+    protected abstract void setupUi();
 
     /**
      * Display a {@link android.support.design.widget.Snackbar} when an error occurs.
      */
-    public abstract void showError(ErrorType error);
+    protected abstract void showError(ErrorType error);
 
     /**
      * Register the fragment to the event bus.

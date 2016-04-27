@@ -1,6 +1,5 @@
 package com.itesm.labs.labsuser.app.bases;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetDialogFragment;
@@ -15,7 +14,7 @@ import javax.inject.Inject;
 public abstract class BaseDialogFragment extends BottomSheetDialogFragment {
 
     @Inject
-    Context mContext;
+    protected Context mContext;
 
     public BaseDialogFragment() {
     }

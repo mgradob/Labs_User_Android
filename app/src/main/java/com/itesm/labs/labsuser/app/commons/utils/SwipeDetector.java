@@ -11,14 +11,11 @@ public class SwipeDetector implements View.OnTouchListener {
 
     private static final int MIN_DISTANCE = 100;
     private float downX, downY, upX, upY;
-    private Action mSwipeDetected = Action.NONE;
 
-    public boolean swipeDetected() {
-        return mSwipeDetected != Action.NONE;
-    }
+    private SwipeListener swipeListener;
 
-    public Action getAction() {
-        return mSwipeDetected;
+    public void setSwipeListener(SwipeListener swipeListener) {
+        this.swipeListener = swipeListener;
     }
 
     @Override
@@ -27,7 +24,6 @@ public class SwipeDetector implements View.OnTouchListener {
             case MotionEvent.ACTION_DOWN:
                 downX = event.getX();
                 downY = event.getY();
-                mSwipeDetected = Action.NONE;
                 return false;
             case MotionEvent.ACTION_MOVE:
                 upX = event.getX();
@@ -39,11 +35,11 @@ public class SwipeDetector implements View.OnTouchListener {
                 if (Math.abs(deltaX) > MIN_DISTANCE) {
                     if (deltaX < 0) {
                         Log.d("SWIPE", "Swipe Left to Right");
-                        mSwipeDetected = Action.LR;
+                        swipeListener.swipedRight();
                         return true;
                     } else if (deltaX > 0) {
                         Log.d("SWIPE", "Swipe Right to Left");
-                        mSwipeDetected = Action.RL;
+                        swipeListener.swipedLeft();
                         return true;
                     }
                 }
@@ -52,11 +48,9 @@ public class SwipeDetector implements View.OnTouchListener {
         }
     }
 
-    public enum Action {
-        LR,
-        RL,
-        UD,
-        DU,
-        NONE
+    public interface SwipeListener {
+        void swipedRight();
+
+        void swipedLeft();
     }
 }

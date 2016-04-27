@@ -10,23 +10,21 @@ import com.itesm.labs.labsuser.app.admin.adapters.AdminRequestRecyclerAdapter;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminSectionPagerAdapter;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminUserDetailRecyclerAdapter;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminUserRecyclerAdapter;
+import com.itesm.labs.labsuser.app.admin.views.activities.InventoryDetailActivity;
+import com.itesm.labs.labsuser.app.admin.views.activities.RequestDetailActivity;
+import com.itesm.labs.labsuser.app.admin.views.activities.UserDetailActivity;
+import com.itesm.labs.labsuser.app.admin.views.activities.UserEditActivity;
 import com.itesm.labs.labsuser.app.admin.views.dialogs.EditUserDialog;
-import com.itesm.labs.labsuser.app.admin.views.fragments.inventory.InventoryControllerFragment;
-import com.itesm.labs.labsuser.app.admin.views.fragments.inventory.InventoryDetailFragment;
-import com.itesm.labs.labsuser.app.admin.views.fragments.inventory.InventoryFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.InventoryFragment;
 import com.itesm.labs.labsuser.app.admin.views.fragments.ReportsFragment;
-import com.itesm.labs.labsuser.app.admin.views.fragments.requests.RequestsControllerFragment;
-import com.itesm.labs.labsuser.app.admin.views.fragments.requests.RequestsDetailFragment;
-import com.itesm.labs.labsuser.app.admin.views.fragments.requests.RequestsFragment;
-import com.itesm.labs.labsuser.app.admin.views.fragments.users.UsersControllerFragment;
-import com.itesm.labs.labsuser.app.admin.views.fragments.users.UsersDetailFragment;
-import com.itesm.labs.labsuser.app.admin.views.fragments.users.UsersFragment;
-import com.itesm.labs.labsuser.app.admin.views.presenters.inventory.InventoryDetailPresenter;
-import com.itesm.labs.labsuser.app.admin.views.presenters.inventory.InventoryPresenter;
-import com.itesm.labs.labsuser.app.admin.views.presenters.requests.RequestsDetailPresenter;
-import com.itesm.labs.labsuser.app.admin.views.presenters.requests.RequestsPresenter;
-import com.itesm.labs.labsuser.app.admin.views.presenters.users.UsersDetailPresenter;
-import com.itesm.labs.labsuser.app.admin.views.presenters.users.UsersPresenter;
+import com.itesm.labs.labsuser.app.admin.views.fragments.RequestsFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.UsersFragment;
+import com.itesm.labs.labsuser.app.admin.views.presenters.InventoryDetailPresenter;
+import com.itesm.labs.labsuser.app.admin.views.presenters.InventoryPresenter;
+import com.itesm.labs.labsuser.app.admin.views.presenters.RequestsDetailPresenter;
+import com.itesm.labs.labsuser.app.admin.views.presenters.RequestsPresenter;
+import com.itesm.labs.labsuser.app.admin.views.presenters.UsersDetailPresenter;
+import com.itesm.labs.labsuser.app.admin.views.presenters.UsersPresenter;
 import com.itesm.labs.labsuser.app.bases.BaseActivity;
 import com.itesm.labs.labsuser.app.bases.BaseActivityPresenter;
 import com.itesm.labs.labsuser.app.bases.BaseDialogFragment;
@@ -42,6 +40,15 @@ import com.itesm.labs.labsuser.app.commons.views.activities.MainActivity;
 import com.itesm.labs.labsuser.app.commons.views.presenters.LabsActivityPresenter;
 import com.itesm.labs.labsuser.app.commons.views.presenters.LoginActivityPresenter;
 import com.itesm.labs.labsuser.app.commons.views.presenters.MainActivityPresenter;
+import com.itesm.labs.labsuser.app.user.adapters.UserCategoryRecyclerAdapter;
+import com.itesm.labs.labsuser.app.user.adapters.UserComponentRecyclerAdapter;
+import com.itesm.labs.labsuser.app.user.adapters.UserSectionPagerAdapter;
+import com.itesm.labs.labsuser.app.user.views.activities.UserMainActivity;
+import com.itesm.labs.labsuser.app.user.views.fragments.UserCartFragment;
+import com.itesm.labs.labsuser.app.user.views.fragments.UserHistoryFragment;
+import com.itesm.labs.labsuser.app.user.views.fragments.UserInventoryFragment;
+import com.itesm.labs.labsuser.app.user.views.presenters.UserHistoryPresenter;
+import com.itesm.labs.labsuser.app.user.views.presenters.UserInventoryPresenter;
 import com.squareup.otto.Bus;
 import com.squareup.otto.ThreadEnforcer;
 
@@ -82,23 +89,30 @@ import rx.subscriptions.Subscriptions;
                 LoginActivityPresenter.class,
                 LabsActivityPresenter.class,
                 MainActivityPresenter.class,
-                RequestsControllerFragment.class,
-                InventoryControllerFragment.class,
-                UsersControllerFragment.class,
                 RequestsFragment.class,
                 RequestsPresenter.class,
-                RequestsDetailFragment.class,
+                RequestDetailActivity.class,
                 RequestsDetailPresenter.class,
                 InventoryFragment.class,
                 InventoryPresenter.class,
-                InventoryDetailFragment.class,
+                InventoryDetailActivity.class,
                 InventoryDetailPresenter.class,
                 UsersFragment.class,
                 UsersPresenter.class,
-                UsersDetailFragment.class,
+                UserDetailActivity.class,
                 UsersDetailPresenter.class,
                 ReportsFragment.class,
-                NfcHandler.class
+                UserEditActivity.class,
+                NfcHandler.class,
+                UserMainActivity.class,
+                UserSectionPagerAdapter.class,
+                UserInventoryFragment.class,
+                UserInventoryPresenter.class,
+                UserCategoryRecyclerAdapter.class,
+                UserComponentRecyclerAdapter.class,
+                UserCartFragment.class,
+                UserHistoryFragment.class,
+                UserHistoryPresenter.class,
         }
 )
 public class AppModule {
@@ -141,25 +155,49 @@ public class AppModule {
 
     @Provides
     @Singleton
-    RequestsControllerFragment providesRequestsControllerFragment() {
-        return new RequestsControllerFragment();
+    RequestsFragment providesRequestsFragment() {
+        return new RequestsFragment();
     }
 
     @Provides
     @Singleton
-    InventoryControllerFragment providesInventoryControllerFragment() {
-        return new InventoryControllerFragment();
+    InventoryFragment providesInventoryFragment() {
+        return new InventoryFragment();
     }
 
     @Provides
     @Singleton
-    UsersControllerFragment providesUsersControllerFragment() {
-        return new UsersControllerFragment();
+    UsersFragment providesUsersFragment() {
+        return new UsersFragment();
     }
 
     @Provides
     @Singleton
     ReportsFragment providesReportsFragment() {
         return new ReportsFragment();
+    }
+
+    @Provides
+    @Singleton
+    NfcHandler providesNfcHandler() {
+        return new NfcHandler();
+    }
+
+    @Provides
+    @Singleton
+    UserInventoryFragment providesUserInventoryFragment() {
+        return new UserInventoryFragment();
+    }
+
+    @Provides
+    @Singleton
+    UserCartFragment providesUserCartFragment() {
+        return new UserCartFragment();
+    }
+
+    @Provides
+    @Singleton
+    UserHistoryFragment providesUserHistoryFragment() {
+        return new UserHistoryFragment();
     }
 }

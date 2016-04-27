@@ -6,13 +6,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.itesm.labs.labsuser.R;
-import com.itesm.labs.labsuser.app.admin.views.fragments.inventory.InventoryControllerFragment;
-import com.itesm.labs.labsuser.app.admin.views.fragments.inventory.InventoryFragment;
 import com.itesm.labs.labsuser.app.admin.views.fragments.ReportsFragment;
-import com.itesm.labs.labsuser.app.admin.views.fragments.requests.RequestsControllerFragment;
-import com.itesm.labs.labsuser.app.admin.views.fragments.requests.RequestsFragment;
-import com.itesm.labs.labsuser.app.admin.views.fragments.users.UsersControllerFragment;
-import com.itesm.labs.labsuser.app.admin.views.fragments.users.UsersFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.InventoryFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.RequestsFragment;
+import com.itesm.labs.labsuser.app.admin.views.fragments.UsersFragment;
 import com.itesm.labs.labsuser.app.application.LabsApp;
 
 import javax.inject.Inject;
@@ -26,11 +23,11 @@ public class AdminSectionPagerAdapter extends FragmentPagerAdapter {
     @Inject
     Context mContext;
     @Inject
-    RequestsControllerFragment mRequestsControllerFragment;
+    RequestsFragment mRequestsFragment;
     @Inject
-    InventoryControllerFragment mInventoryControllerFragment;
+    InventoryFragment mInventoryFragment;
     @Inject
-    UsersControllerFragment mUsersControllerFragment;
+    UsersFragment mUsersFragment;
     @Inject
     ReportsFragment mReportsFragment;
 
@@ -43,15 +40,15 @@ public class AdminSectionPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return mRequestsControllerFragment;
+                return mRequestsFragment;
             case 1:
-                return mInventoryControllerFragment;
+                return mInventoryFragment;
             case 2:
-                return mUsersControllerFragment;
+                return mUsersFragment;
             case 3:
                 return mReportsFragment;
             default:
-                return mRequestsControllerFragment;
+                return mRequestsFragment;
         }
     }
 

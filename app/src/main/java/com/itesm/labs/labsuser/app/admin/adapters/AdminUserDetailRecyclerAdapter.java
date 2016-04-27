@@ -9,6 +9,7 @@ import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.admin.adapters.models.ItemHistory;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
+import com.itesm.labs.labsuser.app.commons.utils.SwipeDetector;
 
 import butterknife.Bind;
 
@@ -30,7 +31,7 @@ public class AdminUserDetailRecyclerAdapter extends BaseRecyclerAdapter<ItemHist
         holder.bindData(DATA.get(position));
     }
 
-    public class ViewHolder extends BaseViewHolder<ItemHistory> {
+    public class ViewHolder extends BaseViewHolder<ItemHistory> implements SwipeDetector.SwipeListener {
 
         @Bind(R.id.record_item_category_name)
         TextView mCategoryName;
@@ -39,6 +40,8 @@ public class AdminUserDetailRecyclerAdapter extends BaseRecyclerAdapter<ItemHist
         @Bind(R.id.record_item_date_out_in)
         TextView mDateOutIn;
 
+        SwipeDetector mSwipeDetector;
+
         /**
          * Constructor that binds to Butterknife automatically.
          *
@@ -46,6 +49,10 @@ public class AdminUserDetailRecyclerAdapter extends BaseRecyclerAdapter<ItemHist
          */
         public ViewHolder(View itemView) {
             super(itemView);
+
+            mSwipeDetector = new SwipeDetector();
+            mSwipeDetector.setSwipeListener(this);
+            itemView.setOnTouchListener(mSwipeDetector);
         }
 
         @Override
@@ -59,6 +66,26 @@ public class AdminUserDetailRecyclerAdapter extends BaseRecyclerAdapter<ItemHist
                     String.format(mContext.getString(R.string.user_list_item_history_date_out_in),
                             holderItem.getHistory().getDateOut(), holderItem.getHistory().getDateIn())
             );
+        }
+
+        @Override
+        public void onClick(View v) {
+
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            return false;
+        }
+
+        @Override
+        public void swipedRight() {
+            // TODO: 4/25/16 update date in.
+        }
+
+        @Override
+        public void swipedLeft() {
+
         }
     }
 }

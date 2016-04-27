@@ -203,7 +203,7 @@
 //     *
 //     * @param component the component to be added.
 //     */
-//    public void addComponent(Component component) {
+//    public void addComponentToCart(Component component) {
 //        SQLiteDatabase database = this.getWritableDatabase();
 //
 //        ContentValues values = new ContentValues();

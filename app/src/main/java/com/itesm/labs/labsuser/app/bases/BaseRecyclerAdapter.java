@@ -21,11 +21,11 @@ import javax.inject.Inject;
 public abstract class BaseRecyclerAdapter<T, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
 
     @Inject
-    public Context mContext;
+    protected Context mContext;
     @Inject
-    public Bus mEventBus;
+    protected Bus mEventBus;
 
-    public List<T> DATA = new ArrayList<>();
+    protected List<T> DATA = new ArrayList<>();
 
     public BaseRecyclerAdapter() {
         LabsApp.get().inject(this);

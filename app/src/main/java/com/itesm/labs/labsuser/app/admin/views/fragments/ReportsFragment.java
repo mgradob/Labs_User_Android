@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.bases.BaseFragment;
+import com.itesm.labs.labsuser.app.commons.contracts.IListContract;
 import com.itesm.labs.labsuser.app.commons.utils.ErrorType;
 
 import java.util.List;
@@ -18,7 +19,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ReportsFragment extends BaseFragment {
+public class ReportsFragment extends BaseFragment implements IListContract {
 
 
     public ReportsFragment() {

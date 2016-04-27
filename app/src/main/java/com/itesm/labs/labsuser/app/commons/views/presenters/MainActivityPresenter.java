@@ -6,9 +6,10 @@ import android.os.Build;
 import android.util.Log;
 
 import com.itesm.labs.labsuser.app.bases.BaseActivityPresenter;
-import com.itesm.labs.labsuser.app.commons.events.UIDEvent;
 import com.itesm.labs.labsuser.app.commons.utils.NfcHandler;
 import com.itesm.labs.labsuser.app.commons.views.activities.MainActivity;
+
+import javax.inject.Inject;
 
 /**
  * Created by mgradob on 2/21/16.
@@ -17,9 +18,11 @@ public class MainActivityPresenter extends BaseActivityPresenter {
 
     private static final String TAG = MainActivityPresenter.class.getSimpleName();
 
+    @Inject
+    NfcHandler mNfcHandler;
+
     private MainActivity mView;
     private NfcAdapter mNfcAdapter;
-    private NfcHandler mNfcHandler;
 
     public MainActivityPresenter(MainActivity mView) {
         super();
@@ -31,12 +34,10 @@ public class MainActivityPresenter extends BaseActivityPresenter {
 
         if (mNfcAdapter == null) Log.d(TAG, "No NFC adapter available");
 
-        if(!mNfcAdapter.isEnabled()){
+        if (!mNfcAdapter.isEnabled()) {
             Log.d(TAG, "NFC adapter is disabled");
             mView.startActivity(new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS));
         }
-
-        mNfcHandler = new NfcHandler();
     }
 
     public void enableNfc() {

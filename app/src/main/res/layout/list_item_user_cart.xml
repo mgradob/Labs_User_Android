@@ -1,0 +1,36 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/cart_component_name"
+            style="@style/LabsTheme.Compat.Text.Body2"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            tools:text="COMPONENT NAME" />
+
+        <TextView
+            android:id="@+id/cart_component_note"
+            style="@style/LabsTheme.Compat.Text.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="NOTE" />
+
+        <TextView
+            android:id="@+id/cart_component_in_cart"
+            style="@style/LabsTheme.Compat.Text.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Cantidad: %1$s" />
+
+    </LinearLayout>
+
+</RelativeLayout>

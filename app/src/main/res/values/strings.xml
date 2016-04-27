@@ -46,6 +46,8 @@
     <string name="singup_carrera">Carrera</string>
     <string name="signup_apellidop">Apellido Paterno</string>
     <string name="signup_apellidom">Apellido Materno</string>
+    <string name="signup_uid">Credential: %1$s</string>
+    <string name="signup_update">Update</string>
 
     <!-- Labs Activity -->
     <string name="title_activity_laboratorios">LaboratoriosActivity</string>
@@ -92,16 +94,22 @@
     <!-- Details -->
     <string name="categories_detail_snackbar_error_content">Error obtaining components.</string>
     <string name="page_title_categories_detail">Details</string>
+    <string name="component_list_item_in_cart">In Cart: %d</string>
 
     <!-- Cart Fragment-->
     <string name="cart_empty_list">List empty\n:(</string>
     <string name="cart_snackbar_error_content">Error obtaining cart.</string>
     <string name="cart_snackbar_post_success_content">Cart added.</string>
     <string name="cart_snackbar_post_error_content">Error adding cart, check your internet connection.</string>
+    <string name="cart_header_api">Ya pedidos</string>
+    <string name="cart_header_local">Por pedidos</string>
+    <string name="cart_qty_in_cart">Cantidad: %1$d</string>
 
     <!-- Record Fragment -->
     <string name="record_snackbar_error_content">Error obtaining cart.</string>
     <string name="record_snackbar_post_success_content">Cart added.</string>
     <string name="record_snackbar_post_error_content">Error adding cart, try again.</string>
+    <string name="record_name_note_quantity">%1$s %2$s\t\tCantidad: %3$s</string>
+    <string name="record_dates">Recogido: %1$s\nEntregado: %2$s</string>
 
 </resources>

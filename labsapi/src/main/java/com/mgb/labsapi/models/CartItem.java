@@ -22,6 +22,10 @@ public class CartItem {
     @SerializedName("date_checkout")
     private String dateCheckout;
 
+    transient String categoryName;
+    transient String componentName;
+    transient String componentNote;
+
     public CartItem(Builder builder) {
         this.cartId = builder.cartId;
         this.studentId = builder.studentId;
@@ -98,7 +102,34 @@ public class CartItem {
                 ", checkout=" + checkout +
                 ", ready=" + ready +
                 ", dateCheckout='" + dateCheckout + '\'' +
+                ", categoryName='" + categoryName + '\'' +
+                ", componentName='" + componentName + '\'' +
+                ", componentNote='" + componentNote + '\'' +
                 '}';
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getComponentName() {
+        return componentName;
+    }
+
+    public void setComponentName(String componentName) {
+        this.componentName = componentName;
+    }
+
+    public String getComponentNote() {
+        return componentNote;
+    }
+
+    public void setComponentNote(String componentNote) {
+        this.componentNote = componentNote;
     }
 
     public static class Builder {

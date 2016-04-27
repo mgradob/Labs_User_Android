@@ -1,5 +1,6 @@
 package com.itesm.labs.labsuser.app.admin.adapters;
 
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,10 +8,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.itesm.labs.labsuser.R;
+import com.itesm.labs.labsuser.app.admin.views.activities.UserDetailActivity;
+import com.itesm.labs.labsuser.app.admin.views.activities.UserEditActivity;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
-import com.itesm.labs.labsuser.app.commons.events.ItemClickEvent;
-import com.itesm.labs.labsuser.app.commons.events.ItemLongClickEvent;
 import com.mgb.labsapi.models.User;
 
 import java.util.Random;
@@ -43,12 +44,6 @@ public class AdminUserRecyclerAdapter extends BaseRecyclerAdapter<User, AdminUse
     public void onBindViewHolder(ViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         holder.bindData(DATA.get(position));
-        holder.itemView.setOnClickListener(v ->
-                mEventBus.post(new ItemClickEvent<>(DATA.get(position))));
-        holder.itemView.setOnLongClickListener(v -> {
-            mEventBus.post(new ItemLongClickEvent<>(DATA.get(position)));
-            return true;
-        });
     }
 
     public class ViewHolder extends BaseViewHolder<User> {
@@ -71,15 +66,33 @@ public class AdminUserRecyclerAdapter extends BaseRecyclerAdapter<User, AdminUse
 
         @Override
         public void bindData(User holderItem) {
-            mUserInitial.setText("" + holderItem.getUserName().charAt(0));
-            mUserName.setText(holderItem.getUserFullName());
+            mModel = holderItem;
+
+            mUserInitial.setText("" + mModel.getUserName().charAt(0));
+            mUserName.setText(mModel.getUserFullName());
             mUserExtra.setText(String.format(
                     mContext.getString(R.string.user_list_item_extra),
-                    holderItem.getUserCareer(),
-                    holderItem.getUserId()));
+                    mModel.getUserCareer(),
+                    mModel.getUserId()));
 
             GradientDrawable gradientDrawable = (GradientDrawable) mUserInitial.getBackground();
             gradientDrawable.setColor(mColors[mRandom.nextInt(mColors.length-1)]);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(mContext, UserDetailActivity.class);
+            intent.putExtra(UserEditActivity.EXTRA_USER_ID, mModel.getUserId());
+            mContext.startActivity(intent);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            Intent intent = new Intent(mContext, UserEditActivity.class);
+            intent.putExtra(UserEditActivity.EXTRA_USER_ID, mModel.getUserId());
+            mContext.startActivity(intent);
+
+            return true;
         }
     }
 }

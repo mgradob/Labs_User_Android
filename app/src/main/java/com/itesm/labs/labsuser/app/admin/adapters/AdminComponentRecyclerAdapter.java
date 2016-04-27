@@ -8,7 +8,6 @@ import android.widget.TextView;
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
-import com.itesm.labs.labsuser.app.commons.events.ItemLongClickEvent;
 import com.mgb.labsapi.models.Component;
 
 import butterknife.Bind;
@@ -33,13 +32,8 @@ public class AdminComponentRecyclerAdapter extends BaseRecyclerAdapter<Component
     public void onBindViewHolder(ViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         holder.bindData(DATA.get(position));
-        holder.itemView.setOnLongClickListener(v -> {
-            mEventBus.post(new ItemLongClickEvent<>(DATA.get(position)));
-            return true;
-        });
     }
 
-    //region ViewHolder
     public class ViewHolder extends BaseViewHolder<Component> {
 
         @Bind(R.id.component_item_name)
@@ -55,10 +49,22 @@ public class AdminComponentRecyclerAdapter extends BaseRecyclerAdapter<Component
 
         @Override
         public void bindData(Component holderItem) {
-            mComponentName.setText(holderItem.getName());
-            mComponentNote.setText(holderItem.getNote());
-            mComponentAvailable.setText(String.format(mContext.getString(R.string.component_list_item_available), holderItem.getAvailable()));
+            mModel = holderItem;
+
+            mComponentName.setText(mModel.getName());
+            mComponentNote.setText(mModel.getNote());
+            mComponentAvailable.setText(String.format(mContext.getString(R.string.component_list_item_available), mModel.getAvailable()));
+        }
+
+        @Override
+        public void onClick(View v) {
+
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            // TODO: 4/23/16 go to edit component.
+            return false;
         }
     }
-    //endregion
 }

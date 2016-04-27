@@ -14,11 +14,11 @@ import rx.Subscription;
 public abstract class BaseRunnable implements Runnable {
 
     @Inject
-    public Context mContext;
+    protected Context mContext;
     @Inject
-    public LabsPreferences mLabsPreferences;
+    protected LabsPreferences mLabsPreferences;
 
-    public Subscription mSubscription;
+    protected Subscription mSubscription;
 
     @Override
     public void run() {

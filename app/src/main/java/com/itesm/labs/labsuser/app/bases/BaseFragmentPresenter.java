@@ -15,13 +15,13 @@ import rx.Subscription;
 public class BaseFragmentPresenter {
 
     @Inject
-    public Context mContext;
+    protected Context mContext;
     @Inject
-    public LabsPreferences mLabsPreferences;
+    protected LabsPreferences mLabsPreferences;
     @Inject
-    public Subscription mSubscription;
+    protected Subscription mSubscription;
 
-    public BaseFragmentPresenter() {
+    protected BaseFragmentPresenter() {
         LabsApp.get().inject(this);
     }
 }

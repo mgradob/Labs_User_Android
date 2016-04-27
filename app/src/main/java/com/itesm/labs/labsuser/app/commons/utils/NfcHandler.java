@@ -9,7 +9,6 @@ import android.util.Log;
 import com.itesm.labs.labsuser.app.application.LabsApp;
 import com.itesm.labs.labsuser.app.commons.events.UIDEvent;
 import com.squareup.otto.Bus;
-import com.squareup.otto.Produce;
 
 import javax.inject.Inject;
 
@@ -60,7 +59,7 @@ public class NfcHandler implements ReaderCallback {
      */
     public static String byteToHex(byte data) {
         StringBuffer buf = new StringBuffer();
-        buf.append(toHexChar((data >>> 4) & 0x0F));
+        buf.append(toHexChar((data >> 4) & 0x0F));
         buf.append(toHexChar(data & 0x0F));
         return buf.toString();
     }

@@ -1,5 +1,6 @@
 package com.itesm.labs.labsuser.app.admin.adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +10,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.admin.adapters.models.ItemCategory;
+import com.itesm.labs.labsuser.app.admin.views.activities.InventoryDetailActivity;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
-import com.itesm.labs.labsuser.app.commons.events.ItemClickEvent;
-import com.itesm.labs.labsuser.app.commons.events.ItemLongClickEvent;
 
 import butterknife.Bind;
 
@@ -32,12 +32,6 @@ public class AdminCategoryRecyclerAdapter extends BaseRecyclerAdapter<ItemCatego
     public void onBindViewHolder(ViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         holder.bindData(DATA.get(position));
-        holder.itemView.setOnClickListener(v ->
-                mEventBus.post(new ItemClickEvent<>(DATA.get(position))));
-        holder.itemView.setOnLongClickListener(v -> {
-            mEventBus.post(new ItemLongClickEvent<>(DATA.get(position)));
-            return true;
-        });
     }
 
     public class ViewHolder extends BaseViewHolder<ItemCategory> {
@@ -58,12 +52,26 @@ public class AdminCategoryRecyclerAdapter extends BaseRecyclerAdapter<ItemCatego
 
         @Override
         public void bindData(ItemCategory holderItem) {
+            mModel = holderItem;
+
             Glide.with(mContext)
-                    .load(holderItem.getImageResource())
+                    .load(mModel.getImageResource())
                     .into(itemImage);
 
-            itemName.setText(holderItem.getName());
+            itemName.setText(mModel.getName());
+        }
 
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(mContext, InventoryDetailActivity.class);
+            intent.putExtra(InventoryDetailActivity.EXTRA_CATEGORY_ID, mModel.getId());
+            mContext.startActivity(intent);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            // TODO: 4/23/16 go to edit category.
+            return false;
         }
     }
 }
