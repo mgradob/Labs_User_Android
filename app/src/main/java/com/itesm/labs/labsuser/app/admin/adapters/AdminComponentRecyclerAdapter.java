@@ -1,5 +1,6 @@
 package com.itesm.labs.labsuser.app.admin.adapters;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +18,8 @@ import butterknife.Bind;
  */
 public class AdminComponentRecyclerAdapter extends BaseRecyclerAdapter<Component, AdminComponentRecyclerAdapter.ViewHolder> {
 
-    public AdminComponentRecyclerAdapter() {
-        super();
+    public AdminComponentRecyclerAdapter(Activity activity) {
+        super(activity);
     }
 
     @Override

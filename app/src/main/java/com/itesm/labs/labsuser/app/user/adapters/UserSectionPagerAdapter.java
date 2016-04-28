@@ -49,7 +49,7 @@ public class UserSectionPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 4;
+        return 3;
     }
 
     @Override

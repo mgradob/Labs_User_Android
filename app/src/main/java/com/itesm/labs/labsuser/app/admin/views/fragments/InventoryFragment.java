@@ -77,7 +77,7 @@ public class InventoryFragment extends BaseFragment implements IListContract {
         mListView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         mListView.setHasFixedSize(true);
 
-        mAdapter = new AdminCategoryRecyclerAdapter();
+        mAdapter = new AdminCategoryRecyclerAdapter(getActivity());
 
         mListView.setAdapter(mAdapter);
     }

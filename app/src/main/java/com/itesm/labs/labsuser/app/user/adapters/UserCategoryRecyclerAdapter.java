@@ -1,5 +1,6 @@
 package com.itesm.labs.labsuser.app.user.adapters;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +22,8 @@ import butterknife.Bind;
  */
 public class UserCategoryRecyclerAdapter extends BaseRecyclerAdapter<ItemCategory, UserCategoryRecyclerAdapter.ViewHolder> {
 
-    public UserCategoryRecyclerAdapter() {
-        super();
+    public UserCategoryRecyclerAdapter(Activity activity) {
+        super(activity);
     }
 
     /**
@@ -86,7 +87,7 @@ public class UserCategoryRecyclerAdapter extends BaseRecyclerAdapter<ItemCategor
         public void onClick(View v) {
             Intent intent = new Intent(mContext, UserInventoryDetailActivity.class);
             intent.putExtra(UserInventoryDetailActivity.EXTRA_CATEGORY_ID, mModel.getId());
-            mContext.startActivity(intent);
+            mActivity.startActivity(intent);
         }
 
         @Override

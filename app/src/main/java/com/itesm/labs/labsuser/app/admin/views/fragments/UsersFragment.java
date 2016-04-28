@@ -78,7 +78,7 @@ public class UsersFragment extends BaseFragment implements IListContract {
         mListView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         mListView.setHasFixedSize(true);
 
-        mAdapter = new AdminUserRecyclerAdapter();
+        mAdapter = new AdminUserRecyclerAdapter(getActivity());
 
         mListView.setAdapter(mAdapter);
     }

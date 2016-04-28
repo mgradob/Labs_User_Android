@@ -76,7 +76,7 @@ public class LabsActivity extends BaseActivity {
         mRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 2));
         mRecyclerView.setHasFixedSize(true);
 
-        mLabsAdapter = new LabsRecyclerAdapter();
+        mLabsAdapter = new LabsRecyclerAdapter(this);
         mRecyclerView.setAdapter(mLabsAdapter);
     }
 

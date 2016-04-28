@@ -86,7 +86,7 @@ public class UserInventoryFragment extends BaseFragment implements IListContract
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setHasFixedSize(true);
 
-        mAdapter = new UserCategoryRecyclerAdapter();
+        mAdapter = new UserCategoryRecyclerAdapter(getActivity());
 
         mRecyclerView.setAdapter(mAdapter);
     }
@@ -117,6 +117,8 @@ public class UserInventoryFragment extends BaseFragment implements IListContract
 
     @Override
     public void updateInfo(List data) {
+        refreshLayout.setRefreshing(false);
+
         mAdapter.refresh(data);
     }
 }

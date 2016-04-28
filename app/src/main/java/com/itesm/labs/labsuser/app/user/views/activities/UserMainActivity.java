@@ -31,39 +31,34 @@ public class UserMainActivity extends BaseActivity {
 
         ButterKnife.bind(this);
 
-        setupToolbar();
-
-        setupStatusBar();
-
-        setupTabLayout();
+        setupUi();
 
         mPager.setCurrentItem(1);
 
 //        startService(new Intent(mContext, BackgroundService.class));
     }
 
+
     @Override
     public void setupUi() {
-        setupToolbar();
-        setupStatusBar();
-        setupTabLayout();
+        setupToolbar(mLabsPreferences.getLabColor(), mLabsPreferences.getCurrentLab().getName());
+
+        setupStatusBar(mLabsPreferences.getLabColor());
+
+        setupTabLayout(mLabsPreferences.getLabColor());
     }
 
-    private void setupToolbar() {
-        mToolbar.setBackgroundColor(getResources().getIntArray(R.array.material_colors)[mLabsPreferences.getLabColor()]);
-        mToolbar.setTitle(mLabsPreferences.getCurrentLab().getName());
+    private void setupToolbar(int colorRes, String title) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            mToolbar.setBackgroundColor(colorRes);
+
+        mToolbar.setTitle(title);
         setSupportActionBar(mToolbar);
     }
 
-    private void setupStatusBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-            getWindow().setStatusBarColor(getResources().getIntArray(R.array.material_colors_dark)[mLabsPreferences.getLabColor()]);
-    }
-
-    private void setupTabLayout() {
+    private void setupTabLayout(int colorRes) {
         mPager.setAdapter(new UserSectionPagerAdapter(getSupportFragmentManager()));
-
-        mTabLayout.setBackgroundColor(getResources().getIntArray(R.array.material_colors)[mLabsPreferences.getLabColor()]);
         mTabLayout.setupWithViewPager(mPager);
+        mTabLayout.setBackgroundColor(colorRes);
     }
 }

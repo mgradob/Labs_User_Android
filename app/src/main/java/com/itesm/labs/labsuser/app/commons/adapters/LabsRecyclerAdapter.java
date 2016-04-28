@@ -1,5 +1,6 @@
 package com.itesm.labs.labsuser.app.commons.adapters;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,8 +34,8 @@ public class LabsRecyclerAdapter extends BaseRecyclerAdapter<ItemLaboratory, Lab
     private int[] colorArray;
     private Random mRandom = new Random();
 
-    public LabsRecyclerAdapter() {
-        super();
+    public LabsRecyclerAdapter(Activity activity) {
+        super(activity);
     }
 
     @Override
@@ -100,7 +101,7 @@ public class LabsRecyclerAdapter extends BaseRecyclerAdapter<ItemLaboratory, Lab
             Intent intent;
             intent = mLabsPreferences.getIsAdmin() ? new Intent(mContext, MainActivity.class)
                     : new Intent(mContext, UserMainActivity.class) ;
-            mContext.startActivity(intent);
+            mActivity.startActivity(intent);
         }
 
         @Override

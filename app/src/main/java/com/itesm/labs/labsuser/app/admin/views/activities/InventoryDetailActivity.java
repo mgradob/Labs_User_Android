@@ -60,7 +60,7 @@ public class InventoryDetailActivity extends BaseActivity implements IListContra
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.hasFixedSize();
 
-        mAdapter = new AdminComponentRecyclerAdapter();
+        mAdapter = new AdminComponentRecyclerAdapter(this);
 
         mRecyclerView.setAdapter(mAdapter);
     }

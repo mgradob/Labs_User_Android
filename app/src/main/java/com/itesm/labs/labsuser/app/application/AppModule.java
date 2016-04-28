@@ -2,6 +2,7 @@ package com.itesm.labs.labsuser.app.application;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.nfc.NfcAdapter;
 
 import com.itesm.labs.labsuser.app.admin.adapters.AdminCategoryRecyclerAdapter;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminComponentRecyclerAdapter;
@@ -23,6 +24,7 @@ import com.itesm.labs.labsuser.app.admin.views.presenters.InventoryDetailPresent
 import com.itesm.labs.labsuser.app.admin.views.presenters.InventoryPresenter;
 import com.itesm.labs.labsuser.app.admin.views.presenters.RequestsDetailPresenter;
 import com.itesm.labs.labsuser.app.admin.views.presenters.RequestsPresenter;
+import com.itesm.labs.labsuser.app.admin.views.presenters.UserEditPresenter;
 import com.itesm.labs.labsuser.app.admin.views.presenters.UsersDetailPresenter;
 import com.itesm.labs.labsuser.app.admin.views.presenters.UsersPresenter;
 import com.itesm.labs.labsuser.app.bases.BaseActivity;
@@ -33,6 +35,7 @@ import com.itesm.labs.labsuser.app.bases.BaseFragmentPresenter;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
 import com.itesm.labs.labsuser.app.commons.adapters.LabsRecyclerAdapter;
+import com.itesm.labs.labsuser.app.commons.utils.NfcController;
 import com.itesm.labs.labsuser.app.commons.utils.NfcHandler;
 import com.itesm.labs.labsuser.app.commons.views.activities.LabsActivity;
 import com.itesm.labs.labsuser.app.commons.views.activities.LoginActivity;
@@ -40,14 +43,19 @@ import com.itesm.labs.labsuser.app.commons.views.activities.MainActivity;
 import com.itesm.labs.labsuser.app.commons.views.presenters.LabsActivityPresenter;
 import com.itesm.labs.labsuser.app.commons.views.presenters.LoginActivityPresenter;
 import com.itesm.labs.labsuser.app.commons.views.presenters.MainActivityPresenter;
+import com.itesm.labs.labsuser.app.user.adapters.UserCartRecyclerAdapter;
 import com.itesm.labs.labsuser.app.user.adapters.UserCategoryRecyclerAdapter;
 import com.itesm.labs.labsuser.app.user.adapters.UserComponentRecyclerAdapter;
+import com.itesm.labs.labsuser.app.user.adapters.UserHistoryRecyclerAdapter;
 import com.itesm.labs.labsuser.app.user.adapters.UserSectionPagerAdapter;
+import com.itesm.labs.labsuser.app.user.views.activities.UserInventoryDetailActivity;
 import com.itesm.labs.labsuser.app.user.views.activities.UserMainActivity;
 import com.itesm.labs.labsuser.app.user.views.fragments.UserCartFragment;
 import com.itesm.labs.labsuser.app.user.views.fragments.UserHistoryFragment;
 import com.itesm.labs.labsuser.app.user.views.fragments.UserInventoryFragment;
+import com.itesm.labs.labsuser.app.user.views.presenters.UserCartPresenter;
 import com.itesm.labs.labsuser.app.user.views.presenters.UserHistoryPresenter;
+import com.itesm.labs.labsuser.app.user.views.presenters.UserInventoryDetailPresenter;
 import com.itesm.labs.labsuser.app.user.views.presenters.UserInventoryPresenter;
 import com.squareup.otto.Bus;
 import com.squareup.otto.ThreadEnforcer;
@@ -103,16 +111,22 @@ import rx.subscriptions.Subscriptions;
                 UsersDetailPresenter.class,
                 ReportsFragment.class,
                 UserEditActivity.class,
+                UserEditPresenter.class,
                 NfcHandler.class,
                 UserMainActivity.class,
                 UserSectionPagerAdapter.class,
                 UserInventoryFragment.class,
                 UserInventoryPresenter.class,
+                UserInventoryDetailActivity.class,
+                UserInventoryDetailPresenter.class,
                 UserCategoryRecyclerAdapter.class,
                 UserComponentRecyclerAdapter.class,
                 UserCartFragment.class,
+                UserCartPresenter.class,
+                UserCartRecyclerAdapter.class,
                 UserHistoryFragment.class,
                 UserHistoryPresenter.class,
+                UserHistoryRecyclerAdapter.class,
         }
 )
 public class AppModule {
@@ -181,6 +195,12 @@ public class AppModule {
     @Singleton
     NfcHandler providesNfcHandler() {
         return new NfcHandler();
+    }
+
+    @Provides
+    @Singleton
+    NfcController providesNfcController() {
+        return new NfcController();
     }
 
     @Provides

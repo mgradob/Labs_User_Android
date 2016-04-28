@@ -24,7 +24,9 @@ import butterknife.OnClick;
 public class UserEditActivity extends BaseActivity {
 
     public static final String EXTRA_USER_ID = "USER_ID";
+    
     private static final String TAG = UserEditActivity.class.getSimpleName();
+
     @Bind(R.id.activity_user_edit_toolbar)
     Toolbar activityUserEditToolbar;
     @Bind(R.id.activity_user_edit_mat)

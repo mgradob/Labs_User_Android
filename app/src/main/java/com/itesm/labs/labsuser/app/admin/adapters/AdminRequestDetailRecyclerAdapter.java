@@ -1,5 +1,6 @@
 package com.itesm.labs.labsuser.app.admin.adapters;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,10 @@ import butterknife.ButterKnife;
  * Created by mgradob on 12/27/15.
  */
 public class AdminRequestDetailRecyclerAdapter extends BaseRecyclerAdapter<ItemUserCartDetail, AdminRequestDetailRecyclerAdapter.ViewHolder> {
+
+    public AdminRequestDetailRecyclerAdapter(Activity activity) {
+        super(activity);
+    }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {

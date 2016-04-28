@@ -1,5 +1,6 @@
 package com.itesm.labs.labsuser.app.admin.adapters;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
@@ -26,8 +27,8 @@ public class AdminUserRecyclerAdapter extends BaseRecyclerAdapter<User, AdminUse
     int[] mColors;
     Random mRandom;
 
-    public AdminUserRecyclerAdapter() {
-        super();
+    public AdminUserRecyclerAdapter(Activity activity) {
+        super(activity);
 
         mColors = mContext.getResources().getIntArray(R.array.material_colors);
         mRandom = new Random();
@@ -83,14 +84,14 @@ public class AdminUserRecyclerAdapter extends BaseRecyclerAdapter<User, AdminUse
         public void onClick(View v) {
             Intent intent = new Intent(mContext, UserDetailActivity.class);
             intent.putExtra(UserEditActivity.EXTRA_USER_ID, mModel.getUserId());
-            mContext.startActivity(intent);
+            mActivity.startActivity(intent);
         }
 
         @Override
         public boolean onLongClick(View v) {
             Intent intent = new Intent(mContext, UserEditActivity.class);
             intent.putExtra(UserEditActivity.EXTRA_USER_ID, mModel.getUserId());
-            mContext.startActivity(intent);
+            mActivity.startActivity(intent);
 
             return true;
         }

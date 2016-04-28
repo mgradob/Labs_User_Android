@@ -8,6 +8,7 @@ import android.util.Log;
 import com.itesm.labs.labsuser.app.admin.views.activities.UserEditActivity;
 import com.itesm.labs.labsuser.app.application.LabsPreferences;
 import com.itesm.labs.labsuser.app.bases.BaseActivityPresenter;
+import com.itesm.labs.labsuser.app.commons.utils.NfcController;
 import com.itesm.labs.labsuser.app.commons.utils.NfcHandler;
 import com.mgb.labsapi.clients.UserClient;
 import com.mgb.labsapi.models.User;
@@ -27,40 +28,30 @@ public class UserEditPresenter extends BaseActivityPresenter {
     private static final String TAG = UserEditPresenter.class.getSimpleName();
 
     @Inject
-    NfcHandler mNfcHandler;
-    @Inject
     UserClient mUserClient;
     @Inject
     LabsPreferences mPreferences;
+    @Inject
+    NfcController mNfcController;
 
     User mUser;
 
     private UserEditActivity mView;
-    private NfcAdapter mNfcAdapter;
 
     public UserEditPresenter(UserEditActivity view) {
         this.mView = view;
     }
 
     public void setupNfc() {
-        mNfcAdapter = NfcAdapter.getDefaultAdapter(mView);
-
-        if (mNfcAdapter == null) Log.d(TAG, "No NFC adapter available");
-
-        if (!mNfcAdapter.isEnabled()) {
-            Log.d(TAG, "NFC adapter is disabled");
-            mView.startActivity(new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS));
-        }
+        mNfcController.setupNfc(mView);
     }
 
     public void enableNfc() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-            mNfcAdapter.enableReaderMode(mView, mNfcHandler, NfcAdapter.FLAG_READER_NFC_A | NfcAdapter.FLAG_READER_NFC_B, null);
+        mNfcController.enableNfc(mView);
     }
 
     public void disableNfc() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-            mNfcAdapter.disableReaderMode(mView);
+        mNfcController.disableNfc(mView);
     }
 
     public void getUser(String userId) {

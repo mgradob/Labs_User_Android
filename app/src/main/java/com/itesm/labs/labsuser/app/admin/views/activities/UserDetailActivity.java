@@ -59,7 +59,7 @@ public class UserDetailActivity extends BaseActivity implements IListContract {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.hasFixedSize();
 
-        mAdapter = new AdminUserDetailRecyclerAdapter();
+        mAdapter = new AdminUserDetailRecyclerAdapter(this);
 
         mRecyclerView.setAdapter(mAdapter);
     }

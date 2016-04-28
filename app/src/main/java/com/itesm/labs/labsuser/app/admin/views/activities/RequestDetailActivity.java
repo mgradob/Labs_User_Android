@@ -72,7 +72,7 @@ public class RequestDetailActivity extends BaseActivity implements IListContract
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.hasFixedSize();
 
-        mAdapter = new AdminRequestDetailRecyclerAdapter();
+        mAdapter = new AdminRequestDetailRecyclerAdapter(this);
 
         mRecyclerView.setAdapter(mAdapter);
     }

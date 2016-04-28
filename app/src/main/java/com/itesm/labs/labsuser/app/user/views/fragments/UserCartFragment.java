@@ -29,8 +29,6 @@ public class UserCartFragment extends BaseFragment implements IListContract {
 
     @Bind(R.id.fragment_cart_recycler_view)
     RecyclerView mRecyclerView;
-    @Bind(R.id.fragment_cart_fab)
-    FloatingActionButton fab;
     @Bind(R.id.fragment_cart_list_view_swipe_refresh)
     SwipeRefreshLayout refreshLayout;
 
@@ -80,7 +78,7 @@ public class UserCartFragment extends BaseFragment implements IListContract {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.hasFixedSize();
 
-        mAdapter = new UserCartRecyclerAdapter();
+        mAdapter = new UserCartRecyclerAdapter(getActivity());
 
         mRecyclerView.setAdapter(mAdapter);
     }
@@ -109,14 +107,8 @@ public class UserCartFragment extends BaseFragment implements IListContract {
 
     @Override
     public void updateInfo(List data) {
+        refreshLayout.setRefreshing(false);
+
         mAdapter.refresh(data);
-    }
-
-    @OnClick(R.id.fragment_cart_fab)
-    void postCart() {
-        // Actualizar todos los items que haya actualmente en la base de datos, ya tenemos una
-        // lista con todos los items nuevos en userCart.
-
-        mPresenter.postUserCart();
     }
 }

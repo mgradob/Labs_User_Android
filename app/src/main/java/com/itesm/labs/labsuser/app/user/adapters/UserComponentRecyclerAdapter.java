@@ -1,9 +1,11 @@
 package com.itesm.labs.labsuser.app.user.adapters;
 
+import android.app.Activity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.itesm.labs.labsuser.R;
@@ -30,12 +32,10 @@ import rx.schedulers.Schedulers;
 /**
  * Created by mgradob on 7/1/15.
  */
-public class UserComponentRecyclerAdapter extends BaseRecyclerAdapter<Component, UserComponentRecyclerAdapter.ViewHolder> {
+public class UserComponentRecyclerAdapter extends BaseRecyclerAdapter<Component, UserComponentRecyclerAdapter.ComponentViewHolder> {
 
     private static final String TAG = UserComponentRecyclerAdapter.class.getSimpleName();
 
-    @Inject
-    ComponentClient mComponentClient;
     @Inject
     CartClient mCartClient;
     @Inject
@@ -43,21 +43,21 @@ public class UserComponentRecyclerAdapter extends BaseRecyclerAdapter<Component,
 
     private ArrayList<CartItem> mUserCartItems = new ArrayList<>();
 
-    public UserComponentRecyclerAdapter() {
-        super();
+    public UserComponentRecyclerAdapter(Activity activity) {
+        super(activity);
 
         getUserCart();
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ComponentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View itemView = inflater.inflate(R.layout.list_item_user_component, parent, false);
-        return new ViewHolder(itemView);
+        return new ComponentViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ComponentViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         holder.bindData(DATA.get(position));
     }
@@ -89,7 +89,7 @@ public class UserComponentRecyclerAdapter extends BaseRecyclerAdapter<Component,
                 });
     }
 
-    public class ViewHolder extends BaseViewHolder<Component> {
+    public class ComponentViewHolder extends BaseViewHolder<Component> {
 
         @Bind(R.id.component_item_name)
         TextView componentItemName;
@@ -100,12 +100,11 @@ public class UserComponentRecyclerAdapter extends BaseRecyclerAdapter<Component,
         @Bind(R.id.component_item_in_cart)
         TextView componentItemInCart;
         @Bind(R.id.component_item_add)
-        TextView componentItemAdd;
+        ImageButton componentItemAdd;
         @Bind(R.id.component_item_remove)
-        TextView componentItemRemove;
+        ImageButton componentItemRemove;
 
-
-        public ViewHolder(View itemView) {
+        public ComponentViewHolder(View itemView) {
             super(itemView);
         }
 
@@ -116,8 +115,18 @@ public class UserComponentRecyclerAdapter extends BaseRecyclerAdapter<Component,
             componentItemName.setText(mModel.getName());
             componentItemNote.setText(mModel.getNote());
 
+
+            int inCart = 0;
+            for (CartItem cartItem : mUserCartItems) {
+                if (cartItem.getComponentId() == mModel.getId()) {
+                    inCart = cartItem.getQuantity();
+
+                    mModel.setAvailable(mModel.getTotal() - cartItem.getQuantity());
+                }
+            }
+
             componentItemAvailable.setText(String.format(mContext.getString(R.string.component_list_item_available), mModel.getAvailable()));
-            componentItemInCart.setText(String.format(mContext.getString(R.string.component_list_item_in_cart), 0));
+            componentItemInCart.setText(String.format(mContext.getString(R.string.component_list_item_in_cart), inCart));
         }
 
         @OnClick({R.id.component_item_add, R.id.component_item_remove})
@@ -130,8 +139,10 @@ public class UserComponentRecyclerAdapter extends BaseRecyclerAdapter<Component,
                     }
                     break;
                 case R.id.component_item_remove:
-                    mModel.setAvailable(mModel.getAvailable() + 1);
-                    removeComponentFromCart();
+                    if (mModel.getTotal() > mModel.getAvailable()) {
+                        mModel.setAvailable(mModel.getAvailable() + 1);
+                        removeComponentFromCart();
+                    }
                     break;
             }
         }
@@ -146,6 +157,7 @@ public class UserComponentRecyclerAdapter extends BaseRecyclerAdapter<Component,
             for (CartItem cartItem : mUserCartItems) {
                 if (cartItem.getComponentId() == mModel.getId()) {
                     itemInCart = cartItem;
+                    itemInCart.setQuantity(itemInCart.getQuantity() + 1);
                     break;
                 }
             }
@@ -161,14 +173,10 @@ public class UserComponentRecyclerAdapter extends BaseRecyclerAdapter<Component,
                             .build()
             );
 
-            Observable.zip(
-                    mComponentClient.editComponent(mLabsPreferences.getToken(), mLabsPreferences.getLabLink(), mModel.getId(), mModel),
-                    cartitemObservable,
-                    (component, response) -> component
-            )
+            cartitemObservable
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Subscriber<Component>() {
+                    .subscribe(new Subscriber<Response>() {
                         @Override
                         public void onStart() {
                             Log.d(TAG, "Task update user cart started");
@@ -178,6 +186,7 @@ public class UserComponentRecyclerAdapter extends BaseRecyclerAdapter<Component,
                         public void onCompleted() {
                             Log.d(TAG, "Task get user cart completed");
 
+                            notifyItemChanged(DATA.indexOf(mModel));
                         }
 
                         @Override
@@ -187,7 +196,7 @@ public class UserComponentRecyclerAdapter extends BaseRecyclerAdapter<Component,
                         }
 
                         @Override
-                        public void onNext(Component component) {
+                        public void onNext(Response response) {
 
                         }
                     });
@@ -205,21 +214,17 @@ public class UserComponentRecyclerAdapter extends BaseRecyclerAdapter<Component,
 
             Observable<Response> cartitemObservable;
 
-            if(itemInCart.getQuantity() > 1) {
+            if (itemInCart.getQuantity() > 1) {
                 itemInCart.setQuantity(itemInCart.getQuantity() - 1);
                 cartitemObservable = mCartClient.editCartItem(mLabsPreferences.getToken(), mLabsPreferences.getLabLink(), itemInCart.getCartId(), itemInCart);
             } else {
                 cartitemObservable = mCartClient.deleteCartItem(mLabsPreferences.getToken(), mLabsPreferences.getLabLink(), itemInCart.getCartId());
             }
 
-            Observable.zip(
-                    mComponentClient.editComponent(mLabsPreferences.getToken(), mLabsPreferences.getLabLink(), mModel.getId(), mModel),
-                    cartitemObservable,
-                    (component, response) -> component
-            )
+            cartitemObservable
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Subscriber<Component>() {
+                    .subscribe(new Subscriber<Response>() {
                         @Override
                         public void onStart() {
                             Log.d(TAG, "Task update user cart started");
@@ -229,6 +234,7 @@ public class UserComponentRecyclerAdapter extends BaseRecyclerAdapter<Component,
                         public void onCompleted() {
                             Log.d(TAG, "Task get user cart completed");
 
+                            notifyItemChanged(DATA.indexOf(mModel));
                         }
 
                         @Override
@@ -238,7 +244,7 @@ public class UserComponentRecyclerAdapter extends BaseRecyclerAdapter<Component,
                         }
 
                         @Override
-                        public void onNext(Component component) {
+                        public void onNext(Response response) {
 
                         }
                     });

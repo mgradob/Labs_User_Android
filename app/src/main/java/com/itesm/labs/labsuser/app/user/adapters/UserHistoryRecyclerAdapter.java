@@ -1,5 +1,6 @@
 package com.itesm.labs.labsuser.app.user.adapters;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,10 @@ import butterknife.Bind;
  * Created by mgradob on 11/21/15.
  */
 public class UserHistoryRecyclerAdapter extends BaseRecyclerAdapter<History, UserHistoryRecyclerAdapter.ViewHolder> {
+
+    public UserHistoryRecyclerAdapter(Activity activity) {
+        super(activity);
+    }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {

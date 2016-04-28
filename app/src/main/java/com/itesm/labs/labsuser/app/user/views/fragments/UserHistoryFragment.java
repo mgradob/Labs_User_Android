@@ -81,7 +81,7 @@ public class UserHistoryFragment extends BaseFragment implements IListContract {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.hasFixedSize();
 
-        mAdapter = new UserHistoryRecyclerAdapter();
+        mAdapter = new UserHistoryRecyclerAdapter(getActivity());
 
         mRecyclerView.setAdapter(mAdapter);
     }
@@ -110,6 +110,8 @@ public class UserHistoryFragment extends BaseFragment implements IListContract {
 
     @Override
     public void updateInfo(List data) {
+        refreshLayout.setRefreshing(false);
+
         mAdapter.refresh(data);
     }
 }

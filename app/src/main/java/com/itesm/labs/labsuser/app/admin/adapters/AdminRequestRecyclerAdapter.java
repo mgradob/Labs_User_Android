@@ -1,5 +1,6 @@
 package com.itesm.labs.labsuser.app.admin.adapters;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -20,6 +21,10 @@ import butterknife.Bind;
  * Created by mgradob on 12/29/15.
  */
 public class AdminRequestRecyclerAdapter extends BaseRecyclerAdapter<ItemUserCart, AdminRequestRecyclerAdapter.ViewHolder> {
+
+    public AdminRequestRecyclerAdapter(Activity activity) {
+        super(activity);
+    }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
@@ -76,7 +81,7 @@ public class AdminRequestRecyclerAdapter extends BaseRecyclerAdapter<ItemUserCar
             Intent intent = new Intent(mContext, RequestDetailActivity.class);
             intent.putExtra(RequestDetailActivity.EXTRA_USER_ID, mModel.getUserId());
             intent.putExtra(RequestDetailActivity.EXTRA_IS_READY, mModel.isReady());
-            mContext.startActivity(intent);
+            mActivity.startActivity(intent);
         }
 
         @Override

@@ -42,7 +42,10 @@ public class UserInventoryDetailActivity extends BaseActivity implements IListCo
         Bundle extras = getIntent().getExtras();
         mCategoryId = extras.getInt(EXTRA_CATEGORY_ID);
 
+        setupUi();
+
         mPresenter = new UserInventoryDetailPresenter(this, mCategoryId);
+        mPresenter.getComponents();
     }
 
     @Override
@@ -56,7 +59,7 @@ public class UserInventoryDetailActivity extends BaseActivity implements IListCo
         activityInventoryDetailRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         activityInventoryDetailRecyclerView.setHasFixedSize(true);
 
-        mAdapter = new UserComponentRecyclerAdapter();
+        mAdapter = new UserComponentRecyclerAdapter(this);
 
         activityInventoryDetailRecyclerView.setAdapter(mAdapter);
     }

@@ -1,5 +1,6 @@
 package com.itesm.labs.labsuser.app.bases;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.UiThread;
 import android.support.v7.widget.RecyclerView;
@@ -25,9 +26,13 @@ public abstract class BaseRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
     @Inject
     protected Bus mEventBus;
 
+    protected Activity mActivity;
+
     protected List<T> DATA = new ArrayList<>();
 
-    public BaseRecyclerAdapter() {
+    public BaseRecyclerAdapter(Activity activity) {
+        this.mActivity = activity;
+
         LabsApp.get().inject(this);
     }
 

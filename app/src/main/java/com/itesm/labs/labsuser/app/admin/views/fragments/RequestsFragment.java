@@ -76,7 +76,7 @@ public class RequestsFragment extends BaseFragment implements IListContract {
         mCartsListView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         mCartsListView.hasFixedSize();
 
-        mAdapter = new AdminRequestRecyclerAdapter();
+        mAdapter = new AdminRequestRecyclerAdapter(getActivity());
 
         mCartsListView.setAdapter(mAdapter);
     }

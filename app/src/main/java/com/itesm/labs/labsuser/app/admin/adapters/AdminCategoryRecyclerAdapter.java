@@ -1,5 +1,6 @@
 package com.itesm.labs.labsuser.app.admin.adapters;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,10 @@ import butterknife.Bind;
  * Created by mgradob on 2/12/16.
  */
 public class AdminCategoryRecyclerAdapter extends BaseRecyclerAdapter<ItemCategory, AdminCategoryRecyclerAdapter.ViewHolder> {
+
+    public AdminCategoryRecyclerAdapter(Activity activity) {
+        super(activity);
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -65,7 +70,7 @@ public class AdminCategoryRecyclerAdapter extends BaseRecyclerAdapter<ItemCatego
         public void onClick(View v) {
             Intent intent = new Intent(mContext, InventoryDetailActivity.class);
             intent.putExtra(InventoryDetailActivity.EXTRA_CATEGORY_ID, mModel.getId());
-            mContext.startActivity(intent);
+            mActivity.startActivity(intent);
         }
 
         @Override

@@ -50,14 +50,18 @@
         <activity
             android:name=".app.admin.views.activities.UserDetailActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".app.user.views.activities.UserMainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".app.user.views.activities.UserInventoryDetailActivity"
+            android:screenOrientation="portrait" />
 
         <service android:name=".app.commons.services.BackgroundService" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="727c1a1f00406d3676ef61ba0a55466fe6877f40" />
-
-        <activity android:name=".app.user.views.activities.UserInventoryDetailActivity"></activity>
     </application>
 
 </manifest>
