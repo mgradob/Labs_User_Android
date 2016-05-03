@@ -4,9 +4,13 @@ import android.app.Application;
 
 import com.crashlytics.android.Crashlytics;
 import com.itesm.labs.labsuser.BuildConfig;
+import com.mgb.labsapi.clients.UserClient;
+
+import javax.inject.Inject;
 
 import dagger.ObjectGraph;
 import io.fabric.sdk.android.Fabric;
+import rx.Subscription;
 
 /**
  * Created by mgradob on 10/26/15.

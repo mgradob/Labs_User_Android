@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
+import com.itesm.labs.labsuser.app.commons.utils.DateTimeUtil;
 import com.mgb.labsapi.models.History;
 
 import butterknife.Bind;
@@ -58,8 +59,15 @@ public class UserHistoryRecyclerAdapter extends BaseRecyclerAdapter<History, Use
             mModel = holderItem;
 
             recordItemCategoryName.setText(mModel.getCategoryName());
-            recordItemComponentNameNoteQty.setText(String.format(mContext.getString(R.string.record_name_note_quantity), mModel.getComponentName(), mModel.getComponentNote(), mModel.getQuantity()));
-            recordItemDateOutIn.setText(String.format(mContext.getString(R.string.record_dates), mModel.getDateOut(), mModel.getDateIn()));
+            recordItemComponentNameNoteQty.setText(String.format(mContext.getString(R.string.record_name_note_quantity),
+                    mModel.getComponentName() == null ? "" : mModel.getComponentName(),
+                    mModel.getComponentNote() == null ? "" : mModel.getComponentNote(),
+                    mModel.getQuantity())
+            );
+            recordItemDateOutIn.setText(
+                    String.format(mContext.getString(R.string.record_dates),
+                            DateTimeUtil.formatDateToLocal(mModel.getDateOut()),
+                            DateTimeUtil.formatDateToLocal(mModel.getDateIn())));
         }
 
         @Override

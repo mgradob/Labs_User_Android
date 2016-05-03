@@ -4,6 +4,10 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.bases.BaseActivity;
@@ -23,6 +27,8 @@ public class LabsActivity extends BaseActivity {
     RecyclerView mRecyclerView;
     @Bind(R.id.labs_grid_swipe_refresh)
     SwipeRefreshLayout mRefreshLayout;
+    @Bind(R.id.labs_toolbar)
+    Toolbar labsToolbar;
 
     private LabsRecyclerAdapter mLabsAdapter;
 
@@ -42,6 +48,8 @@ public class LabsActivity extends BaseActivity {
 
     @Override
     public void setupUi() {
+        setSupportActionBar(labsToolbar);
+
         setupStatusBar(getResources().getColor(R.color.primary));
 
         setupRefreshLayout();
@@ -87,5 +95,29 @@ public class LabsActivity extends BaseActivity {
 
     public void showError() {
         mRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_labs, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_labs_settings:
+                return true;
+            case R.id.menu_main_logout:
+                logoutUser();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        logoutUser();
     }
 }

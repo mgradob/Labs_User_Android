@@ -42,13 +42,6 @@ public class LabsActivityPresenter extends BaseActivityPresenter {
         random = new Random();
     }
 
-    //region UI
-    public ItemLaboratory getLabItem(int position) {
-        return labsList.get(position);
-    }
-    //endregion
-
-    //region Api calls
     public void getAllowedLabs() {
         mSubscription.unsubscribe();
         mSubscription = mLaboratoryClient.getLaboratories(mLabsPreferences.getToken())
@@ -91,5 +84,4 @@ public class LabsActivityPresenter extends BaseActivityPresenter {
                     }
                 });
     }
-    //endregion
 }

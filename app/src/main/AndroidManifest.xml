@@ -62,6 +62,8 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="727c1a1f00406d3676ef61ba0a55466fe6877f40" />
+
+        <activity android:name=".app.commons.views.activities.RegisterActivity"></activity>
     </application>
 
 </manifest>

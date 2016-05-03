@@ -2,6 +2,7 @@ package com.itesm.labs.labsuser.app.user.views.fragments;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -83,7 +84,7 @@ public class UserInventoryFragment extends BaseFragment implements IListContract
 
     @Override
     public void setupList() {
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 2));
         mRecyclerView.setHasFixedSize(true);
 
         mAdapter = new UserCategoryRecyclerAdapter(getActivity());

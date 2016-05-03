@@ -40,9 +40,11 @@ import com.itesm.labs.labsuser.app.commons.utils.NfcHandler;
 import com.itesm.labs.labsuser.app.commons.views.activities.LabsActivity;
 import com.itesm.labs.labsuser.app.commons.views.activities.LoginActivity;
 import com.itesm.labs.labsuser.app.commons.views.activities.MainActivity;
+import com.itesm.labs.labsuser.app.commons.views.activities.RegisterActivity;
 import com.itesm.labs.labsuser.app.commons.views.presenters.LabsActivityPresenter;
 import com.itesm.labs.labsuser.app.commons.views.presenters.LoginActivityPresenter;
 import com.itesm.labs.labsuser.app.commons.views.presenters.MainActivityPresenter;
+import com.itesm.labs.labsuser.app.commons.views.presenters.RegisterActivityPresenter;
 import com.itesm.labs.labsuser.app.user.adapters.UserCartRecyclerAdapter;
 import com.itesm.labs.labsuser.app.user.adapters.UserCategoryRecyclerAdapter;
 import com.itesm.labs.labsuser.app.user.adapters.UserComponentRecyclerAdapter;
@@ -78,6 +80,8 @@ import rx.subscriptions.Subscriptions;
                 BaseActivity.class,
                 BaseFragment.class,
                 LoginActivity.class,
+                RegisterActivity.class,
+                RegisterActivityPresenter.class,
                 LabsActivity.class,
                 MainActivity.class,
                 BaseDialogFragment.class,

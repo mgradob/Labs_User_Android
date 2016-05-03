@@ -10,6 +10,7 @@ import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.admin.adapters.models.ItemHistory;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
+import com.itesm.labs.labsuser.app.commons.utils.DateTimeUtil;
 import com.itesm.labs.labsuser.app.commons.utils.SwipeDetector;
 
 import butterknife.Bind;
@@ -69,7 +70,8 @@ public class AdminUserDetailRecyclerAdapter extends BaseRecyclerAdapter<ItemHist
             );
             mDateOutIn.setText(
                     String.format(mContext.getString(R.string.user_list_item_history_date_out_in),
-                            holderItem.getHistory().getDateOut(), holderItem.getHistory().getDateIn())
+                            DateTimeUtil.formatDateToLocal(holderItem.getHistory().getDateOut()),
+                            DateTimeUtil.formatDateToLocal(holderItem.getHistory().getDateIn()))
             );
         }
 

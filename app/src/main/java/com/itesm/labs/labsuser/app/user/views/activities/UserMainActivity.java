@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.bases.BaseActivity;
@@ -61,4 +64,22 @@ public class UserMainActivity extends BaseActivity {
         mTabLayout.setupWithViewPager(mPager);
         mTabLayout.setBackgroundColor(colorRes);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_main_settings:
+                return true;
+            case R.id.menu_main_logout:
+                logoutUser();
+            default:
+                return super.onOptionsItemSelected(item);
+        }    }
 }

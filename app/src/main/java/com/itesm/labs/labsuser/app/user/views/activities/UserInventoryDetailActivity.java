@@ -1,11 +1,16 @@
 package com.itesm.labs.labsuser.app.user.views.activities;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.LinearLayout;
+import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
 
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.bases.BaseActivity;
@@ -21,17 +26,27 @@ import butterknife.ButterKnife;
 public class UserInventoryDetailActivity extends BaseActivity implements IListContract {
 
     public static final String EXTRA_CATEGORY_ID = "CATEGORY_ID";
+    public static final String EXTRA_CATEGORY_NAME = "CATEGORY_NAME";
+    public static final String EXTRA_CATEGORY_IMAGE = "CATEGORY_IMAGE";
 
     @Bind(R.id.activity_inventory_detail_recycler_view)
     RecyclerView activityInventoryDetailRecyclerView;
     @Bind(R.id.activity_inventory_detail_swipe_layout)
     SwipeRefreshLayout activityInventoryDetailSwipeLayout;
+    @Bind(R.id.activity_inventory_detail_image)
+    ImageView activityInventoryDetailImage;
+    @Bind(R.id.activity_inventory_detail_toolbar)
+    Toolbar activityInventoryDetailToolbar;
+    @Bind(R.id.activity_inventory_detail_ctl)
+    CollapsingToolbarLayout activityInventoryDetailCtl;
 
     private UserInventoryDetailPresenter mPresenter;
 
     private UserComponentRecyclerAdapter mAdapter;
 
     private int mCategoryId;
+    private String mCategoryName;
+    private int mCategoryImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +56,8 @@ public class UserInventoryDetailActivity extends BaseActivity implements IListCo
 
         Bundle extras = getIntent().getExtras();
         mCategoryId = extras.getInt(EXTRA_CATEGORY_ID);
+        mCategoryName = extras.getString(EXTRA_CATEGORY_NAME);
+        mCategoryImage = extras.getInt(EXTRA_CATEGORY_IMAGE);
 
         setupUi();
 
@@ -50,8 +67,32 @@ public class UserInventoryDetailActivity extends BaseActivity implements IListCo
 
     @Override
     public void setupUi() {
+        setupToolbar();
         setupList();
         setupRefresh();
+    }
+
+    public void setupToolbar() {
+        setSupportActionBar(activityInventoryDetailToolbar);
+
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), mCategoryImage);
+
+        if (bitmap == null) return;
+
+        Palette palette = Palette.from(bitmap).generate();
+
+        activityInventoryDetailImage.setImageBitmap(bitmap);
+
+        activityInventoryDetailCtl.setBackgroundColor(palette.getVibrantColor(getResources().getColor(R.color.primary)));
+        activityInventoryDetailCtl.setContentScrimColor(palette.getVibrantColor(getResources().getColor(R.color.primary)));
+        activityInventoryDetailCtl.setCollapsedTitleTextColor(getResources().getColor(R.color.primary_text_light));
+        activityInventoryDetailCtl.setExpandedTitleColor(getResources().getColor(R.color.primary_text_light));
+
+        activityInventoryDetailToolbar.setTitle(mCategoryName);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(palette.getVibrantColor(getResources().getColor(R.color.primary)));
+        }
     }
 
     @Override
@@ -90,6 +131,8 @@ public class UserInventoryDetailActivity extends BaseActivity implements IListCo
 
     @Override
     public void updateInfo(List data) {
+        activityInventoryDetailSwipeLayout.setRefreshing(false);
+
         mAdapter.refresh(data);
     }
 }

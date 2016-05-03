@@ -4,13 +4,18 @@ import android.util.Log;
 
 import com.itesm.labs.labsuser.app.bases.BaseFragmentPresenter;
 import com.itesm.labs.labsuser.app.user.views.fragments.UserHistoryFragment;
+import com.mgb.labsapi.clients.CategoryClient;
+import com.mgb.labsapi.clients.ComponentClient;
 import com.mgb.labsapi.clients.HistoryClient;
+import com.mgb.labsapi.models.Category;
+import com.mgb.labsapi.models.Component;
 import com.mgb.labsapi.models.History;
 
 import java.util.ArrayList;
 
 import javax.inject.Inject;
 
+import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -24,6 +29,10 @@ public class UserHistoryPresenter extends BaseFragmentPresenter {
 
     @Inject
     HistoryClient mHistoryClient;
+    @Inject
+    ComponentClient mComponentClient;
+    @Inject
+    CategoryClient mCategoryClient;
 
     UserHistoryFragment mView;
 
@@ -35,7 +44,28 @@ public class UserHistoryPresenter extends BaseFragmentPresenter {
 
     public void getUserHistory() {
         mSubscription.unsubscribe();
-        mSubscription = mHistoryClient.getHistoryOf(mLabsPreferences.getToken(), mLabsPreferences.getCurrentLab().getLink(), mLabsPreferences.getUser().getUserId())
+        mSubscription = Observable.zip(
+                mHistoryClient.getHistoryOf(mLabsPreferences.getToken(), mLabsPreferences.getCurrentLab().getLink(), mLabsPreferences.getUser().getUserId()),
+                mComponentClient.getAllComponents(mLabsPreferences.getToken(), mLabsPreferences.getLabLink()),
+                mCategoryClient.getCategories(mLabsPreferences.getToken(), mLabsPreferences.getLabLink()),
+                (histories, components, categories) -> {
+                    for (History history : histories) {
+                        for (Component component : components) {
+                            if (component.getId() == history.getComponentId()) {
+                                history.setComponentName(component.getName());
+                                history.setComponentNote(component.getNote());
+
+                                for (Category category : categories) {
+                                    if (category.getId() == component.getCategory()) {
+                                        history.setCategoryName(category.getName());
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    return histories;
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<ArrayList<History>>() {

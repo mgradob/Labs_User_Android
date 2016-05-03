@@ -87,6 +87,8 @@ public class UserCategoryRecyclerAdapter extends BaseRecyclerAdapter<ItemCategor
         public void onClick(View v) {
             Intent intent = new Intent(mContext, UserInventoryDetailActivity.class);
             intent.putExtra(UserInventoryDetailActivity.EXTRA_CATEGORY_ID, mModel.getId());
+            intent.putExtra(UserInventoryDetailActivity.EXTRA_CATEGORY_NAME, mModel.getName());
+            intent.putExtra(UserInventoryDetailActivity.EXTRA_CATEGORY_IMAGE, mModel.getImageResource());
             mActivity.startActivity(intent);
         }
 

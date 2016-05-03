@@ -1,19 +1,23 @@
 package com.itesm.labs.labsuser.app.bases;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.itesm.labs.labsuser.app.application.LabsApp;
 import com.itesm.labs.labsuser.app.application.LabsPreferences;
+import com.itesm.labs.labsuser.app.commons.views.activities.LoginActivity;
+import com.mgb.labsapi.clients.UserClient;
 import com.squareup.otto.Bus;
-import com.squareup.otto.Subscribe;
 
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by mgradob on 10/26/15.
@@ -28,6 +32,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     public Bus mEventBus;
     @Inject
     public Subscription mSubscription;
+    @Inject
+    UserClient mUserClient;
 
     private boolean isBusRegistered = false;
 
@@ -74,5 +80,19 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void setupStatusBar(int colorRes) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             getWindow().setStatusBarColor(colorRes);
+    }
+
+    public void logoutUser() {
+        mSubscription.unsubscribe();
+        mSubscription = mUserClient.logoutUser(mLabsPreferences.getToken())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe();
+
+        mLabsPreferences.logout();
+
+        Intent resetIntent = new Intent(mContext, LoginActivity.class);
+        resetIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(resetIntent);
     }
 }

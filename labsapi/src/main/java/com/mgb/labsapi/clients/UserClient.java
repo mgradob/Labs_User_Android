@@ -2,7 +2,9 @@ package com.mgb.labsapi.clients;
 
 import com.mgb.labsapi.ApiConstants;
 import com.mgb.labsapi.models.Auth;
+import com.mgb.labsapi.models.ChangePassword;
 import com.mgb.labsapi.models.LoginBody;
+import com.mgb.labsapi.models.NewUser;
 import com.mgb.labsapi.models.User;
 
 import java.util.ArrayList;
@@ -22,8 +24,18 @@ import rx.Observable;
  */
 public interface UserClient {
 
+    @POST("/auth/register/")
+    Observable<Response> registerUser(@Body NewUser body);
+
     @POST("/auth/login/")
     Observable<Auth> loginUser(@Body LoginBody loginUser);
+
+    @POST("/auth/logout/")
+    Observable<Response> logoutUser(@Header(ApiConstants.AUTHORIZATION) String token);
+
+    @POST("/auth/password/")
+    Observable<Response> changeUserPass(@Header(ApiConstants.AUTHORIZATION) String token,
+                                        @Body ChangePassword body);
 
     @GET("/students/{user_id}")
     Observable<User> getUser(@Header(ApiConstants.AUTHORIZATION) String token,

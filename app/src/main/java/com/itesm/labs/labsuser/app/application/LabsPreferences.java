@@ -51,7 +51,6 @@ public class LabsPreferences {
         this.mSharedPreferences = mSharedPreferences;
     }
 
-    //region User preferences,
     public User getUser() {
         User.Builder userBuilder = new User.Builder()
                 .setUserName(mSharedPreferences.getString(PREFERENCES_KEY_USER_NAME, null))
@@ -195,9 +194,7 @@ public class LabsPreferences {
     public void putRememberInfo(boolean remember) {
         mSharedPreferences.edit().putBoolean(PREFERENCES_KEY_USER_REMEMBER_INFO, remember).apply();
     }
-    //endregion
 
-    //region Lab preferences.
     public Laboratory getCurrentLab() {
         return new Laboratory.Builder()
                 .setName(mSharedPreferences.getString(PREFERENCES_KEY_LAB_NAME, null))
@@ -237,5 +234,10 @@ public class LabsPreferences {
                 .putInt(PREFERENCES_KEY_LAB_COLOR, color)
                 .apply();
     }
-    //endregion
+
+    public void logout() {
+        mSharedPreferences.edit()
+                .remove(PREFERENCES_KEY_USER_TOKEN)
+                .apply();
+    }
 }

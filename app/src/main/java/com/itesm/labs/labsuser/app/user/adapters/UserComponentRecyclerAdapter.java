@@ -13,7 +13,6 @@ import com.itesm.labs.labsuser.app.application.LabsPreferences;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
 import com.mgb.labsapi.clients.CartClient;
-import com.mgb.labsapi.clients.ComponentClient;
 import com.mgb.labsapi.models.CartItem;
 import com.mgb.labsapi.models.Component;
 
@@ -115,7 +114,6 @@ public class UserComponentRecyclerAdapter extends BaseRecyclerAdapter<Component,
             componentItemName.setText(mModel.getName());
             componentItemNote.setText(mModel.getNote());
 
-
             int inCart = 0;
             for (CartItem cartItem : mUserCartItems) {
                 if (cartItem.getComponentId() == mModel.getId()) {
@@ -162,21 +160,30 @@ public class UserComponentRecyclerAdapter extends BaseRecyclerAdapter<Component,
                 }
             }
 
-            Observable<Response> cartitemObservable = (itemInCart != null) ? mCartClient.editCartItem(mLabsPreferences.getToken(), mLabsPreferences.getLabLink(), itemInCart.getCartId(), itemInCart)
-                    : mCartClient.postNewCartItem(mLabsPreferences.getToken(), mLabsPreferences.getLabLink(),
-                    new CartItem.Builder()
-                            .setStudentId(mLabsPreferences.getUserId())
-                            .setComponentId(mModel.getId())
-                            .setQuantity(1)
-                            .setReady(false)
-                            .setCheckout(false)
-                            .build()
-            );
+            Observable<Response> cartItemObservable;
+            if (itemInCart != null) {
+                cartItemObservable = mCartClient.editCartItem(mLabsPreferences.getToken(), mLabsPreferences.getLabLink(), itemInCart.getCartId(), itemInCart);
+            } else {
+                itemInCart = new CartItem.Builder()
+                        .setStudentId(mLabsPreferences.getUserId())
+                        .setComponentId(mModel.getId())
+                        .setQuantity(1)
+                        .setReady(false)
+                        .setCheckout(false)
+                        .build();
+                cartItemObservable = mCartClient.postNewCartItem(mLabsPreferences.getToken(), mLabsPreferences.getLabLink(), itemInCart);
+            }
 
-            cartitemObservable
+            Observable<ArrayList<CartItem>> cartObservable = mCartClient.getCartItemsOf(mLabsPreferences.getToken(), mLabsPreferences.getLabLink(), mLabsPreferences.getUserId());
+
+            cartItemObservable
+                    .flatMap(response -> cartObservable, (response1, cartItems) -> {
+                        mUserCartItems = cartItems;
+                        return mUserCartItems;
+                    })
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Subscriber<Response>() {
+                    .subscribe(new Subscriber<ArrayList<CartItem>>() {
                         @Override
                         public void onStart() {
                             Log.d(TAG, "Task update user cart started");
@@ -196,8 +203,8 @@ public class UserComponentRecyclerAdapter extends BaseRecyclerAdapter<Component,
                         }
 
                         @Override
-                        public void onNext(Response response) {
-
+                        public void onNext(ArrayList<CartItem> cartItems) {
+                            mUserCartItems = cartItems;
                         }
                     });
         }
@@ -212,19 +219,24 @@ public class UserComponentRecyclerAdapter extends BaseRecyclerAdapter<Component,
             }
             if (itemInCart == null) return;
 
-            Observable<Response> cartitemObservable;
-
+            Observable<Response> cartItemObservable;
             if (itemInCart.getQuantity() > 1) {
                 itemInCart.setQuantity(itemInCart.getQuantity() - 1);
-                cartitemObservable = mCartClient.editCartItem(mLabsPreferences.getToken(), mLabsPreferences.getLabLink(), itemInCart.getCartId(), itemInCart);
+                cartItemObservable = mCartClient.editCartItem(mLabsPreferences.getToken(), mLabsPreferences.getLabLink(), itemInCart.getCartId(), itemInCart);
             } else {
-                cartitemObservable = mCartClient.deleteCartItem(mLabsPreferences.getToken(), mLabsPreferences.getLabLink(), itemInCart.getCartId());
+                cartItemObservable = mCartClient.deleteCartItem(mLabsPreferences.getToken(), mLabsPreferences.getLabLink(), itemInCart.getCartId());
             }
 
-            cartitemObservable
+            Observable<ArrayList<CartItem>> cartObservable = mCartClient.getCartItemsOf(mLabsPreferences.getToken(), mLabsPreferences.getLabLink(), mLabsPreferences.getUserId());
+
+            cartItemObservable
+                    .flatMap(response -> cartObservable, (response1, cartItems) -> {
+                        mUserCartItems = cartItems;
+                        return mUserCartItems;
+                    })
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Subscriber<Response>() {
+                    .subscribe(new Subscriber<ArrayList<CartItem>>() {
                         @Override
                         public void onStart() {
                             Log.d(TAG, "Task update user cart started");
@@ -244,7 +256,7 @@ public class UserComponentRecyclerAdapter extends BaseRecyclerAdapter<Component,
                         }
 
                         @Override
-                        public void onNext(Response response) {
+                        public void onNext(ArrayList<CartItem> cartItems) {
 
                         }
                     });

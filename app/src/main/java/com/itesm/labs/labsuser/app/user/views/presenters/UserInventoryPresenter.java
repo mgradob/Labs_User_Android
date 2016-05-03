@@ -8,6 +8,7 @@ import com.itesm.labs.labsuser.app.admin.adapters.models.ItemCategory;
 import com.itesm.labs.labsuser.app.bases.BaseFragmentPresenter;
 import com.itesm.labs.labsuser.app.user.views.fragments.UserInventoryFragment;
 import com.mgb.labsapi.clients.CategoryClient;
+import com.mgb.labsapi.models.Category;
 
 import java.util.ArrayList;
 
@@ -38,10 +39,15 @@ public class UserInventoryPresenter extends BaseFragmentPresenter {
     }
 
     public void getCategories() {
+        mCategoriesData.clear();
+
         mSubscription.unsubscribe();
         mSubscription = mCategoryClient.getCategories(mLabsPreferences.getToken(), mLabsPreferences.getLabLink())
                 .flatMap(categories -> Observable.from(categories))
                 .map(category -> {
+                    if (category.getId() == 1 || category.getId() == 2 || category.getId() == 6 || category.getId() == 7 || category.getId() == 9 || category.getId() == 11 || category.getId() == 15 || category.getId() == 17 || category.getId() == 18) {
+                            return mCategoriesData;
+                    }
                     mCategoriesData.add(new ItemCategory.Builder()
                             .setId(category.getId())
                             .setName(category.getName())
