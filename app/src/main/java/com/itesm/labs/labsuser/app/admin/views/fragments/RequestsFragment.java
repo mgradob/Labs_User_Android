@@ -14,6 +14,7 @@ import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminRequestRecyclerAdapter;
 import com.itesm.labs.labsuser.app.admin.adapters.models.ItemUserCart;
 import com.itesm.labs.labsuser.app.admin.views.presenters.RequestsPresenter;
+import com.itesm.labs.labsuser.app.bases.BaseActivity;
 import com.itesm.labs.labsuser.app.bases.BaseFragment;
 import com.itesm.labs.labsuser.app.commons.contracts.IListContract;
 import com.itesm.labs.labsuser.app.commons.utils.ErrorType;
@@ -76,7 +77,7 @@ public class RequestsFragment extends BaseFragment implements IListContract {
         mCartsListView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         mCartsListView.hasFixedSize();
 
-        mAdapter = new AdminRequestRecyclerAdapter(getActivity());
+        mAdapter = new AdminRequestRecyclerAdapter((BaseActivity) getActivity());
 
         mCartsListView.setAdapter(mAdapter);
     }

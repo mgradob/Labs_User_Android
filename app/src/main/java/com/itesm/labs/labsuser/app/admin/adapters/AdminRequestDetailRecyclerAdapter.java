@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.admin.adapters.models.ItemUserCartDetail;
+import com.itesm.labs.labsuser.app.bases.BaseActivity;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
 
@@ -19,8 +20,8 @@ import butterknife.ButterKnife;
  */
 public class AdminRequestDetailRecyclerAdapter extends BaseRecyclerAdapter<ItemUserCartDetail, AdminRequestDetailRecyclerAdapter.ViewHolder> {
 
-    public AdminRequestDetailRecyclerAdapter(Activity activity) {
-        super(activity);
+    public AdminRequestDetailRecyclerAdapter(BaseActivity mActivity) {
+        super(mActivity);
     }
 
     @Override

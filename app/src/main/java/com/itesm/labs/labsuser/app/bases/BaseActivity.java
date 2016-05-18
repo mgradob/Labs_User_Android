@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.itesm.labs.labsuser.app.application.LabsApp;
 import com.itesm.labs.labsuser.app.application.LabsPreferences;
+import com.itesm.labs.labsuser.app.commons.services.NotificationService;
 import com.itesm.labs.labsuser.app.commons.views.activities.LoginActivity;
 import com.mgb.labsapi.clients.UserClient;
 import com.squareup.otto.Bus;
@@ -90,6 +91,8 @@ public abstract class BaseActivity extends AppCompatActivity {
                 .subscribe();
 
         mLabsPreferences.logout();
+
+        stopService(new Intent(mContext, NotificationService.class));
 
         Intent resetIntent = new Intent(mContext, LoginActivity.class);
         resetIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);

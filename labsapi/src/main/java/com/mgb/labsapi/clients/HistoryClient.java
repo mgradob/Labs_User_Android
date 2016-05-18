@@ -10,6 +10,7 @@ import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.Header;
 import retrofit.http.POST;
+import retrofit.http.PUT;
 import retrofit.http.Path;
 import retrofit.http.Query;
 import rx.Observable;
@@ -31,5 +32,11 @@ public interface HistoryClient {
     @POST("/{lab}/detailhistory/")
     Observable<Response> postHistoryItem(@Header(ApiConstants.AUTHORIZATION) String token,
                                          @Path(ApiConstants.LAB) String lab,
+                                         @Body History item);
+
+    @PUT("/{lab}/detailhistory/{id_history}")
+    Observable<Response> editHistoryItem(@Header(ApiConstants.AUTHORIZATION) String token,
+                                         @Path(ApiConstants.LAB) String lab,
+                                         @Path(ApiConstants.ID_HISTORY) int historyId,
                                          @Body History item);
 }

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import com.itesm.labs.labsuser.app.application.LabsApp;
+import com.itesm.labs.labsuser.app.application.LabsPreferences;
 import com.squareup.otto.Bus;
 
 import java.util.ArrayList;
@@ -25,13 +26,15 @@ public abstract class BaseRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
     protected Context mContext;
     @Inject
     protected Bus mEventBus;
+    @Inject
+    protected LabsPreferences mLabsPreferences;
 
-    protected Activity mActivity;
+    protected BaseActivity mActivity;
 
     protected List<T> DATA = new ArrayList<>();
 
-    public BaseRecyclerAdapter(Activity activity) {
-        this.mActivity = activity;
+    public BaseRecyclerAdapter(BaseActivity mActivity) {
+        this.mActivity = mActivity;
 
         LabsApp.get().inject(this);
     }

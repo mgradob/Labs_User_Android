@@ -16,7 +16,6 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -56,14 +55,18 @@
         <activity
             android:name=".app.user.views.activities.UserInventoryDetailActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".app.commons.views.activities.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".app.commons.views.activities.AccountActivity"
+            android:screenOrientation="portrait" />
 
-        <service android:name=".app.commons.services.BackgroundService" />
+        <service android:name=".app.commons.services.NotificationService" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="727c1a1f00406d3676ef61ba0a55466fe6877f40" />
-
-        <activity android:name=".app.commons.views.activities.RegisterActivity"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,7 @@
 package com.mgb.labsapi.models;
 
+import android.os.Bundle;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -7,6 +9,8 @@ import com.google.gson.annotations.SerializedName;
  */
 public class History {
 
+    @SerializedName("id_history")
+    private int historyId;
     @SerializedName("id_student_fk")
     private String studentId;
     @SerializedName("id_component_fk")
@@ -23,12 +27,32 @@ public class History {
     transient String componentNote;
 
     public History(Builder builder) {
+        this.historyId = builder.historyId;
         this.studentId = builder.studentId;
         this.componentId = builder.componentId;
         this.quantity = builder.quantity;
         this.dateOut = builder.dateOut;
         this.dateIn = builder.dateIn;
 
+    }
+
+    @Override
+    public String toString() {
+        return "History{" +
+                "historyId=" + historyId +
+                ", studentId='" + studentId + '\'' +
+                ", componentId=" + componentId +
+                ", quantity=" + quantity +
+                ", dateOut='" + dateOut + '\'' +
+                ", dateIn='" + dateIn + '\'' +
+                ", categoryName='" + categoryName + '\'' +
+                ", componentName='" + componentName + '\'' +
+                ", componentNote='" + componentNote + '\'' +
+                '}';
+    }
+
+    public int getHistoryId() {
+        return historyId;
     }
 
     public String getStudentId() {
@@ -49,20 +73,6 @@ public class History {
 
     public String getDateIn() {
         return dateIn;
-    }
-
-    @Override
-    public String toString() {
-        return "History{" +
-                "studentId='" + studentId + '\'' +
-                ", componentId=" + componentId +
-                ", quantity=" + quantity +
-                ", dateOut='" + dateOut + '\'' +
-                ", dateIn='" + dateIn + '\'' +
-                ", categoryName='" + categoryName + '\'' +
-                ", componentName='" + componentName + '\'' +
-                ", componentNote='" + componentNote + '\'' +
-                '}';
     }
 
     public String getCategoryName() {
@@ -90,11 +100,17 @@ public class History {
     }
 
     public static class Builder {
+        private int historyId;
         private String studentId;
         private int componentId;
         private int quantity;
         private String dateOut;
         private String dateIn;
+
+        public Builder setHistoryId(int historyId){
+            this.historyId = historyId;
+            return this;
+        }
 
         public Builder setStudentId(String studentId) {
             this.studentId = studentId;

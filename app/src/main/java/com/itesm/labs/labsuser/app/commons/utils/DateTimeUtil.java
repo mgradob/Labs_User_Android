@@ -15,7 +15,8 @@ public class DateTimeUtil {
     public static final String labsFormat = "dd/MM/yyyy @ KK:mm a";
 
     public static String getCurrentDateTimeUtc() {
-        return new DateTime().toDateTimeISO().toString();
+        Date date = new Date();
+        return new SimpleDateFormat(isoFormat).format(date);
     }
 
     public static String formatDateToLocal(String dateTime) {

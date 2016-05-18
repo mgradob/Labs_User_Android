@@ -1,5 +1,6 @@
 package com.itesm.labs.labsuser.app.user.views.activities;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -11,6 +12,8 @@ import android.view.MenuItem;
 
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.bases.BaseActivity;
+import com.itesm.labs.labsuser.app.commons.services.NotificationService;
+import com.itesm.labs.labsuser.app.commons.views.activities.AccountActivity;
 import com.itesm.labs.labsuser.app.user.adapters.UserSectionPagerAdapter;
 
 import butterknife.Bind;
@@ -38,7 +41,7 @@ public class UserMainActivity extends BaseActivity {
 
         mPager.setCurrentItem(1);
 
-//        startService(new Intent(mContext, BackgroundService.class));
+        startService(new Intent(mContext, NotificationService.class));
     }
 
 
@@ -75,10 +78,12 @@ public class UserMainActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_main_settings:
+            case R.id.menu_main_account:
+                startActivity(new Intent(mContext, AccountActivity.class));
                 return true;
             case R.id.menu_main_logout:
                 logoutUser();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }    }

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.itesm.labs.labsuser.R;
+import com.itesm.labs.labsuser.app.bases.BaseActivity;
 import com.itesm.labs.labsuser.app.bases.BaseFragment;
 import com.itesm.labs.labsuser.app.commons.contracts.IListContract;
 import com.itesm.labs.labsuser.app.commons.utils.ErrorType;
@@ -78,7 +79,7 @@ public class UserCartFragment extends BaseFragment implements IListContract {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.hasFixedSize();
 
-        mAdapter = new UserCartRecyclerAdapter(getActivity());
+        mAdapter = new UserCartRecyclerAdapter((BaseActivity) getActivity());
 
         mRecyclerView.setAdapter(mAdapter);
     }

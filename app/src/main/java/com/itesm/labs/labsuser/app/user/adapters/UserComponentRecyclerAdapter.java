@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.application.LabsPreferences;
+import com.itesm.labs.labsuser.app.bases.BaseActivity;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
 import com.mgb.labsapi.clients.CartClient;
@@ -42,8 +43,8 @@ public class UserComponentRecyclerAdapter extends BaseRecyclerAdapter<Component,
 
     private ArrayList<CartItem> mUserCartItems = new ArrayList<>();
 
-    public UserComponentRecyclerAdapter(Activity activity) {
-        super(activity);
+    public UserComponentRecyclerAdapter(BaseActivity mActivity) {
+        super(mActivity);
 
         getUserCart();
     }

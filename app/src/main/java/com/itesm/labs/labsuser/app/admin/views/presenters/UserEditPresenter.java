@@ -1,21 +1,21 @@
 package com.itesm.labs.labsuser.app.admin.views.presenters;
 
-import android.content.Intent;
-import android.nfc.NfcAdapter;
-import android.os.Build;
 import android.util.Log;
 
 import com.itesm.labs.labsuser.app.admin.views.activities.UserEditActivity;
-import com.itesm.labs.labsuser.app.application.LabsPreferences;
 import com.itesm.labs.labsuser.app.bases.BaseActivityPresenter;
 import com.itesm.labs.labsuser.app.commons.utils.NfcController;
-import com.itesm.labs.labsuser.app.commons.utils.NfcHandler;
+import com.mgb.labsapi.clients.LaboratoryClient;
 import com.mgb.labsapi.clients.UserClient;
+import com.mgb.labsapi.models.Laboratory;
 import com.mgb.labsapi.models.User;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
 import retrofit.client.Response;
+import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -30,11 +30,20 @@ public class UserEditPresenter extends BaseActivityPresenter {
     @Inject
     UserClient mUserClient;
     @Inject
-    LabsPreferences mPreferences;
+    LaboratoryClient mLaboratoryClient;
     @Inject
     NfcController mNfcController;
 
     User mUser;
+    ArrayList<Laboratory> mLaboratories = new ArrayList<>();
+
+    public ArrayList<Laboratory> getLaboratories() {
+        return mLaboratories;
+    }
+
+    public void setLaboratories(ArrayList<Laboratory> mLaboratories) {
+        this.mLaboratories = mLaboratories;
+    }
 
     private UserEditActivity mView;
 
@@ -56,7 +65,22 @@ public class UserEditPresenter extends BaseActivityPresenter {
 
     public void getUser(String userId) {
         mSubscription.unsubscribe();
-        mSubscription = mUserClient.getUser(mPreferences.getToken(), userId)
+        mSubscription = Observable.zip(
+                mUserClient.getUser(mLabsPreferences.getToken(), userId),
+                mLaboratoryClient.getLaboratories(mLabsPreferences.getToken()),
+                (user, laboratories) -> {
+                    for (Laboratory laboratory : laboratories) {
+                        for (String userLabLink : user.getAllowedLabs()) {
+                            if (laboratory.getLink().equals(userLabLink)) {
+                                laboratory.setAllowed(true);
+                            }
+                        }
+
+                        mLaboratories.add(laboratory);
+                    }
+
+                    return user;
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<User>() {
@@ -80,7 +104,7 @@ public class UserEditPresenter extends BaseActivityPresenter {
 
                     @Override
                     public void onNext(User user) {
-                        if(user == null) throw new NullPointerException("User is null");
+                        if (user == null) throw new NullPointerException("User is null");
 
                         mUser = user;
                     }
@@ -98,7 +122,7 @@ public class UserEditPresenter extends BaseActivityPresenter {
                 .setUserUid(uid);
 
         mSubscription.unsubscribe();
-        mSubscription = mUserClient.editUser(mPreferences.getToken(), mUser.getUserId(), builder.build())
+        mSubscription = mUserClient.editUser(mLabsPreferences.getToken(), mUser.getUserId(), builder.build())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<Response>() {

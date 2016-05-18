@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.admin.adapters.models.ItemCategory;
+import com.itesm.labs.labsuser.app.bases.BaseActivity;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
 import com.itesm.labs.labsuser.app.user.views.activities.UserInventoryDetailActivity;
@@ -22,8 +23,8 @@ import butterknife.Bind;
  */
 public class UserCategoryRecyclerAdapter extends BaseRecyclerAdapter<ItemCategory, UserCategoryRecyclerAdapter.ViewHolder> {
 
-    public UserCategoryRecyclerAdapter(Activity activity) {
-        super(activity);
+    public UserCategoryRecyclerAdapter(BaseActivity mActivity) {
+        super(mActivity);
     }
 
     /**

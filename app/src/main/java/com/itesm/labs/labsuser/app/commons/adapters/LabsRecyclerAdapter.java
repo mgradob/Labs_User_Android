@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.application.LabsPreferences;
+import com.itesm.labs.labsuser.app.bases.BaseActivity;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
 import com.itesm.labs.labsuser.app.commons.adapters.models.ItemLaboratory;
@@ -34,8 +35,8 @@ public class LabsRecyclerAdapter extends BaseRecyclerAdapter<ItemLaboratory, Lab
     private int[] colorArray;
     private Random mRandom = new Random();
 
-    public LabsRecyclerAdapter(Activity activity) {
-        super(activity);
+    public LabsRecyclerAdapter(BaseActivity mActivity) {
+        super(mActivity);
     }
 
     @Override

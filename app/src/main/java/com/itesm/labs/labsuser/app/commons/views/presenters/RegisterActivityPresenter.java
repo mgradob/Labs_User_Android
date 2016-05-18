@@ -34,7 +34,7 @@ public class RegisterActivityPresenter extends BaseActivityPresenter {
     }
 
     public void registerUser(String userId, String userName, String userLastName1, String userLastName2, String userCareer, String userPassword) {
-        NewUser newUser = new NewUser(userId, userName, userLastName1, userLastName2, userCareer, userPassword, userId + "@itesm.mx");
+        NewUser newUser = new NewUser(userId, userName, userLastName1, userLastName2, userCareer, userPassword, userId + "@itesm.mx", mLabsPreferences.getUserAllowedLabs());
 
         mSubscription.unsubscribe();
         mSubscription = mUserClient.registerUser(newUser)

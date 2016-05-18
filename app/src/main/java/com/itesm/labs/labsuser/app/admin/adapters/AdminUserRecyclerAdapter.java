@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.admin.views.activities.UserDetailActivity;
 import com.itesm.labs.labsuser.app.admin.views.activities.UserEditActivity;
+import com.itesm.labs.labsuser.app.bases.BaseActivity;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
 import com.mgb.labsapi.models.User;
@@ -27,8 +28,8 @@ public class AdminUserRecyclerAdapter extends BaseRecyclerAdapter<User, AdminUse
     int[] mColors;
     Random mRandom;
 
-    public AdminUserRecyclerAdapter(Activity activity) {
-        super(activity);
+    public AdminUserRecyclerAdapter(BaseActivity mActivity) {
+        super(mActivity);
 
         mColors = mContext.getResources().getIntArray(R.array.material_colors);
         mRandom = new Random();

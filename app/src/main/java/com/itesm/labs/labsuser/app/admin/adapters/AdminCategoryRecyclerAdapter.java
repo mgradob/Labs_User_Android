@@ -7,13 +7,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.admin.adapters.models.ItemCategory;
 import com.itesm.labs.labsuser.app.admin.views.activities.InventoryDetailActivity;
+import com.itesm.labs.labsuser.app.admin.views.dialogs.EditCategoryDialogFragment;
+import com.itesm.labs.labsuser.app.bases.BaseActivity;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
+import com.itesm.labs.labsuser.app.commons.contracts.IDialogContract;
+import com.mgb.labsapi.models.Category;
 
 import butterknife.Bind;
 
@@ -22,8 +27,8 @@ import butterknife.Bind;
  */
 public class AdminCategoryRecyclerAdapter extends BaseRecyclerAdapter<ItemCategory, AdminCategoryRecyclerAdapter.ViewHolder> {
 
-    public AdminCategoryRecyclerAdapter(Activity activity) {
-        super(activity);
+    public AdminCategoryRecyclerAdapter(BaseActivity mActivity) {
+        super(mActivity);
     }
 
     @Override
@@ -70,13 +75,34 @@ public class AdminCategoryRecyclerAdapter extends BaseRecyclerAdapter<ItemCatego
         public void onClick(View v) {
             Intent intent = new Intent(mContext, InventoryDetailActivity.class);
             intent.putExtra(InventoryDetailActivity.EXTRA_CATEGORY_ID, mModel.getId());
+            intent.putExtra(InventoryDetailActivity.EXTRA_CATEGORY_NAME, mModel.getName());
+            intent.putExtra(InventoryDetailActivity.EXTRA_CATEGORY_IMAGE, mModel.getImageResource());
             mActivity.startActivity(intent);
         }
 
         @Override
         public boolean onLongClick(View v) {
-            // TODO: 4/23/16 go to edit category.
-            return false;
+            Category category = new Category.Builder()
+                    .setId(mModel.getId())
+                    .setName(mModel.getName())
+                    .build();
+
+            EditCategoryDialogFragment fragment = EditCategoryDialogFragment.newInstance(category);
+            fragment.setContract(new IDialogContract() {
+                @Override
+                public void onActionSuccess() {
+                    fragment.dismiss();
+                }
+
+                @Override
+                public void onActionFailed() {
+                    Toast.makeText(mContext, R.string.event_error_network, Toast.LENGTH_LONG)
+                            .show();
+                }
+            });
+            fragment.show(mActivity.getSupportFragmentManager(), null);
+
+            return true;
         }
     }
 }

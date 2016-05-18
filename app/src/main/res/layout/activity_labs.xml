@@ -14,9 +14,8 @@
         android:background="@color/primary"
         android:elevation="3dp"
         android:gravity="bottom"
-        app:contentInsetStart="36dp"
         app:title="@string/labs_title"
-        app:titleTextAppearance="@style/LabsTheme.Compat.Light.Text.Display1" />
+        app:titleTextAppearance="@style/LabsTheme.Compat.Light.Text.Headline" />
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/labs_grid_swipe_refresh"

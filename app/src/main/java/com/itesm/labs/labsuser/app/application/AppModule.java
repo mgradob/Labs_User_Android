@@ -2,20 +2,24 @@ package com.itesm.labs.labsuser.app.application;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.nfc.NfcAdapter;
 
 import com.itesm.labs.labsuser.app.admin.adapters.AdminCategoryRecyclerAdapter;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminComponentRecyclerAdapter;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminRequestDetailRecyclerAdapter;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminRequestRecyclerAdapter;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminSectionPagerAdapter;
+import com.itesm.labs.labsuser.app.admin.adapters.AdminUserAllowedLabsAdapter;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminUserDetailRecyclerAdapter;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminUserRecyclerAdapter;
 import com.itesm.labs.labsuser.app.admin.views.activities.InventoryDetailActivity;
 import com.itesm.labs.labsuser.app.admin.views.activities.RequestDetailActivity;
 import com.itesm.labs.labsuser.app.admin.views.activities.UserDetailActivity;
 import com.itesm.labs.labsuser.app.admin.views.activities.UserEditActivity;
-import com.itesm.labs.labsuser.app.admin.views.dialogs.EditUserDialog;
+import com.itesm.labs.labsuser.app.admin.views.dialogs.AddCategoryDialogFragment;
+import com.itesm.labs.labsuser.app.admin.views.dialogs.AddComponentDialogFragment;
+import com.itesm.labs.labsuser.app.admin.views.dialogs.AddUserDialogFragment;
+import com.itesm.labs.labsuser.app.admin.views.dialogs.EditCategoryDialogFragment;
+import com.itesm.labs.labsuser.app.admin.views.dialogs.EditComponentDialogFragment;
 import com.itesm.labs.labsuser.app.admin.views.fragments.InventoryFragment;
 import com.itesm.labs.labsuser.app.admin.views.fragments.ReportsFragment;
 import com.itesm.labs.labsuser.app.admin.views.fragments.RequestsFragment;
@@ -35,12 +39,15 @@ import com.itesm.labs.labsuser.app.bases.BaseFragmentPresenter;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
 import com.itesm.labs.labsuser.app.commons.adapters.LabsRecyclerAdapter;
+import com.itesm.labs.labsuser.app.commons.services.NotificationService;
 import com.itesm.labs.labsuser.app.commons.utils.NfcController;
 import com.itesm.labs.labsuser.app.commons.utils.NfcHandler;
+import com.itesm.labs.labsuser.app.commons.views.activities.AccountActivity;
 import com.itesm.labs.labsuser.app.commons.views.activities.LabsActivity;
 import com.itesm.labs.labsuser.app.commons.views.activities.LoginActivity;
 import com.itesm.labs.labsuser.app.commons.views.activities.MainActivity;
 import com.itesm.labs.labsuser.app.commons.views.activities.RegisterActivity;
+import com.itesm.labs.labsuser.app.commons.views.fragments.ChangePasswordDialogFragment;
 import com.itesm.labs.labsuser.app.commons.views.presenters.LabsActivityPresenter;
 import com.itesm.labs.labsuser.app.commons.views.presenters.LoginActivityPresenter;
 import com.itesm.labs.labsuser.app.commons.views.presenters.MainActivityPresenter;
@@ -82,10 +89,10 @@ import rx.subscriptions.Subscriptions;
                 LoginActivity.class,
                 RegisterActivity.class,
                 RegisterActivityPresenter.class,
+                AccountActivity.class,
                 LabsActivity.class,
                 MainActivity.class,
                 BaseDialogFragment.class,
-                EditUserDialog.class,
                 BaseRecyclerAdapter.class,
                 BaseViewHolder.class,
                 LabsRecyclerAdapter.class,
@@ -96,6 +103,7 @@ import rx.subscriptions.Subscriptions;
                 AdminRequestRecyclerAdapter.class,
                 AdminUserDetailRecyclerAdapter.class,
                 AdminUserRecyclerAdapter.class,
+                AddUserDialogFragment.class,
                 BaseActivityPresenter.class,
                 BaseFragmentPresenter.class,
                 LoginActivityPresenter.class,
@@ -116,6 +124,7 @@ import rx.subscriptions.Subscriptions;
                 ReportsFragment.class,
                 UserEditActivity.class,
                 UserEditPresenter.class,
+                AdminUserAllowedLabsAdapter.class,
                 NfcHandler.class,
                 UserMainActivity.class,
                 UserSectionPagerAdapter.class,
@@ -131,6 +140,12 @@ import rx.subscriptions.Subscriptions;
                 UserHistoryFragment.class,
                 UserHistoryPresenter.class,
                 UserHistoryRecyclerAdapter.class,
+                ChangePasswordDialogFragment.class,
+                AddCategoryDialogFragment.class,
+                EditCategoryDialogFragment.class,
+                AddComponentDialogFragment.class,
+                EditComponentDialogFragment.class,
+                NotificationService.class
         }
 )
 public class AppModule {

@@ -1,8 +1,6 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".UsersFragment">
+    android:layout_height="match_parent">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/fragment_users_refresh_layout"
@@ -11,10 +9,10 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/fragment_users_list"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:paddingLeft="8dp"
             android:paddingRight="8dp" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
-</RelativeLayout>
+</FrameLayout>

@@ -17,7 +17,7 @@
             android:background="@color/primary"
             app:contentScrim="@color/primary"
             android:elevation="3dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|enterAlways">
 
             <ImageView
                 android:id="@+id/activity_inventory_detail_image"

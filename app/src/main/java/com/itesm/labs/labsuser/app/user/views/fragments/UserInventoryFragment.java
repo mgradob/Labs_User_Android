@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.application.LabsPreferences;
+import com.itesm.labs.labsuser.app.bases.BaseActivity;
 import com.itesm.labs.labsuser.app.bases.BaseFragment;
 import com.itesm.labs.labsuser.app.commons.contracts.IListContract;
 import com.itesm.labs.labsuser.app.commons.utils.ErrorType;
@@ -87,7 +88,7 @@ public class UserInventoryFragment extends BaseFragment implements IListContract
         mRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 2));
         mRecyclerView.setHasFixedSize(true);
 
-        mAdapter = new UserCategoryRecyclerAdapter(getActivity());
+        mAdapter = new UserCategoryRecyclerAdapter((BaseActivity) getActivity());
 
         mRecyclerView.setAdapter(mAdapter);
     }

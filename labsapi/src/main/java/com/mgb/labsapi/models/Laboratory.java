@@ -14,6 +14,8 @@ public class Laboratory implements Serializable {
     @SerializedName("link")
     private String link;
 
+    private boolean isAllowed = false;
+
     public Laboratory(Builder builder) {
         this.name = builder.name;
         this.link = builder.link;
@@ -25,6 +27,14 @@ public class Laboratory implements Serializable {
 
     public String getLink() {
         return link;
+    }
+
+    public boolean isAllowed() {
+        return isAllowed;
+    }
+
+    public void setAllowed(boolean allowed) {
+        isAllowed = allowed;
     }
 
     @Override

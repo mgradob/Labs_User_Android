@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.itesm.labs.labsuser.R;
+import com.itesm.labs.labsuser.app.bases.BaseActivity;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
 import com.itesm.labs.labsuser.app.commons.utils.DateTimeUtil;
@@ -19,8 +20,8 @@ import butterknife.Bind;
  */
 public class UserHistoryRecyclerAdapter extends BaseRecyclerAdapter<History, UserHistoryRecyclerAdapter.ViewHolder> {
 
-    public UserHistoryRecyclerAdapter(Activity activity) {
-        super(activity);
+    public UserHistoryRecyclerAdapter(BaseActivity mActivity) {
+        super(mActivity);
     }
 
     @Override

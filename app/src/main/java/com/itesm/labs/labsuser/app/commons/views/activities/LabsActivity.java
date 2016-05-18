@@ -1,5 +1,6 @@
 package com.itesm.labs.labsuser.app.commons.views.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -107,10 +108,12 @@ public class LabsActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_labs_settings:
+            case R.id.menu_labs_account:
+                startActivity(new Intent(mContext, AccountActivity.class));
                 return true;
             case R.id.menu_main_logout:
                 logoutUser();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

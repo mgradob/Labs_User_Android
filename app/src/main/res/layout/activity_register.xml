@@ -11,12 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="?android:actionBarSize"
         android:background="@color/primary"
-        app:title="Crear cuenta"
+        app:title="@string/activity_signup_title"
         app:titleTextColor="@color/primary_text_light" />
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp">
 

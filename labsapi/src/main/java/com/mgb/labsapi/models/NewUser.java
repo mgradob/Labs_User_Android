@@ -2,6 +2,8 @@ package com.mgb.labsapi.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 /**
  * Created by mgradob on 5/2/16.
  */
@@ -21,8 +23,10 @@ public class NewUser {
     private String password;
     @SerializedName("mail")
     private String mail;
+    @SerializedName("labs")
+    private ArrayList<String> labs;
 
-    public NewUser(String userId, String userName, String userLastName1, String userLastName2, String career, String password, String mail) {
+    public NewUser(String userId, String userName, String userLastName1, String userLastName2, String career, String password, String mail, ArrayList<String> labs) {
         this.userId = userId;
         this.userName = userName;
         this.userLastName1 = userLastName1;
@@ -30,6 +34,7 @@ public class NewUser {
         this.career = career;
         this.password = password;
         this.mail = mail;
+        this.labs = labs;
     }
 
     public String getUserId() {
@@ -86,5 +91,13 @@ public class NewUser {
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    public ArrayList<String> getLabs() {
+        return labs;
+    }
+
+    public void setLabs(ArrayList<String> labs) {
+        this.labs = labs;
     }
 }

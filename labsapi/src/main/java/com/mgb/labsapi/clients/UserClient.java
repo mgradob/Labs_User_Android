@@ -46,7 +46,7 @@ public interface UserClient {
 
     @POST("/students/")
     Observable<Response> postNewUser(@Header(ApiConstants.AUTHORIZATION) String token,
-                                     @Body User body);
+                                     @Body NewUser body);
 
     @PUT("/students/{user_id}/")
     Observable<Response> editUser(@Header(ApiConstants.AUTHORIZATION) String token,

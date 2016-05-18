@@ -31,9 +31,9 @@
                 android:layout_height="wrap_content"
                 app:layout_scrollFlags="exitUntilCollapsed"
                 app:tabIndicatorColor="@color/primary_text_light"
+                app:tabMode="scrollable"
                 app:tabSelectedTextColor="@color/primary_text_light"
-                app:tabTextColor="@color/secondary_text_light"
-                app:tabMode="scrollable"/>
+                app:tabTextColor="@color/secondary_text_light" />
 
         </android.support.design.widget.AppBarLayout>
 

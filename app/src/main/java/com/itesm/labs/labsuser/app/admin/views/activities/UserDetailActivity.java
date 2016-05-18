@@ -85,4 +85,8 @@ public class UserDetailActivity extends BaseActivity implements IListContract {
     public void showError(ErrorType error) {
 
     }
+
+    public void reloadData() {
+        mPresenter.getUserDetail();
+    }
 }

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.itesm.labs.labsuser.R;
+import com.itesm.labs.labsuser.app.bases.BaseActivity;
 import com.itesm.labs.labsuser.app.bases.BaseRecyclerAdapter;
 import com.itesm.labs.labsuser.app.bases.BaseViewHolder;
 import com.mgb.labsapi.models.CartItem;
@@ -18,8 +19,8 @@ import butterknife.Bind;
  */
 public class UserCartRecyclerAdapter extends BaseRecyclerAdapter<CartItem, UserCartRecyclerAdapter.CartViewHolder> {
 
-    public UserCartRecyclerAdapter(Activity activity) {
-        super(activity);
+    public UserCartRecyclerAdapter(BaseActivity mActivity) {
+        super(mActivity);
     }
 
     @Override

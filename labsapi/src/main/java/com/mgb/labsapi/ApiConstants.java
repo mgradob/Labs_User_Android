@@ -13,6 +13,7 @@ public class ApiConstants {
     public static final String LAB_NAME = "lab_name";
 
     // History client
+    public static final String ID_HISTORY = "id_history";
 
     // Category client
     public static final String ID_CATEGORY = "id_category";
@@ -27,4 +28,6 @@ public class ApiConstants {
 
     // Cart client
     public static final String ID_CART = "id_cart";
+
+    public static final String DEFAULT_PASSWORD = "password";
 }

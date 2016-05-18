@@ -2,12 +2,15 @@ package com.itesm.labs.labsuser.app.admin.views.activities;
 
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.itesm.labs.labsuser.R;
+import com.itesm.labs.labsuser.app.admin.adapters.AdminUserAllowedLabsAdapter;
 import com.itesm.labs.labsuser.app.admin.views.presenters.UserEditPresenter;
 import com.itesm.labs.labsuser.app.bases.BaseActivity;
 import com.itesm.labs.labsuser.app.commons.events.UIDEvent;
@@ -24,7 +27,7 @@ import butterknife.OnClick;
 public class UserEditActivity extends BaseActivity {
 
     public static final String EXTRA_USER_ID = "USER_ID";
-    
+
     private static final String TAG = UserEditActivity.class.getSimpleName();
 
     @Bind(R.id.activity_user_edit_toolbar)
@@ -41,6 +44,8 @@ public class UserEditActivity extends BaseActivity {
     AppCompatEditText activityUserEditCareer;
     @Bind(R.id.activity_user_edit_uid)
     TextView activityUserEditUid;
+    @Bind(R.id.activity_user_edit_allowed_labs)
+    RecyclerView activityUserEditAllowedLabs;
     @Bind(R.id.activity_user_edit_update)
     Button activityUserEditUpdate;
     @Bind(R.id.activity_user_edit_cancel)
@@ -49,6 +54,8 @@ public class UserEditActivity extends BaseActivity {
     Button activityUserEditDone;
 
     UserEditPresenter mPresenter;
+
+    AdminUserAllowedLabsAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,10 +71,18 @@ public class UserEditActivity extends BaseActivity {
         mPresenter = new UserEditPresenter(this);
         mPresenter.setupNfc();
         mPresenter.getUser(userId);
+
+        setupUi();
     }
 
     @Override
     public void setupUi() {
+        activityUserEditAllowedLabs.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+        activityUserEditAllowedLabs.setHasFixedSize(true);
+
+        mAdapter = new AdminUserAllowedLabsAdapter(this);
+
+        activityUserEditAllowedLabs.setAdapter(mAdapter);
     }
 
     public void fillUserInfo(User user) {
@@ -77,6 +92,7 @@ public class UserEditActivity extends BaseActivity {
         activityUserEditAp2.setText(user.getUserLastName2());
         activityUserEditCareer.setText(user.getUserCareer());
         activityUserEditUid.setText(String.format(getString(R.string.signup_uid), String.valueOf(user.getUserUid())));
+        mAdapter.refresh(mPresenter.getLaboratories());
     }
 
     @OnClick({R.id.activity_user_edit_update, R.id.activity_user_edit_cancel, R.id.activity_user_edit_done})
@@ -88,6 +104,7 @@ public class UserEditActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.activity_user_edit_done:
+                mPresenter.setLaboratories(mAdapter.getData());
                 mPresenter.doEdit(
                         activityUserEditMat.getText().toString(),
                         activityUserEditName.getText().toString(),

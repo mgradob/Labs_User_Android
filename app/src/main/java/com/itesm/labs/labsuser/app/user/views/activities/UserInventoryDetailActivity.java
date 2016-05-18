@@ -87,8 +87,7 @@ public class UserInventoryDetailActivity extends BaseActivity implements IListCo
         activityInventoryDetailCtl.setContentScrimColor(palette.getVibrantColor(getResources().getColor(R.color.primary)));
         activityInventoryDetailCtl.setCollapsedTitleTextColor(getResources().getColor(R.color.primary_text_light));
         activityInventoryDetailCtl.setExpandedTitleColor(getResources().getColor(R.color.primary_text_light));
-
-        activityInventoryDetailToolbar.setTitle(mCategoryName);
+        activityInventoryDetailCtl.setTitle(mCategoryName);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(palette.getVibrantColor(getResources().getColor(R.color.primary)));

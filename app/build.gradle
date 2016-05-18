@@ -4,14 +4,21 @@ apply plugin: 'me.tatarka.retrolambda'
 
 def MAJOR_VERSION = 1
 def MINOR_VERSION = 1
-def BUILD_VERSION = 0
+def BUILD_VERSION = 2
 
 def ENABLE_FABRIC = "ENABLE_FABRIC"
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'dsp-server'
+            keyPassword '6842ldCC$'
+            storeFile file('/Users/mgradob/Documents/NOVUS/Labs_Android/Documents/novus.jks')
+            storePassword '6842ldCC$'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion "22.0.1"
-
     defaultConfig {
         applicationId "com.itesm.labs"
         minSdkVersion 16
@@ -20,7 +27,6 @@ android {
         versionName "${MAJOR_VERSION}.${MINOR_VERSION}.${BUILD_VERSION}"
         buildConfigField("boolean", ENABLE_FABRIC, "false")
     }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -28,7 +34,6 @@ android {
             buildConfigField("boolean", ENABLE_FABRIC, "true")
         }
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -36,8 +41,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':labsapi')
 
     // Android support libraries

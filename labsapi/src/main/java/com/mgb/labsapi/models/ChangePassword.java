@@ -12,6 +12,11 @@ public class ChangePassword {
     @SerializedName("new_password")
     private String newPassword;
 
+    public ChangePassword(String currentPassword, String newPassword) {
+        this.currentPassword = currentPassword;
+        this.newPassword = newPassword;
+    }
+
     public String getCurrentPassword() {
         return currentPassword;
     }

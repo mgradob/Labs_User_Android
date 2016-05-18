@@ -18,8 +18,21 @@
 
     <string name="app_name">Labs CUU</string>
     <string name="action_settings">Preferencias</string>
+    <string name="menu_account">Cuenta</string>
     <string name="menu_settings">Ajustes</string>
     <string name="menu_logout">Logout</string>
+
+    <!-- Actions -->
+    <string name="action_ok">OK</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_edit">Editar</string>
+    <string name="action_change">Cambiar</string>
+    <string name="action_create">Crear</string>
+    <string name="action_delete">Eliminar</string>
+
+    <!-- Events -->
+    <string name="event_error_network">Error, revisa tu conexión a internet.</string>
+    <string name="event_password_changed">Password cambiado, vuelve a iniciar sesión</string>
 
     <string name="app_title_login">Laboratorios</string>
     <string name="app_campus_name">Campus Chihuahua</string>
@@ -43,14 +56,15 @@
     <string name="remember_me">Remember me</string>
     <string name="login_new_account">No tienes una cuenta? <b>REGISTRATE</b></string>
 
-    <!-- Signup Activity -->
-    <string name="title_activity_sign_up">SignUpActivity</string>
+    <!-- Register Activity -->
+    <string name="activity_signup_title">Crear cuenta</string>
     <string name="signup_name">Nombre(s)</string>
     <string name="signup_user_id">Matrícula</string>
     <string name="signup_career">Carrera</string>
     <string name="signup_last_name_1">Apellido Paterno</string>
     <string name="signup_last_name_2">Apellido Materno</string>
     <string name="signup_uid">Credencial: %1$s</string>
+    <string name="signup_allowed_labs">Laboratorios Autorizados:</string>
     <string name="signup_password">Password</string>
     <string name="signup_create">Crear</string>
     <string name="signup_update">Actualizar</string>
@@ -67,6 +81,21 @@
     <string name="main_dialog_title_init">Por favor, espere…</string>
     <string name="main_dialog_content_init">Estamos obteniendo los datos del laboratorio…</string>
 
+    <!-- Account Activity-->
+    <string name="activity_account_title">Cuenta</string>
+    <string name="account_preferences">Preferencias</string>
+    <string name="account_full_name"><b>Nombre</b>\n%1$s %2$s %3$s</string>
+    <string name="account_user_id"><b>Matrícula</b>\n%1$s</string>
+    <string name="account_career"><b>Carrera</b>\n%1$s</string>
+    <string name="account_mail"><b>Mail</b>\n%1$s</string>
+    <string name="account_about">Acerca de</string>
+    <string name="account_change_password">Cambiar Password</string>
+
+    <!-- Reset Password Dialog Fragment -->
+    <string name="reset_password_title">Cambiar Password</string>
+    <string name="reset_password_old">Password Actual</string>
+    <string name="reset_password_new">Nuevo Password</string>
+    <string name="reset_password_new_verify">Confirmar Nuevo Password</string>
 
     <!-- Admin Flow -->
     <!-- Requests Fragment -->
@@ -117,5 +146,30 @@
     <string name="record_snackbar_post_error_content">Error añadiendo carrito, prueba otra vez.</string>
     <string name="record_name_note_quantity">%1$s %2$s\t\t<b>Cantidad:</b> %3$s</string>
     <string name="record_dates"><b>Recogido:</b> %1$s\n<b>Entregado:</b> %2$s</string>
+
+    <!-- Add Category Dialog -->
+    <string name="add_category_title">Agregar Categoría</string>
+    <string name="add_category_name">Nombre de la Categoría</string>
+
+    <!-- Edit Cateogry Dialog -->
+    <string name="edit_category_title">Editar Categoría</string>
+    <string name="edit_category_name">Nombre de la Categoría</string>
+
+    <!-- Add Component Dialog -->
+    <string name="add_component_title">Agregar Componente</string>
+    <string name="add_component_name">Nombre del Componente</string>
+    <string name="add_component_note">Notas</string>
+    <string name="add_component_total">Total de Componentes</string>
+    <string name="add_component_available">Componentes Disponibles</string>
+
+    <!-- Edit Component Dialog -->
+    <string name="edit_component_title">Editar Componente</string>
+    <string name="edit_component_name">Nombre del Componente</string>
+    <string name="edit_component_note">Notas</string>
+    <string name="edit_component_total">Total de Componentes</string>
+    <string name="edit_component_available">Componentes Disponibles</string>
+
+    <!-- Add User Dialog -->
+    <string name="dialog_create_user_title">Crear Usuario</string>
 
 </resources>
