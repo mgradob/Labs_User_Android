@@ -1,10 +1,14 @@
 package com.itesm.labs.labsuser.app.admin.views.activities;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminRequestDetailRecyclerAdapter;
@@ -27,6 +31,7 @@ import butterknife.OnLongClick;
 public class RequestDetailActivity extends BaseActivity implements IListContract {
 
     public static final String EXTRA_USER_ID = "USER_ID";
+    public static final String EXTRA_USER_NAME = "USER_NAME";
     public static final String EXTRA_IS_READY = "IS_READY";
 
     private static final String TAG = RequestDetailActivity.class.getSimpleName();
@@ -38,10 +43,16 @@ public class RequestDetailActivity extends BaseActivity implements IListContract
     SwipeRefreshLayout mRefreshLayout;
     @Bind(R.id.activity_request_detail_fab)
     FloatingActionButton mFab;
+    @Bind(R.id.activity_request_detail_toolbar)
+    Toolbar activityRequestDetailToolbar;
+    @Bind(R.id.activity_request_detail_ctl)
+    CollapsingToolbarLayout activityRequestDetailCtl;
 
     private BaseRecyclerAdapter mAdapter;
     private RequestsDetailPresenter mPresenter;
+
     private String mUserId;
+    private String mUserName;
     private boolean mIsReady;
 
     @Override
@@ -52,6 +63,7 @@ public class RequestDetailActivity extends BaseActivity implements IListContract
 
         Bundle extras = getIntent().getExtras();
         mUserId = extras.getString(EXTRA_USER_ID);
+        mUserName = extras.getString(EXTRA_USER_NAME);
         mIsReady = extras.getBoolean(EXTRA_IS_READY);
 
         mPresenter = new RequestsDetailPresenter(this, mUserId);
@@ -63,8 +75,27 @@ public class RequestDetailActivity extends BaseActivity implements IListContract
 
     @Override
     public void setupUi() {
+        setupToolbar();
         setupList();
         setupRefresh();
+    }
+
+    public void setupToolbar() {
+        setSupportActionBar(activityRequestDetailToolbar);
+
+        activityRequestDetailCtl.setBackgroundColor(mLabsPreferences.getLabColor());
+        activityRequestDetailCtl.setContentScrimColor(mLabsPreferences.getLabColor());
+        activityRequestDetailCtl.setCollapsedTitleTextColor(getResources().getColor(R.color.primary_text_light));
+        activityRequestDetailCtl.setExpandedTitleColor(getResources().getColor(R.color.primary_text_light));
+        activityRequestDetailCtl.setTitle(mUserName);
+
+        activityRequestDetailToolbar.setBackgroundColor(mLabsPreferences.getLabColor());
+        activityRequestDetailToolbar.setTitleTextColor(getResources().getColor(R.color.primary_text_light));
+        activityRequestDetailToolbar.setSubtitleTextColor(getResources().getColor(R.color.primary_text_light));
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(mLabsPreferences.getLabColor());
+        }
     }
 
     @Override
@@ -100,10 +131,6 @@ public class RequestDetailActivity extends BaseActivity implements IListContract
         else mFab.setImageResource(R.drawable.ic_done_white);
     }
 
-    public void showError(ErrorType error) {
-
-    }
-
 //    public static void onUidRead(UIDEvent event) {
 //        if (event != null)
 //            mUserUid = event.getUID();
@@ -127,11 +154,19 @@ public class RequestDetailActivity extends BaseActivity implements IListContract
         return true;
     }
 
-    public void showValidationSuccess() {
-//        mEventBus.post(new SnackbarEvent(R.string.request_item_validate_success));
+    public void showValidationSuccess(int bodyRes) {
+        Snackbar.make(findViewById(R.id.activity_request_detail), bodyRes, Snackbar.LENGTH_LONG)
+                .setCallback(new Snackbar.Callback() {
+                    @Override
+                    public void onDismissed(Snackbar snackbar, int event) {
+                        finish();
+                    }
+                })
+                .show();
     }
 
-    public void showValidationError() {
-//        mEventBus.post(new SnackbarEvent(R.string.request_item_validate_error));
+    public void showValidationError(int bodyRes) {
+        Snackbar.make(findViewById(R.id.activity_request_detail), bodyRes, Snackbar.LENGTH_LONG)
+                .show();
     }
 }

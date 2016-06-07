@@ -12,14 +12,11 @@ import android.view.ViewGroup;
 
 import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.admin.adapters.AdminRequestRecyclerAdapter;
-import com.itesm.labs.labsuser.app.admin.adapters.models.ItemUserCart;
 import com.itesm.labs.labsuser.app.admin.views.presenters.RequestsPresenter;
 import com.itesm.labs.labsuser.app.bases.BaseActivity;
 import com.itesm.labs.labsuser.app.bases.BaseFragment;
 import com.itesm.labs.labsuser.app.commons.contracts.IListContract;
 import com.itesm.labs.labsuser.app.commons.utils.ErrorType;
-import com.itesm.labs.labsuser.app.commons.utils.IFragmentCallback;
-import com.squareup.otto.Subscribe;
 
 import java.util.List;
 
@@ -29,7 +26,7 @@ import butterknife.ButterKnife;
 /**
  * Created by mgradob on 2/12/16.
  */
-public class RequestsFragment extends BaseFragment implements IListContract {
+public class RequestsFragment extends BaseFragment implements IListContract, AdminRequestRecyclerAdapter.IRequestsCallback {
 
     private static final String TAG = RequestsFragment.class.getSimpleName();
 
@@ -67,6 +64,13 @@ public class RequestsFragment extends BaseFragment implements IListContract {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        mPresenter.getAllRequests();
+    }
+
+    @Override
     public void setupUi() {
         setupList();
         setupRefresh();
@@ -77,7 +81,7 @@ public class RequestsFragment extends BaseFragment implements IListContract {
         mCartsListView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         mCartsListView.hasFixedSize();
 
-        mAdapter = new AdminRequestRecyclerAdapter((BaseActivity) getActivity());
+        mAdapter = new AdminRequestRecyclerAdapter((BaseActivity) getActivity(), this);
 
         mCartsListView.setAdapter(mAdapter);
     }
@@ -105,5 +109,10 @@ public class RequestsFragment extends BaseFragment implements IListContract {
         Snackbar.make(getActivity().findViewById(R.id.fragment_requests),
                 R.string.request_item_error_get_list, Snackbar.LENGTH_LONG)
                 .show();
+    }
+
+    @Override
+    public void onRequestDeleted() {
+        mPresenter.getAllRequests();
     }
 }

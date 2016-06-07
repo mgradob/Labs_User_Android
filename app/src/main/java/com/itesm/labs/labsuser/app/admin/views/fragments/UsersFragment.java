@@ -72,6 +72,13 @@ public class UsersFragment extends BaseFragment implements IListContract {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        mPresenter.getUsers();
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_admin_users, menu);
     }

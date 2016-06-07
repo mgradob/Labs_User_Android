@@ -33,7 +33,7 @@ public class UserHistoryRecyclerAdapter extends BaseRecyclerAdapter<History, Use
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        View view = inflater.inflate(R.layout.list_item_record, parent, false);
+        View view = inflater.inflate(R.layout.list_item_user_history, parent, false);
         return new ViewHolder(view);
     }
 

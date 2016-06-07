@@ -1,7 +1,6 @@
 package com.itesm.labs.labsuser.app.commons.views.activities;
 
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -37,8 +36,6 @@ public class LoginActivity extends BaseActivity {
     AppCompatCheckBox loginRememberMe;
     @Bind(R.id.login_register)
     TextView loginRegister;
-
-    ProgressDialog dialog;
 
     private LoginActivityPresenter mPresenter;
 
@@ -86,7 +83,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     void doLogin() {
-        dialog = ProgressDialog.show(this, "Log In", "Por favor espere...", true);
+        showProgressDialog(R.string.login_dialog_title, R.string.login_dialog_content);
 
         loginButton.setEnabled(false);
 
@@ -105,13 +102,15 @@ public class LoginActivity extends BaseActivity {
     public void goToLabsView() {
         Log.d(TAG, "Going to labs view");
 
-        dialog.dismiss();
+        dismissProgressDialog();
 
         Intent intent = new Intent(mContext, LabsActivity.class);
         startActivity(intent);
     }
 
     public void displayLoginError() {
+        dismissProgressDialog();
+
         Snackbar.make(findViewById(R.id.login_activity), R.string.login_snackbar_error_content,
                 Snackbar.LENGTH_LONG)
                 .show();

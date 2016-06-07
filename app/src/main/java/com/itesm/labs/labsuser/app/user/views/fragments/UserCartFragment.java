@@ -57,6 +57,13 @@ public class UserCartFragment extends BaseFragment implements IListContract {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        mPresenter.getCart();
+    }
+
+    @Override
     protected void setupUi() {
         setupList();
         setupRefresh();

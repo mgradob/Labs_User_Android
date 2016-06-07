@@ -1,11 +1,14 @@
 package com.itesm.labs.labsuser.app.bases;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 
+import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.application.LabsApp;
 import com.itesm.labs.labsuser.app.application.LabsPreferences;
 import com.itesm.labs.labsuser.app.commons.services.NotificationService;
@@ -35,6 +38,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     public Subscription mSubscription;
     @Inject
     UserClient mUserClient;
+
+    private ProgressDialog mProgressDialog;
 
     private boolean isBusRegistered = false;
 
@@ -97,5 +102,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         Intent resetIntent = new Intent(mContext, LoginActivity.class);
         resetIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(resetIntent);
+    }
+
+    public void showProgressDialog(int titleRes, int bodyRes){
+        mProgressDialog = ProgressDialog.show(this, getString(titleRes), getString(bodyRes), true);
+    }
+
+    public void dismissProgressDialog() {
+        if (mProgressDialog != null) mProgressDialog.dismiss();
     }
 }

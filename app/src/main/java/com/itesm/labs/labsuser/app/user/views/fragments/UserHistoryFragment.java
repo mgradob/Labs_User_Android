@@ -61,6 +61,13 @@ public class UserHistoryFragment extends BaseFragment implements IListContract {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        mPresenter.getUserHistory();
+    }
+
+    @Override
     protected void setupUi() {
         setupList();
         setupRefresh();

@@ -2,6 +2,7 @@ package com.itesm.labs.labsuser.app.admin.views.presenters;
 
 import android.util.Log;
 
+import com.itesm.labs.labsuser.R;
 import com.itesm.labs.labsuser.app.admin.adapters.models.ItemUserCart;
 import com.itesm.labs.labsuser.app.admin.adapters.models.ItemUserCartDetail;
 import com.itesm.labs.labsuser.app.admin.views.activities.RequestDetailActivity;
@@ -116,7 +117,7 @@ public class RequestsDetailPresenter extends BaseFragmentPresenter {
                     public void onError(Throwable e) {
                         Log.d(TAG, "Get carts task error: " + e.getMessage());
 
-                        mView.showError(null); // TODO: 3/7/16 add error types.
+                        mView.showValidationError(R.string.event_error_network); // TODO: 3/7/16 add error types.
                     }
 
                     @Override
@@ -142,21 +143,21 @@ public class RequestsDetailPresenter extends BaseFragmentPresenter {
                 .subscribe(new Subscriber<Response>() {
                     @Override
                     public void onStart() {
-                        Log.d(TAG, "Task validate cart started");
+                        Log.d(TAG, "Task ready user cart started");
                     }
 
                     @Override
                     public void onCompleted() {
-                        Log.d(TAG, "Task validate cart completed");
+                        Log.d(TAG, "Task ready user cart completed");
 
-                        mView.showValidationSuccess();
+                        mView.showValidationSuccess(R.string.request_item_ready_cart_success);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e(TAG, "Task validate cart error: " + e.getMessage());
+                        Log.e(TAG, "Task ready user cart error: " + e.getMessage());
 
-                        mView.showValidationError();
+                        mView.showValidationError(R.string.event_error_network);
                     }
 
                     @Override
@@ -171,7 +172,7 @@ public class RequestsDetailPresenter extends BaseFragmentPresenter {
      */
     public void validateUserCart(long UID, boolean force) {
         if (!force) {
-            if (UID != mValidateUser.getUserUid()) mView.showError(null);
+            if (UID != mValidateUser.getUserUid()) mView.showValidationError(R.string.request_item_validate_error);
             return;
         }
 
@@ -199,14 +200,14 @@ public class RequestsDetailPresenter extends BaseFragmentPresenter {
                     public void onCompleted() {
                         Log.d(TAG, "Task validate cart completed");
 
-                        mView.showValidationSuccess();
+                        mView.showValidationSuccess(R.string.request_item_validate_success);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         Log.e(TAG, "Task validate cart error: " + e.getMessage());
 
-                        mView.showValidationError();
+                        mView.showValidationError(R.string.request_item_validate_error);
                     }
 
                     @Override

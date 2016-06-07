@@ -1,10 +1,11 @@
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'realm-android'
 
 def MAJOR_VERSION = 1
 def MINOR_VERSION = 1
-def BUILD_VERSION = 2
+def BUILD_VERSION = 3
 
 def ENABLE_FABRIC = "ENABLE_FABRIC"
 
@@ -21,7 +22,7 @@ android {
     buildToolsVersion "22.0.1"
     defaultConfig {
         applicationId "com.itesm.labs"
-        minSdkVersion 16
+        minSdkVersion 14
         targetSdkVersion 23
         versionCode MAJOR_VERSION * 10000 + MINOR_VERSION * 100 + BUILD_VERSION * 1
         versionName "${MAJOR_VERSION}.${MINOR_VERSION}.${BUILD_VERSION}"
@@ -42,7 +43,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':labsapi')
+    compile project(':api')
 
     // Android support libraries
     compile rootProject.ext.libs.support

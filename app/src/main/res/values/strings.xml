@@ -50,7 +50,7 @@
     <string name="login_pass">Password</string>
     <string name="login_button">LOGIN</string>
     <string name="login_signup">Sign Up</string>
-    <string name="login_dialog_title">Por favor, espere…</string>
+    <string name="login_dialog_title">Por favor, espera…</string>
     <string name="login_dialog_content">Te estamos registrando…</string>
     <string name="login_snackbar_error_content">Matrícula o Password inválido.</string>
     <string name="remember_me">Remember me</string>
@@ -101,8 +101,11 @@
     <!-- Requests Fragment -->
     <string name="request_item_list_item_quantity">Total: %s</string>
     <string name="request_item_error_get_list">Error obteniendo la información.</string>
+    <string name="request_item_ready_cart_success">Carrito listo.</string>
     <string name="request_item_validate_success">Validación exitosa.</string>
     <string name="request_item_validate_error">Error al validar.</string>
+    <string name="request_item_delete_dialog_title">Por favor espere…</string>
+    <string name="request_item_delete_dialog_body">Eliminando carrito…</string>
     <!-- Inventory Fragment -->
     <string name="component_list_item_available">Disponible: %d</string>
     <!-- Users Fragment -->

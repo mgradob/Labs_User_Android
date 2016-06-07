@@ -76,15 +76,12 @@ public class NotificationService extends Service {
 
     private void startPolling() {
         Log.d(TAG, "Start polling");
-        mRunnable = new Runnable() {
-            @Override
-            public void run() {
-                Log.d(TAG, "Running runnable");
+        mRunnable = () -> {
+            Log.d(TAG, "Running runnable");
 
-                getUserCart();
+            getUserCart();
 
-                mHandler.postDelayed(mRunnable, POLL_TIME);
-            }
+            mHandler.postDelayed(mRunnable, POLL_TIME);
         };
 
         mHandler.postDelayed(mRunnable, POLL_TIME);
@@ -100,7 +97,7 @@ public class NotificationService extends Service {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
 
-        builder.setSmallIcon(R.drawable.ic_notification_small);
+        builder.setSmallIcon(R.drawable.ic_chemistry_white);
         builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_herramientas));
         builder.setContentTitle(getResources().getString(R.string.notification_cart_ready_title));
         builder.setContentText(getResources().getString(R.string.notification_cart_ready_body));

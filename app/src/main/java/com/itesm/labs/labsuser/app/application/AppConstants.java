@@ -22,5 +22,4 @@ public class AppConstants {
     public static final String PREFERENCES_KEY_USER_ID = "userid";
     public static final String PREFERENCES_KEY_USER_PASS = "userpass";
     public static final String PREFERENCES_KEY_USER_TOKEN = "token";
-
 }

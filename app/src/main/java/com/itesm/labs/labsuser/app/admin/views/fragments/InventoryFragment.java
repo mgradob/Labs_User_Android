@@ -69,6 +69,13 @@ public class InventoryFragment extends BaseFragment implements IListContract {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        mPresenter.getCategoriesInfo();
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_admin_category, menu);
     }

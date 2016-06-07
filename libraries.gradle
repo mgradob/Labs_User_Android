@@ -1,31 +1,31 @@
 ext {
     libs = [
             // Android support libraries
-            support        : 'com.android.support:support-v4:23.2.0',
-            appcompat      : 'com.android.support:appcompat-v7:23.2.0',
-            cardview       : 'com.android.support:cardview-v7:23.1.1',
-            palette        : 'com.android.support:palette-v7:23.1.1',
-            design         : 'com.android.support:design:23.2.0',
+            support       : 'com.android.support:support-v4:23.2.0',
+            appcompat     : 'com.android.support:appcompat-v7:23.2.0',
+            cardview      : 'com.android.support:cardview-v7:23.1.1',
+            palette       : 'com.android.support:palette-v7:23.1.1',
+            design        : 'com.android.support:design:23.2.0',
 
             // REST
-            retrofit       : 'com.squareup.retrofit:retrofit:1.9.0',
+            retrofit      : 'com.squareup.retrofit:retrofit:1.9.0',
 
             // Image Loading
-            glide          : 'com.github.bumptech.glide:glide:3.6.1',
+            glide         : 'com.github.bumptech.glide:glide:3.6.1',
 
             // Injection
-            butterknife    : 'com.jakewharton:butterknife:7.0.1',
-            dagger         : 'com.squareup.dagger:dagger:1.2.2',
-            daggerCompiler : 'com.squareup.dagger:dagger-compiler:1.2.2',
+            butterknife   : 'com.jakewharton:butterknife:7.0.1',
+            dagger        : 'com.squareup.dagger:dagger:1.2.2',
+            daggerCompiler: 'com.squareup.dagger:dagger-compiler:1.2.2',
 
             // Reactive Java
-            rxAndroid      : 'io.reactivex:rxandroid:1.0.1',
-            rxJava         : 'io.reactivex:rxjava:1.0.14',
+            rxAndroid     : 'io.reactivex:rxandroid:1.0.1',
+            rxJava        : 'io.reactivex:rxjava:1.0.14',
 
             // Event Bus
-            otto           : 'com.squareup:otto:1.3.8',
+            otto          : 'com.squareup:otto:1.3.8',
 
             // Joda Time
-            jodaTime       : 'net.danlew:android.joda:2.9.2'
+            jodaTime      : 'net.danlew:android.joda:2.9.2',
     ]
 }

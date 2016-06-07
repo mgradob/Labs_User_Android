@@ -3,7 +3,6 @@ package com.itesm.labs.labsuser.app.user.views.fragments;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +45,6 @@ public class UserInventoryFragment extends BaseFragment implements IListContract
         super.onCreate(savedInstanceState);
 
         mPresenter = new UserInventoryPresenter(this);
-        mPresenter.getCategories();
     }
 
     @Override
@@ -64,6 +62,13 @@ public class UserInventoryFragment extends BaseFragment implements IListContract
         super.onViewCreated(view, savedInstanceState);
 
         setupUi();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        mPresenter.getCategories();
     }
 
     @Override

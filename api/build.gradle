@@ -1,0 +1,53 @@
+apply plugin: 'com.android.library'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'realm-android'
+
+def BASE_API_URL = "BASE_API_URL"
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        buildConfigField "String", "${BASE_API_URL}", "\"http://labs.chi.itesm.mx:8080\""
+    }
+    buildTypes {
+        debug {
+            buildConfigField "String", "${BASE_API_URL}", "\"http://labs.chi.itesm.mx:8080\""
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "${BASE_API_URL}", "\"http://labs.chi.itesm.mx:8080\""
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+
+    // Android support libraries
+    compile rootProject.ext.libs.support
+    compile rootProject.ext.libs.appcompat
+
+    // REST
+    compile rootProject.ext.libs.retrofit
+
+    // Injection
+    compile rootProject.ext.libs.butterknife
+    compile rootProject.ext.libs.dagger
+    provided rootProject.ext.libs.daggerCompiler
+
+    // Reactive Java
+    compile rootProject.ext.libs.rxAndroid
+    compile rootProject.ext.libs.rxJava
+}
